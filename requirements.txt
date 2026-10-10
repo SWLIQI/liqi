@@ -1,0 +1,10 @@
+# 脚本运行时依赖
+
+# 仅两个脚本需要第三方包，其余全部只用标准库
+matplotlib>=3.5   # scripts/generate_emotion_curve.py 画情绪张力曲线
+pillow>=9.0       # scripts/slice_reference.py 设定卡裁切
+
+# 说明
+# - Python >= 3.8 即可，未用到 3.9+ 语法
+# - Node >= 16（脚本使用 `node:fs` 前缀写法），零 npm 依赖
+# - 不依赖 python-docx / pandas，docx 解析走 zipfile + ElementTree

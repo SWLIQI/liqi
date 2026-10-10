@@ -1,0 +1,1626 @@
+{
+  "version": 1,
+  "seed_note": "本文件是种子模板，随 skill 分发。项目初始化时复制成 <项目>/style-registry.json，再按项目实际用到的风格增删条目。schema 与字段含义见 references/风格注册表_style-registry.md。",
+  "styles": {
+    "ink-wash-2d": {
+      "display_name": "水墨淡彩东方手绘 2D",
+      "track": "手绘轨",
+      "dimension": "2D",
+      "heads_range": "5.5-6.5",
+      "heads_note": "成人档；孩童取 4-4.5。同包禁混档",
+      "stability": "险",
+      "palette": {
+        "primary": "#EDE7DE",
+        "secondary": "#A9AFB5",
+        "accent": "#A83A32",
+        "usage": "primary 为宣纸底与留白，secondary 为灰青衣物，accent 为铜钱朱红且是全片唯一重音色"
+      },
+      "negative_direction": [
+        "写实照片感",
+        "3D 渲染",
+        "赛璐璐粗描边",
+        "塑料高光",
+        "渐变",
+        "体积光",
+        "可读文字",
+        "水印"
+      ],
+      "tech_spec": {
+        "render_cn": "一幅平面手绘的中国水墨淡彩画，画在宣纸上，整幅压在同一个平面内。细匀墨线勾边，偶有干笔断锋；每一块颜色都是一次平涂完成。光不做塑造，近处与远处保持同样的平面感。大面积留白即为天空与地面。",
+        "render_en": "A flat hand-painted Chinese ink-and-wash picture on xuan paper, held on one plane. Thin ink outlines with occasional dry-brush breaks; every area is one flat wash struck once. Light is not modelled, and the same flatness holds near and far. Large areas of bare paper read as sky and ground.",
+        "palette_cn": "低饱和配色：宣纸白、藕荷灰粉、灰青灰、赭石土黄与墨绿松针，朱红只作唯一重音色点缀。",
+        "palette_en": "muted desaturated palette of xuan-paper white, pale lilac grey, slate blue grey, ochre earth and pine green, with a single restrained cinnabar accent",
+        "material_rule": "光不做塑造，每块区域从边到边是同一个明度；阴影用色块不用渐变；不写逆光轮廓光"
+      },
+      "motion_pool": {
+        "main": [
+          "固定中景",
+          "缓慢推近",
+          "横向平移",
+          "微俯",
+          "轻摇"
+        ],
+        "limited": [
+          "摇臂升起",
+          "航拍拉远",
+          "入眼",
+          "变焦对焦"
+        ],
+        "forbidden": [
+          "甩镜",
+          "溜溜球变焦",
+          "斯诺瑞康姆",
+          "360 环绕",
+          "荷兰角",
+          "分屏"
+        ]
+      },
+      "material_budget": {
+        "main": "面部与水痕晕染",
+        "second": "衣料褶皱与发丝",
+        "save": "远景群像、背景植被细节、地面纹理",
+        "forbidden_material": [
+          "皮肤高光",
+          "布料丝滑反光",
+          "金属镜面反射"
+        ]
+      },
+      "collapse_risks": [
+        {
+          "symptom": "出片 2.5D 半立体",
+          "cause": "压句含 animation 或 storybook 或否定句；正文有横向位移产生视差；参考图本身半立体",
+          "fix": "换 picture，位移改整幅同速率侧移并声明不产生视差，参考图按压句重出"
+        },
+        {
+          "symptom": "画面变 3D 渲染或塑料感",
+          "cause": "写了高光、渐变、体积光，或风格压句没写",
+          "fix": "压句逐字复用；禁写高光与渐变"
+        },
+        {
+          "symptom": "变成赛璐璐卡通",
+          "cause": "误选卡通轨，写了粗黑轮廓线与硬边阴影",
+          "fix": "锁手绘轨；轮廓线写 thin even ink outlines"
+        },
+        {
+          "symptom": "饱和度失控色散",
+          "cause": "没写色彩预算",
+          "fix": "每镜声明唯一重音色与色系"
+        },
+        {
+          "symptom": "角色被画成设定表三宫格",
+          "cause": "把三视图或 4 View 板当首帧",
+          "fix": "三视图只当 Subject N 定义，绝不当首帧"
+        },
+        {
+          "symptom": "水印被画进画面",
+          "cause": "资产图带平台水印未裁",
+          "fix": "喂模型前裁掉或用修补盖掉"
+        },
+        {
+          "symptom": "人物与场景质感打架",
+          "cause": "人物图是柔和水彩、场景图是平涂线描",
+          "fix": "场景图按本文件压句重出一版，只改质感不改构图"
+        },
+        {
+          "symptom": "表情全部被抹平",
+          "cause": "一镜塞了太多表情节拍",
+          "fix": "一镜一个主节拍，拆成 2-3 秒短镜"
+        },
+        {
+          "symptom": "动作像橡皮糖",
+          "cause": "写了碰撞、液体量、物体切半",
+          "fix": "不拍那一刻，改写为光一闪加物件离开"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "2D animation",
+          "picture"
+        ],
+        [
+          "illustrated storybook",
+          ""
+        ],
+        [
+          "no rendered volume",
+          "Light is not modelled, and the same flatness holds near and far."
+        ],
+        [
+          "glow",
+          "flat warm wash"
+        ],
+        [
+          "pans slowly to the right",
+          "the whole picture slides sideways at one rate without parallax"
+        ],
+        [
+          "水墨动画",
+          "水墨淡彩画"
+        ],
+        [
+          "国漫",
+          "平面手绘画"
+        ],
+        [
+          "不要渐变",
+          "光不做塑造"
+        ],
+        [
+          "暗部提亮一档、降饱和一档",
+          ""
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句逐字复用，英文 47 词，改前算 Δ，改完跑 check_prompt_h3.mjs 要求 0 error 0 warning",
+        "seedance_2_5": "中文压句写在【生成目标】段首，配色句写在【主体与关系】风格内联，刚性约束必锁行再压一次",
+        "cn": "中文压句写在整体风格段；负面词压成 Must not 一行附正文末，不超过 1 行"
+      },
+      "marker_words": [
+        "xuan paper",
+        "ink-and-wash",
+        "one flat wash",
+        "dry-brush breaks",
+        "宣纸",
+        "水墨",
+        "留白",
+        "干笔断锋",
+        "平涂一次"
+      ],
+      "excludes": [
+        "gothic-puppet",
+        "photoreal-pbr",
+        "celshade-guoman-2d",
+        "npr-celshaded-3d",
+        "stylized-pixar-3d",
+        "anime-2d",
+        "webtoon-2d",
+        "documentary-live-action"
+      ],
+      "ref_file": "references/水墨淡彩2D风格锚.md",
+      "status": "已落值"
+    },
+    "gothic-puppet": {
+      "display_name": "哥特定格木偶",
+      "track": "定格木偶轨",
+      "dimension": "3D",
+      "dimension_note": "实体微缩实拍，有真实光影与景深；体积与纵深是风格本体，不是缺陷",
+      "heads_range": "1:3.5-1:4.5",
+      "heads_note": "头大身细的木偶比例；禁止真实人体解剖",
+      "stability": "中",
+      "palette": {
+        "primary": "#1E2630",
+        "secondary": "#7C93A8",
+        "accent": "#D08A4E",
+        "usage": "primary 为深夜蓝阴影与夜空，secondary 为月光冷蓝主光，accent 为灯笼暖橙且是全片唯一暖色重音色"
+      },
+      "negative_direction": [
+        "皮克斯风",
+        "迪士尼风",
+        "光滑 CGI 渲染",
+        "写实真人",
+        "真实人体解剖",
+        "动漫风",
+        "高光镜面反射",
+        "运动模糊",
+        "可读文字",
+        "水印"
+      ],
+      "tech_spec": {
+        "render_cn": "一部哥特维多利亚定格木偶电影，手作暗黑童话，按真实微缩布景实拍方式呈现，手工痕迹清晰可见。伯顿式木偶：头大、四肢细长、骨骼解剖歪扭、尸感面孔、哑光黏土皮肤；每一处动作都保留轻微的定格动画不完美。月光蓝照明、深长阴影、去饱和蓝灰色调、德国表现主义布景，每一处表面都哑光不反光。",
+        "render_en": "A Gothic Victorian stop-motion puppet film, a handcrafted dark fairytale shot as real miniature set photography with visible handmade textures. Burton-esque puppets with oversized heads, thin elongated limbs, crooked skeletal anatomy, corpse-like faces and matte clay skin; subtle stop-motion imperfections stay in every movement. Moonlit blue lighting, deep shadows, a desaturated blue-grey palette, German expressionist sets, and every surface matte and non-glossy.",
+        "palette_cn": "去饱和蓝灰色调：月光冷蓝、深夜蓝阴影、苍白黏土肤色与做旧粗布，灯笼暖橙作唯一重音色。",
+        "palette_en": "desaturated blue-grey palette of moonlit cold blue, deep night-blue shadow, pale clay skin and weathered cloth, with a single warm lantern-orange accent",
+        "material_rule": "每一处都保留轻微的定格动画不完美；不用丝滑运动模糊；每个材质词后跟哑光不反光"
+      },
+      "motion_pool": {
+        "main": [
+          "固定中景",
+          "缓慢推近",
+          "低角度仰拍",
+          "微俯",
+          "横向平移"
+        ],
+        "limited": [
+          "荷兰角",
+          "摇臂升起",
+          "入眼",
+          "变焦对焦"
+        ],
+        "forbidden": [
+          "甩镜",
+          "溜溜球变焦",
+          "360 环绕",
+          "分屏"
+        ]
+      },
+      "material_budget": {
+        "main": "面部黏土质感与手工痕迹（指痕、接缝、不对称、尸感灰白）",
+        "second": "布料做旧与微缩布景的模型痕迹",
+        "save": "远景群像（压成蓝灰剪影）、背景陈设细节、天空与远景",
+        "forbidden_material": [
+          "皮肤高光与次表面散射",
+          "布料丝滑反光",
+          "金属镜面反射",
+          "体积光柱"
+        ]
+      },
+      "collapse_risks": [
+        {
+          "symptom": "变光滑 CGI 或皮克斯感",
+          "cause": "材质词没配哑光；正文出现高光辉光次表面散射类词；运动写成丝滑",
+          "fix": "压句逐字复用；每个材质词后跟 matte 与 non-glossy；动作写 stagger 与 imperfect"
+        },
+        {
+          "symptom": "变写实真人",
+          "cause": "写了真实解剖词（肌肉、皮肤纹理、真实五官比例）；参考图是真人照片",
+          "fix": "钉死木偶比例与尸感面孔；参考图必须本身就是木偶质感"
+        },
+        {
+          "symptom": "运动太顺滑丢失定格感",
+          "cause": "写了流畅连续动作长拍",
+          "fix": "一段只写一个主动作，动作间留静止半拍；长动作拆成 2-3 秒短镜"
+        },
+        {
+          "symptom": "动漫化或三渲二",
+          "cause": "风格压句缺位或被稀释；参考图带动漫风",
+          "fix": "压句第一句就是媒介声明 stop-motion puppet film，不许挪到句子后半段"
+        },
+        {
+          "symptom": "色彩饱和度漂移变鲜艳",
+          "cause": "没写色彩预算",
+          "fix": "每镜声明唯一重音色与蓝灰色系；配色句必须与压句同时出现"
+        },
+        {
+          "symptom": "角色被画成设定表三宫格",
+          "cause": "把双视图或 4 View 板当首帧",
+          "fix": "双视图只当 Subject N 定义（左脸特写裁身份锚），绝不当首帧"
+        },
+        {
+          "symptom": "布景变真实大小空间",
+          "cause": "场景词写了真实世界尺度参照",
+          "fix": "写微缩模型痕迹（接缝、板材、手工做旧），场景是搭出来的这件事可以被看见"
+        },
+        {
+          "symptom": "表情过度灵活变脸",
+          "cause": "一镜塞了太多表情节拍",
+          "fix": "木偶表情幅度天生受限：一镜一个主节拍，只写眉、嘴角、眼睑的大位移"
+        },
+        {
+          "symptom": "暖光源扩散污染全片",
+          "cause": "写了温暖的光照亮房间",
+          "fix": "暖光只照亮相邻一小圈、衰减快；画面主体始终是冷蓝调"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "丝滑",
+          "二拍一顿挫，动作起收各留半拍静止"
+        ],
+        [
+          "流畅",
+          "二拍一顿挫，动作起收各留半拍静止"
+        ],
+        [
+          "运动模糊",
+          ""
+        ],
+        [
+          "高光",
+          "哑光不反光"
+        ],
+        [
+          "镜面反射",
+          "哑光不反光"
+        ],
+        [
+          "次表面散射",
+          "哑光黏土"
+        ],
+        [
+          "真实人体解剖",
+          "木偶比例，四肢细长歪扭"
+        ],
+        [
+          "辽阔",
+          "微缩模型，接缝与板材可见"
+        ],
+        [
+          "实景",
+          "微缩布景实拍"
+        ],
+        [
+          "温暖的光照亮房间",
+          "暖光只照亮相邻一小圈，衰减快"
+        ],
+        [
+          "细腻皮肤动态",
+          "眉、嘴角、眼睑的大位移"
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句逐字复用，英文 62 词，改前算 Δ，改完跑 check_prompt_h3.mjs 要求 0 error 0 warning",
+        "seedance_2_5": "中文压句写在【生成目标】段首，配色句写在【主体与关系】风格内联，刚性约束必锁行再压一次",
+        "cn": "中文压句写在整体风格段；负面词压成 Must not 一行附正文末，不超过 1 行"
+      },
+      "marker_words": [
+        "stop-motion puppet",
+        "matte clay skin",
+        "miniature set photography",
+        "定格木偶",
+        "黏土",
+        "微缩布景"
+      ],
+      "excludes": [
+        "ink-wash-2d",
+        "photoreal-pbr",
+        "celshade-guoman-2d",
+        "npr-celshaded-3d",
+        "stylized-pixar-3d"
+      ],
+      "ref_file": "references/哥特定格木偶风格锚.md",
+      "status": "已落值"
+    },
+    "photoreal-pbr": {
+      "display_name": "写实 PBR",
+      "track": "写实轨",
+      "dimension": "3D",
+      "heads_range": "7-7.5",
+      "stability": "险",
+      "marker_words": [
+        "photoreal live-action",
+        "PBR materials",
+        "skin shows pores",
+        "影视级 PBR",
+        "写实照片感",
+        "cg-grade realism"
+      ],
+      "excludes": [
+        "ink-wash-2d",
+        "gothic-puppet",
+        "celshade-guoman-2d",
+        "npr-celshaded-3d",
+        "stylized-pixar-3d",
+        "anime-2d",
+        "webtoon-2d",
+        "documentary-live-action"
+      ],
+      "ref_file": "references/风格锚_写实PBR.md",
+      "heads_note": "真实人体比例；孩童取 5-5.5",
+      "stability_note": "全套风格里翻车率最高：恐怖谷、塑料脸、美颜磨皮、手部崩形、换脸。短片可用，长片多镜建议换 npr-celshaded-3d",
+      "palette": {
+        "primary": "#C8CBCA",
+        "secondary": "#6E7773",
+        "accent": "#C9743A",
+        "usage": "primary 为雾白与受光面，secondary 为青灰环境主色，accent 为唯一暖色实用光源"
+      },
+      "negative_direction": [
+        "卡通感",
+        "塑料感",
+        "玩具感",
+        "平涂色块",
+        "描边",
+        "Q 版比例",
+        "美颜磨皮",
+        "无瑕光滑肌肤",
+        "贴图拉伸",
+        "多余手指",
+        "肢体畸形",
+        "可读文字",
+        "水印",
+        "比例漂移",
+        "换脸",
+        "服装变化"
+      ],
+      "tech_spec": {
+        "render_cn": "一幅写实电影画面，PBR 真实材质与真实的电影布光。皮肤能看到毛孔、细纹与轻微不对称，绝不光滑无瑕、绝不磨皮。布料织纹、潮湿石面与风化木料在近距离都清晰可辨。单一有依据的光源，衰减自然，带体积雾，极轻的胶片颗粒。",
+        "render_en": "A photoreal live-action film frame with PBR materials and real cinematic lighting. Skin shows pores, fine lines and slight asymmetry, never flawless or airbrushed. Cloth weave, damp stone and weathered wood all read at close range. One motivated light source with natural falloff, volumetric haze, very light film grain.",
+        "palette_cn": "低饱和配色：冷灰、土黄与深褐，唯一暖色重音由画面里唯一的实用光源承担。",
+        "palette_en": "desaturated palette of cold grey, earth ochre and deep brown, with a single warm accent hue carried by the only practical light source",
+        "material_rule": "皮肤必须带不完美（毛孔 / 细纹 / 轻微不对称），至少带两项；光源方向必须写明，衰减自然"
+      },
+      "motion_pool": {
+        "main": [
+          "固定中景",
+          "缓慢推近",
+          "斯坦尼康跟拍",
+          "微俯",
+          "手持呼吸感"
+        ],
+        "limited": [
+          "摇臂升起",
+          "航拍拉远",
+          "入眼",
+          "变焦对焦",
+          "浅景深特写"
+        ],
+        "forbidden": [
+          "360 环绕",
+          "荷兰角",
+          "分屏",
+          "甩镜"
+        ]
+      },
+      "material_budget": {
+        "main": "皮肤与布料材质",
+        "second": "体积雾与氛围、环境光层次",
+        "save": "群像细节与远景陈设",
+        "forbidden_material": [
+          "平涂色块",
+          "描边",
+          "卡通着色",
+          "无瑕光滑肌肤",
+          "磨皮",
+          "瓷娃娃质感",
+          "塑料反光"
+        ]
+      },
+      "imperfection_words": [
+        "毛孔",
+        "细纹",
+        "轻微不对称",
+        "皮肤瑕疵",
+        "干燥起皮",
+        "布料起毛",
+        "木料开裂风化"
+      ],
+      "collapse_risks": [
+        {
+          "symptom": "塑料脸或美颜磨皮（本轨头号崩点）",
+          "cause": "没写不完美词；写了 perfect、beautiful、精致五官",
+          "fix": "压句逐字复用；不完美词至少带两项；删掉一切颜值评价词"
+        },
+        {
+          "symptom": "恐怖谷",
+          "cause": "皮肤太光滑加眼睛太锐利加比例完美",
+          "fix": "皮肤加不完美；眼睛写有血丝与轻微不对称；比例按 7-7.5"
+        },
+        {
+          "symptom": "变卡通或变三渲二",
+          "cause": "压句没写 photoreal；正文出现平涂、色块、描边、硬边阴影",
+          "fix": "压句第一词就是 photoreal；卡通着色词全部删除"
+        },
+        {
+          "symptom": "手部崩形",
+          "cause": "3D 生成常见问题，手部没给明确姿态",
+          "fix": "手部写清姿态与可见指节；负面词保留多余手指与肢体畸形"
+        },
+        {
+          "symptom": "跨镜换脸或比例漂移",
+          "cause": "没走 Subject N；参考图不是同一套",
+          "fix": "每镜内联锁定；必带资产图走 I2V/Ref2VA；逐镜核对人脸"
+        },
+        {
+          "symptom": "光线发假棚拍感",
+          "cause": "没写光源方向与衰减；写了昏暗这种无方向的词",
+          "fix": "必须写明光源（侧逆 / 顶光 / 窗光）与衰减；写清阴影层次"
+        },
+        {
+          "symptom": "画面发灰像广告片",
+          "cause": "没写色彩预算",
+          "fix": "每镜声明唯一重音色与低饱和色系"
+        },
+        {
+          "symptom": "过审被拦",
+          "cause": "真人感加血腥恐怖画面",
+          "fix": "伤口与血液一律正向定义加「影视特效化妆感、不是血腥恐怖画面」；必跑 audit_risk.py"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "完美肌肤",
+          "皮肤有毛孔与细纹"
+        ],
+        [
+          "无瑕",
+          "毛孔可见"
+        ],
+        [
+          "精致五官",
+          "五官轻微不对称"
+        ],
+        [
+          "高颜值",
+          ""
+        ],
+        [
+          "瓷娃娃",
+          ""
+        ],
+        [
+          "平涂",
+          ""
+        ],
+        [
+          "色块",
+          ""
+        ],
+        [
+          "描边",
+          ""
+        ],
+        [
+          "卡通着色",
+          ""
+        ],
+        [
+          "Q 版",
+          ""
+        ],
+        [
+          "磨皮",
+          ""
+        ],
+        [
+          "柔光",
+          ""
+        ],
+        [
+          "美白",
+          ""
+        ],
+        [
+          "beautiful",
+          ""
+        ],
+        [
+          "stunning",
+          ""
+        ],
+        [
+          "gorgeous",
+          ""
+        ],
+        [
+          "3D render",
+          "photoreal live-action film frame"
+        ],
+        [
+          "CGI",
+          "photoreal live-action film frame"
+        ],
+        [
+          "昏暗",
+          "侧逆光 / 顶光 / 窗光，衰减自然"
+        ],
+        [
+          "高 ISO",
+          "极轻的胶片颗粒"
+        ],
+        [
+          "重噪点",
+          "极轻的胶片颗粒"
+        ],
+        [
+          "血腥",
+          "影视特效化妆感，不是血腥恐怖画面"
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句取 2.1；必走 Ref2VA 带资产图，纯文生还原率最低",
+        "seedance_2_5": "压句取 2.2，写在【生成目标】段首；配色句写进【主体与关系】风格内联",
+        "cn": "压句取 2.3，写在整体风格段；平台自带美颜是头号杀手，必须钉死不磨皮；必跑 audit_risk",
+        "dedupe_script": "不要跑 dedupe_style.py --style ink-wash-2d——那份词表是去立体的，本轨要体积"
+      },
+      "status": "已落值"
+    },
+    "celshade-guoman-2d": {
+      "display_name": "国漫赛璐璐 2D",
+      "track": "卡通轨",
+      "dimension": "2D",
+      "heads_range": "6-6.5",
+      "stability": "稳",
+      "marker_words": [
+        "guoman cel-shading",
+        "国漫 2D 赛璐璐",
+        "两段式阴影",
+        "catchlight"
+      ],
+      "excludes": [
+        "ink-wash-2d",
+        "gothic-puppet",
+        "photoreal-pbr",
+        "npr-celshaded-3d",
+        "anime-2d",
+        "webtoon-2d",
+        "documentary-live-action"
+      ],
+      "ref_file": "references/风格锚_国漫赛璐璐2D.md",
+      "heads_note": "美型成人档；孩童取 4.5-5。Q 版 2-3 是另一条轨，本轨禁",
+      "palette": {
+        "primary": "#EDE8DB",
+        "secondary": "#3A4E66",
+        "accent": "#A63A2B",
+        "usage": "primary 为亮部与内衬，secondary 为主体衣物，accent 为朱砂红且是全片唯一重音色"
+      },
+      "negative_direction": [
+        "写实照片",
+        "3D 渲染",
+        "CG 质感",
+        "真关键道具肤质感与毛孔",
+        "厚涂油画笔触",
+        "噪点颗粒",
+        "Q 版二头身",
+        "儿童化",
+        "可读文字",
+        "水印 logo"
+      ],
+      "tech_spec": {
+        "render_cn": "一幅国漫 2D 动画赛璐璐上色的画面，线条流畅清晰，色块干净，阴影是边缘分明的两段式阴影，亮部与暗部之间不做过渡。大眼带一处清晰高光，轮廓线均匀，无渐变，无噪点颗粒。单一光源，整张画面光照统一。",
+        "render_en": "A Chinese 2D animation frame in clean cel-shading, with smooth confident linework, flat colour areas and two-tone shading split by a hard edge. Large eyes with a single crisp catchlight, even outlines, no gradient, no grain. One light source, unified lighting across the whole frame.",
+        "palette_cn": "干净明快的赛璐璐配色：阴影是固有色加深一档，不是灰也不是黑，每帧只保留一个重音色。",
+        "palette_en": "clean saturated cel-shading palette where shadow is the local colour one step darker, never grey or black, with a single accent hue per frame",
+        "material_rule": "暗部 = 固有色加深一档，绝不用灰或黑当阴影；材质用形状化色块 + 明确高光形状表达"
+      },
+      "motion_pool": {
+        "main": [
+          "固定中景",
+          "缓慢推近",
+          "横向平移",
+          "微俯",
+          "跟拍",
+          "轻摇"
+        ],
+        "limited": [
+          "摇臂升起",
+          "航拍拉远",
+          "入眼",
+          "变焦对焦"
+        ],
+        "forbidden": [
+          "360 环绕",
+          "斯诺瑞康姆",
+          "荷兰角",
+          "强透视广角"
+        ]
+      },
+      "material_budget": {
+        "main": "面部五官与眼睛高光",
+        "second": "服装平涂色块与褶皱线（褶皱用线表达不用明暗）",
+        "save": "背景细节、远景群像、地面纹理",
+        "forbidden_material": [
+          "皮肤毛孔",
+          "次表面散射",
+          "布料丝滑反光",
+          "金属镜面反射",
+          "厚涂笔触",
+          "渐变",
+          "噪点颗粒"
+        ]
+      },
+      "collapse_risks": [
+        {
+          "symptom": "阴影变渐变滑向厚涂二次元",
+          "cause": "写了柔和过渡、渐变、环境光遮蔽",
+          "fix": "钉死两段式硬边阴影；暗部写固有色加深一档"
+        },
+        {
+          "symptom": "变 3D 渲染或 CG 质感",
+          "cause": "写了 PBR、皮肤毛孔、次表面散射、镜面反射",
+          "fix": "压句逐字复用；材质改色块加高光形状"
+        },
+        {
+          "symptom": "变成日系而不是国漫",
+          "cause": "压句写了 anime 或日系动漫",
+          "fix": "写 Chinese 2D animation 与国漫 2D 动画，配中式服化道锚"
+        },
+        {
+          "symptom": "变 Q 版或儿童化",
+          "cause": "头身比没写或写了 Q 版参考",
+          "fix": "钉死 6-6.5；负面词保留 Q 版二头身与儿童化"
+        },
+        {
+          "symptom": "色块变脏发灰",
+          "cause": "加了噪点颗粒或胶片颗粒",
+          "fix": "压句带 flat colour areas 与 no grain；每镜声明色彩预算"
+        },
+        {
+          "symptom": "轮廓线丢失变无描边平涂",
+          "cause": "压句没提线条或写了 no outline",
+          "fix": "压句带 smooth confident linework 与 even outlines"
+        },
+        {
+          "symptom": "转面崩形",
+          "cause": "要求 360 度转面或强透视",
+          "fix": "本轨不写环绕；需要转面换 npr-celshaded-3d"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "柔和阴影",
+          "边缘分明的两段式阴影"
+        ],
+        [
+          "渐变过渡",
+          "两段式硬边，不做过渡"
+        ],
+        [
+          "厚涂",
+          "平涂色块"
+        ],
+        [
+          "油画笔触",
+          "平涂色块"
+        ],
+        [
+          "皮肤毛孔",
+          "平涂肤色加一处高光"
+        ],
+        [
+          "次表面散射",
+          "平涂肤色加一处高光"
+        ],
+        [
+          "镜面反射",
+          "形状化高光"
+        ],
+        [
+          "体积光",
+          ""
+        ],
+        [
+          "光柱",
+          ""
+        ],
+        [
+          "环境光遮蔽",
+          ""
+        ],
+        [
+          "全局光照",
+          ""
+        ],
+        [
+          "噪点",
+          ""
+        ],
+        [
+          "2D anime",
+          "Chinese 2D animation"
+        ],
+        [
+          "日系动漫",
+          "国漫 2D 动画"
+        ],
+        [
+          "Q 版",
+          ""
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句取 2.1；本轨允许比手绘轨更强的运镜，但禁环绕",
+        "seedance_2_5": "压句取 2.2，写在【生成目标】段首；配色句写进【主体与关系】风格内联",
+        "cn": "压句取 2.3，写在整体风格段；负面词压成 Must not 一行附正文末",
+        "dedupe_script": "不要跑 dedupe_style.py --style ink-wash-2d——那份词表是手绘轨的，会删掉本轨的 shadow 与 highlight"
+      },
+      "ip_note": "投喂词内禁止点名任何具体作品名，只写风格特征（赛璐璐 / 美型 / 国漫 2D）",
+      "status": "已落值"
+    },
+    "npr-celshaded-3d": {
+      "display_name": "三渲二 NPR",
+      "track": "三渲二轨",
+      "dimension": "3D",
+      "dimension_note": "3D 模型 + 卡通着色：体积是 3D 的，明暗是 2D 的",
+      "heads_range": "6.5-7",
+      "heads_note": "美型成人档；孩童取 5-5.5",
+      "stability": "稳",
+      "stability_note": "长片一致性最好的一档：资产是模型，转面不崩、跨镜不走形。代价是必带资产图走 I2V/Ref2VA",
+      "palette": {
+        "primary": "#E8E4DA",
+        "secondary": "#46617F",
+        "accent": "#C0563C",
+        "usage": "primary 为受光面，secondary 为主体衣物，accent 为赭红且是全片唯一重音色"
+      },
+      "negative_direction": [
+        "写实 PBR 材质",
+        "真实皮肤毛孔",
+        "次表面散射",
+        "全局光照",
+        "软阴影",
+        "镜面反射",
+        "厚涂笔触",
+        "噪点颗粒",
+        "Q 版二头身",
+        "可读文字",
+        "水印"
+      ],
+      "tech_spec": {
+        "render_cn": "一幅三渲二卡通着色的 3D 画面：角色是有体积的三维实体，任意角度转面都保持一致，明暗是两段式的平涂色，中间分界硬。轮廓线均匀，色块干净，无渐变，无噪点颗粒，无运动模糊。单一主光，整张画面光照统一。",
+        "render_en": "A cel-shaded 3D render: solid three-dimensional characters with real volume that stay consistent from every angle, shaded in two flat tones with a hard edge between them. Even outlines, flat colour areas, no gradient, no grain, no motion blur. One key light, unified lighting across the frame.",
+        "palette_cn": "干净的三渲二配色：阴影是固有色加深一档，不是灰也不是黑，每帧只保留一个重音色。",
+        "palette_en": "clean cel-shaded palette where shadow is the local colour one step darker, never grey or black, with a single accent hue per frame",
+        "material_rule": "3D 体积 + 2D 明暗：阴影两段式且分界硬，材质平涂色块不做 PBR，禁用全局光照与软阴影"
+      },
+      "motion_pool": {
+        "main": [
+          "固定中景",
+          "缓慢推近",
+          "横向平移",
+          "跟拍",
+          "环绕",
+          "摇臂升起",
+          "航拍拉远"
+        ],
+        "limited": [
+          "斯坦尼康跟拍",
+          "入眼",
+          "变焦对焦",
+          "低角度仰拍"
+        ],
+        "forbidden": [
+          "甩镜",
+          "溜溜球变焦",
+          "分屏",
+          "极端鱼眼"
+        ]
+      },
+      "material_budget": {
+        "main": "面部轮廓、描边质量与阴影分界线",
+        "second": "服装曲面转折与阴影分界（分界随曲面走但必须硬）",
+        "save": "远景群像、背景陈设细节、天空",
+        "forbidden_material": [
+          "真实皮肤毛孔",
+          "次表面散射",
+          "镜面反射",
+          "软阴影",
+          "全局光照",
+          "厚涂笔触",
+          "噪点颗粒",
+          "运动模糊"
+        ]
+      },
+      "collapse_risks": [
+        {
+          "symptom": "变写实 PBR 或 CG 电影感",
+          "cause": "压句只写 3D render 没写 cel-shaded；正文出现 PBR、SSS、AO、GI",
+          "fix": "压句第一词就是 cel-shaded；写实渲染管线词全部删除"
+        },
+        {
+          "symptom": "阴影变软掉进写实光照",
+          "cause": "写了柔和阴影、环境光遮蔽、全局光照",
+          "fix": "钉死 two flat tones with a hard edge；只写单一主光"
+        },
+        {
+          "symptom": "变纯 2D 平涂体积丢失",
+          "cause": "压句没提 3D 体积；运镜不敢动",
+          "fix": "压句带 solid three-dimensional volume；本轨敢写环绕"
+        },
+        {
+          "symptom": "描边丢失变无描边 CG",
+          "cause": "压句没提描边",
+          "fix": "压句带 even outlines"
+        },
+        {
+          "symptom": "材质变塑料或光滑玩具感",
+          "cause": "写了 glossy、specular、次表面散射",
+          "fix": "每个材质词后跟平涂无反射；金属只给形状化高光"
+        },
+        {
+          "symptom": "转面崩形或跨镜换脸",
+          "cause": "纯文生没给资产图；参考图不是同一套",
+          "fix": "必走 I2V/Ref2VA 并带资产图；每镜内联锁定同一 Subject N"
+        },
+        {
+          "symptom": "运动模糊出现画面变实拍",
+          "cause": "写了运动模糊或快门拖影",
+          "fix": "压句带 no motion blur；动作写清起收"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "PBR",
+          "cel-shaded"
+        ],
+        [
+          "physically based",
+          "cel-shaded"
+        ],
+        [
+          "次表面散射",
+          "平涂肤色加一处高光"
+        ],
+        [
+          "subsurface scattering",
+          "flat skin tone with one highlight"
+        ],
+        [
+          "皮肤毛孔",
+          "平涂肤色"
+        ],
+        [
+          "全局光照",
+          "单一主光"
+        ],
+        [
+          "环境光遮蔽",
+          ""
+        ],
+        [
+          "AO",
+          ""
+        ],
+        [
+          "光线追踪",
+          ""
+        ],
+        [
+          "柔和阴影",
+          "两段式平涂，分界硬"
+        ],
+        [
+          "soft shadow",
+          "two flat tones with a hard edge"
+        ],
+        [
+          "镜面反射",
+          "形状化高光"
+        ],
+        [
+          "specular",
+          "shaped highlight"
+        ],
+        [
+          "glossy",
+          "flat matte colour"
+        ],
+        [
+          "运动模糊",
+          ""
+        ],
+        [
+          "厚涂",
+          "平涂色块"
+        ],
+        [
+          "噪点",
+          ""
+        ],
+        [
+          "复杂贴图花纹",
+          "纯色块或简单条纹"
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句取 2.1；必走 Ref2VA 带资产图，纯文生还原率明显低于 2D",
+        "seedance_2_5": "压句取 2.2，写在【生成目标】段首；配色句写进【主体与关系】风格内联",
+        "cn": "压句取 2.3，写在整体风格段；平台默认会开全局光照与软阴影，必须钉死两段式",
+        "dedupe_script": "不要跑 dedupe_style.py --style ink-wash-2d——会删掉本轨的 shadow 与体积，等于把三渲二删成 2D"
+      },
+      "marker_words": [
+        "cel-shaded 3D render",
+        "two flat tones",
+        "three-dimensional characters",
+        "三渲二",
+        "solid three-dimensional"
+      ],
+      "excludes": [
+        "ink-wash-2d",
+        "gothic-puppet",
+        "photoreal-pbr",
+        "celshade-guoman-2d",
+        "stylized-pixar-3d",
+        "anime-2d",
+        "documentary-live-action"
+      ],
+      "ref_file": "references/风格锚_三渲二NPR.md",
+      "status": "已落值"
+    },
+    "stylized-pixar-3d": {
+      "display_name": "风格化 3D（皮克斯式）",
+      "track": "三渲二轨",
+      "dimension": "3D",
+      "heads_range": "6-6.5",
+      "heads_note": "风格化成人档；孩童取 4-4.5。同包禁混档",
+      "stability": "稳",
+      "stability_note": "表情与表演效率最高的一档；代价是纯文生视频易滑向写实 CG 或三渲二，有资产图走 I2V/Ref2VA 最稳",
+      "palette": {
+        "primary": "#C8794A",
+        "secondary": "#5C7488",
+        "accent": "#D0483A",
+        "usage": "primary 为衣物暖橙棕，secondary 为环境反射青灰蓝，accent 为朱红且是全片唯一重音色"
+      },
+      "negative_direction": [
+        "照片写实",
+        "真人皮肤毛孔",
+        "恐怖谷人脸",
+        "两段式赛璐璐阴影",
+        "均匀描边",
+        "平涂色块",
+        "塑料高光",
+        "定格顿挫",
+        "可读文字",
+        "水印"
+      ],
+      "tech_spec": {
+        "render_cn": "一幅风格化 3D 动画电影画面：角色造型圆润简化、头略偏大，皮肤有柔和的次表面透光，明暗是多层软过渡，不描边。三点式布光带体积感，暗部吃环境反射色而不是灰或黑。",
+        "render_en": "A stylized 3D animated feature look: rounded simplified characters with slightly oversized heads, soft subsurface skin, multi-tone soft shading with no outline, volumetric three-point lighting where shadow takes the ambient colour rather than grey or black.",
+        "palette_cn": "明亮饱和的配色：暗部带环境反射色，不是灰也不是黑，每帧只保留一个重音色。",
+        "palette_en": "bright saturated palette where shadow carries the ambient bounce colour, never grey or black, with a single accent hue per frame",
+        "material_rule": "材质带手绘纹理与轻微不完美（磨损、指印、布纹），禁塑料高光与镜面反射"
+      },
+      "motion_pool": {
+        "main": [
+          "缓推缓拉",
+          "弧形环绕",
+          "低角度仰拍",
+          "跟随跟拍"
+        ],
+        "limited": [
+          "快速推近",
+          "俯冲下降",
+          "大范围横移"
+        ],
+        "forbidden": [
+          "甩镜",
+          "抽帧",
+          "极近大特写填满整帧"
+        ]
+      },
+      "material_budget": {
+        "main": "皮肤次表面透光与服装布料纹理",
+        "second": "场景材质与道具表面细节",
+        "save": "远景植被、群演、背景陈设",
+        "forbidden_material": "塑料高光、镜面反射、平涂色块化、真实毛孔"
+      },
+      "collapse_risks": [
+        {
+          "symptom": "变写实 CG",
+          "cause": "压句只写 3D render，正文出现 PBR / photorealistic",
+          "fix": "压句第一词必须是 stylized 3D animated feature look"
+        },
+        {
+          "symptom": "变三渲二",
+          "cause": "出现 cel-shaded / outline / two tones",
+          "fix": "删掉并改写成 soft multi-tone shading with no outline"
+        },
+        {
+          "symptom": "人脸恐怖谷",
+          "cause": "写真实皮肤细节与真人比例",
+          "fix": "头身比写死 6-6.5，皮肤只写柔和透光"
+        },
+        {
+          "symptom": "暗部变灰",
+          "cause": "平台默认管线把阴影压成中灰",
+          "fix": "每镜都写暗部吃环境反射色，不是灰也不是黑"
+        },
+        {
+          "symptom": "变定格动画",
+          "cause": "出现 stop-motion / 顿挫 / 抽帧",
+          "fix": "写运动连续，允许轻微运动模糊"
+        },
+        {
+          "symptom": "材质变塑料",
+          "cause": "出现 glossy / plastic / mirror reflection",
+          "fix": "写哑光手绘纹理与轻微不完美"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "cel-shaded",
+          "soft multi-tone shading"
+        ],
+        [
+          "outline",
+          "no outline"
+        ],
+        [
+          "two flat tones",
+          "soft multi-tone shading"
+        ],
+        [
+          "photorealistic",
+          "stylized"
+        ],
+        [
+          "skin pores",
+          "soft subsurface skin"
+        ],
+        [
+          "次表面散射",
+          "柔和的次表面透光"
+        ],
+        [
+          "赛璐璐",
+          "多层软过渡"
+        ],
+        [
+          "描边",
+          "不描边"
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句写在 [Shot 1] 之前；英文正文，禁中文词",
+        "seedance_2_5": "压句写在【生成目标】段首，配色句写在【主体与关系】",
+        "cn": "压句写在整体风格段；无 negative 字段时压成 Must not 一行",
+        "dedupe_script": "不要跑 dedupe_style.py --style ink-wash-2d——那份词表是去立体的，本风格要体积"
+      },
+      "marker_words": [
+        "stylized 3D animated feature look",
+        "soft subsurface skin",
+        "multi-tone soft shading",
+        "no outline",
+        "风格化 3D",
+        "三点式布光"
+      ],
+      "excludes": [
+        "npr-celshaded-3d",
+        "photoreal-pbr",
+        "gothic-puppet",
+        "ink-wash-2d",
+        "documentary-live-action"
+      ],
+      "ref_file": "references/风格锚_风格化3D皮克斯.md",
+      "status": "已落值",
+      "dimension_note": "3D 模型 + 多层软过渡卡通着色：体积是 3D 的，明暗是软分层的，无描边"
+    },
+    "anime-2d": {
+      "display_name": "日系动画 2D（anime 通用档）",
+      "track": "卡通轨",
+      "dimension": "2D",
+      "heads_range": "6.5-7",
+      "heads_note": "日系美型成人档；孩童取 4.5-5。同包禁混档",
+      "stability": "稳",
+      "stability_note": "眼部表现空间大，情绪传达效率高；硬限制是 2D 画做环绕必崩，运镜池禁环绕",
+      "palette": {
+        "primary": "#3B4A6B",
+        "secondary": "#6A6390",
+        "accent": "#D9493F",
+        "usage": "primary 为校服藏青，secondary 为带紫倾向的影色（不用灰），accent 为朱红且是全片唯一重音色"
+      },
+      "negative_direction": [
+        "3D 渲染",
+        "写实照片感",
+        "真人化",
+        "厚涂油画笔触",
+        "软过渡渐变",
+        "运动模糊",
+        "环绕视差",
+        "Q 版二头身",
+        "可读文字",
+        "水印"
+      ],
+      "tech_spec": {
+        "render_cn": "一幅日系 2D 动画赛璐璐画面：细而干净的勾线，颜色分成底色与影色两层，分界清晰，不做体积渲染，没有渐变。角色保持平面化的绘画感，背景可以是绘制得更细的美术背景。有限动画的运动方式，镜头不环绕，无运动模糊。",
+        "render_en": "A Japanese 2D anime cel-shaded look: thin clean lineart, flat colour split into base tone and shadow tone with a crisp boundary, no volumetric shading, no gradient. Characters stay flat and graphic while the painted background may carry more detail. Limited-animation motion, no camera orbit, no motion blur.",
+        "palette_cn": "日系动画配色：暗部用带色相的影色而不是灰，每帧只保留一个重音色。",
+        "palette_en": "anime palette where shadow is a tinted hue rather than grey, with a single accent hue per frame",
+        "material_rule": "色块分层、勾线干净；禁厚涂笔触与软过渡渐变"
+      },
+      "motion_pool": {
+        "main": [
+          "固定机位",
+          "缓推缓拉",
+          "背景横移",
+          "上下平移",
+          "正反打"
+        ],
+        "limited": [
+          "小幅跟拍",
+          "轻微变焦",
+          "快速推近"
+        ],
+        "forbidden": [
+          "环绕 orbit",
+          "大幅度横移带角色层视差",
+          "甩镜",
+          "低角度大仰角带角色形变"
+        ]
+      },
+      "material_budget": {
+        "main": "眼型瞳色与头发的体块高光",
+        "second": "服装色块与褶皱线",
+        "save": "背景细节、群演、远景陈设",
+        "forbidden_material": "厚涂笔触、软过渡渐变、皮肤毛孔、体积光"
+      },
+      "collapse_risks": [
+        {
+          "symptom": "变 3D CG",
+          "cause": "出现 render / volumetric / soft shadow",
+          "fix": "压句首词 2D anime cel-shaded，全片禁 3D 词"
+        },
+        {
+          "symptom": "环绕时角色崩形",
+          "cause": "运镜写了 orbit / 绕到侧面",
+          "fix": "环绕是禁项，转面镜头改拆镜"
+        },
+        {
+          "symptom": "线条变软变糊",
+          "cause": "出现 gradient / blur / soft lighting",
+          "fix": "写细而干净的勾线，分界清晰"
+        },
+        {
+          "symptom": "眼型漂移",
+          "cause": "角色条目没写死眼型与瞳色",
+          "fix": "眼型、瞳色、睫毛三件必写"
+        },
+        {
+          "symptom": "背景喧宾夺主",
+          "cause": "背景细节写太多",
+          "fix": "主花费给角色头部，背景走省"
+        },
+        {
+          "symptom": "暗部变灰",
+          "cause": "影色写成 grey",
+          "fix": "写带色相的影色（偏紫或偏蓝）"
+        },
+        {
+          "symptom": "加运动模糊",
+          "cause": "写了 motion blur",
+          "fix": "明写 no motion blur"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "render",
+          "2D anime cel-shaded"
+        ],
+        [
+          "volumetric",
+          "flat colour in two tones"
+        ],
+        [
+          "soft shadow",
+          "base tone and shadow tone"
+        ],
+        [
+          "ambient occlusion",
+          "删除"
+        ],
+        [
+          "gradient",
+          "flat colour"
+        ],
+        [
+          "厚涂",
+          "干净赛璐璐色块"
+        ],
+        [
+          "灰/灰色阴影",
+          "带色相的影色"
+        ],
+        [
+          "motion blur",
+          "no motion blur"
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句写在 [Shot 1] 之前；英文正文，禁中文词",
+        "seedance_2_5": "压句写在【生成目标】段首，配色句写在【主体与关系】",
+        "cn": "压句写在整体风格段；无 negative 字段时压成 Must not 一行",
+        "dedupe_script": "不要跑 dedupe_style.py --style ink-wash-2d——本风格要赛璐璐分界不是去立体"
+      },
+      "marker_words": [
+        "Japanese 2D anime cel-shaded",
+        "thin clean lineart",
+        "base tone and shadow tone",
+        "no gradient",
+        "no camera orbit",
+        "日系 2D 动画赛璐璐"
+      ],
+      "excludes": [
+        "npr-celshaded-3d",
+        "ink-wash-2d",
+        "photoreal-pbr",
+        "celshade-guoman-2d",
+        "webtoon-2d"
+      ],
+      "ref_file": "references/风格锚_日系动画2D.md",
+      "status": "已落值",
+      "dimension_note": "2D 赛璐璐绘画：资产是画不是模型，转面要重新画，环绕必崩"
+    },
+    "webtoon-2d": {
+      "display_name": "韩漫条漫（竖屏专项）",
+      "track": "卡通轨",
+      "dimension": "2D",
+      "heads_range": "7.5-8",
+      "heads_note": "修长成人档；少年取 7。同包禁混档",
+      "stability": "中",
+      "stability_note": "竖屏 9:16 专项档，解决「竖屏只有画幅语法没有内容模板」的缺口；横屏项目改用 celshade-guoman-2d 或 anime-2d",
+      "palette": {
+        "primary": "#2F3E5C",
+        "secondary": "#B9C2CC",
+        "accent": "#D9486B",
+        "usage": "primary 为都市藏蓝，secondary 为背景低饱和灰蓝，accent 为玫红且是全片唯一重音色"
+      },
+      "negative_direction": [
+        "3D 渲染",
+        "写实照片感",
+        "两段式硬边赛璐璐阴影",
+        "厚涂油画",
+        "Q 版二头身",
+        "粗颗粒噪点",
+        "可读文字",
+        "水印"
+      ],
+      "tech_spec": {
+        "render_cn": "一幅韩漫条漫质感的画面：干净的数码勾线，上色是柔边过渡的赛璐璐，皮肤带轻微柔光与渐变，人物是修长的成人比例，整体是平面绘画的数码质感并带屏幕亮感。竖屏分格构图，镜头不环绕，不做连续长镜跟拍。",
+        "render_en": "A Korean webtoon illustration look: clean digital lineart, soft-edged cel shading with slight skin glow and gentle gradients, elongated eight-head adult proportions, flat graphic characters with a screen-lit finish. Vertical panel composition, no camera orbit, no continuous tracking shot.",
+        "palette_cn": "条漫配色：背景低饱和、人物高饱和，每帧只保留一个重音色。",
+        "palette_en": "webtoon palette with desaturated backgrounds and saturated characters, one accent hue per frame",
+        "material_rule": "皮肤带轻微柔光与渐变；禁硬边两段式阴影、禁写实景深虚化"
+      },
+      "motion_pool": {
+        "main": [
+          "竖屏上下平移",
+          "轻微推近",
+          "分格式切",
+          "正反打"
+        ],
+        "limited": [
+          "轻微缩放",
+          "局部放大特写"
+        ],
+        "forbidden": [
+          "环绕",
+          "连续长镜跟拍",
+          "横移带视差",
+          "甩镜"
+        ]
+      },
+      "material_budget": {
+        "main": "人物面部与发型的数码绘制精度",
+        "second": "服装褶皱与材质",
+        "save": "背景陈设、远景人群",
+        "forbidden_material": "真实皮肤毛孔、写实景深虚化、硬边两段式阴影"
+      },
+      "collapse_risks": [
+        {
+          "symptom": "变日系 anime",
+          "cause": "写了硬边两段式、头身掉到 6.5",
+          "fix": "压句写 soft-edged cel shading，头身写死 7.5-8"
+        },
+        {
+          "symptom": "变写实照片",
+          "cause": "出现 photorealistic / skin pores / DSLR",
+          "fix": "删掉，写 flat graphic characters"
+        },
+        {
+          "symptom": "皮肤变塑料",
+          "cause": "柔光写成 glossy / plastic",
+          "fix": "写轻微柔光与渐变，不是高光"
+        },
+        {
+          "symptom": "H3 正文混中文",
+          "cause": "压句里夹中文词",
+          "fix": "压句纯英文，跑 check_prompt_h3.mjs 确认 0 warning"
+        },
+        {
+          "symptom": "竖屏构图崩",
+          "cause": "没按上中下三段写",
+          "fix": "每镜场景段写上段 / 中段 / 下段各有什么"
+        },
+        {
+          "symptom": "背景抢戏",
+          "cause": "背景饱和度高过人物",
+          "fix": "写背景低饱和、人物高饱和"
+        },
+        {
+          "symptom": "连续运镜导致形崩",
+          "cause": "写了长镜跟拍",
+          "fix": "连续跟拍是禁项"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "two-tone",
+          "soft-edged cel shading"
+        ],
+        [
+          "hard edge",
+          "soft-edged"
+        ],
+        [
+          "crisp shadow",
+          "gentle gradient"
+        ],
+        [
+          "photorealistic",
+          "flat graphic characters"
+        ],
+        [
+          "skin pores",
+          "slight skin glow"
+        ],
+        [
+          "glossy",
+          "slight skin glow"
+        ],
+        [
+          "厚涂",
+          "干净数码绘制"
+        ],
+        [
+          "8头身",
+          "eight-head adult proportions"
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句写在 [Shot 1] 之前；**必须纯英文**，头身比写成 eight-head 不能夹中文",
+        "seedance_2_5": "压句写在【生成目标】段首，配色句写在【主体与关系】",
+        "cn": "压句写在整体风格段；无 negative 字段时压成 Must not 一行",
+        "dedupe_script": "不要跑 dedupe_style.py --style ink-wash-2d——本风格要柔边过渡不是去立体"
+      },
+      "marker_words": [
+        "Korean webtoon illustration",
+        "clean digital lineart",
+        "soft-edged cel shading",
+        "eight-head adult proportions",
+        "vertical panel composition",
+        "韩漫条漫"
+      ],
+      "excludes": [
+        "anime-2d",
+        "celshade-guoman-2d",
+        "photoreal-pbr",
+        "ink-wash-2d"
+      ],
+      "ref_file": "references/风格锚_韩漫条漫2D.md",
+      "status": "已落值",
+      "dimension_note": "2D 数字绘制条漫：柔边赛璐璐 + 屏幕亮感，竖屏分格构图"
+    },
+    "documentary-live-action": {
+      "display_name": "纪实 / 纪录片式实拍",
+      "track": "写实轨",
+      "dimension": "实拍",
+      "heads_range": "7-7.5",
+      "heads_note": "真人比例，不做美型简化；孩童按真实比例取。同包禁混档",
+      "stability": "中",
+      "stability_note": "风险不在画质在「过度整洁」——模型默认输出精修画面，越好看越假。判断标准是画面里有没有「摄影师在场」的痕迹",
+      "palette": {
+        "primary": "#5A6470",
+        "secondary": "#8A7256",
+        "accent": "#E08A3C",
+        "usage": "primary 为日常服装灰蓝，secondary 为木与土，accent 为钠灯橙且必须是现场光源、是全片唯一重音色"
+      },
+      "negative_direction": [
+        "CGI",
+        "3D 渲染",
+        "塑料皮肤",
+        "完美对称脸",
+        "电影级调色",
+        "稳定器丝滑运镜",
+        "广告片质感",
+        "动漫化",
+        "可读文字",
+        "水印"
+      ],
+      "tech_spec": {
+        "render_cn": "一段由真实摄影机在真实环境里拍到的素材：只用现场光，带手持的自然微晃，人物不摆拍且有日常的不完美。皮肤有毛孔与细纹，布料有褶皱与磨损。纪实式的取景，由物理距离决定景别，不是设计出来的构图。不做调色，不用稳定器式的平滑运镜。",
+        "render_en": "Footage shot by a real camera in a real location: available light only, natural handheld micro-shake, unposed subjects with everyday imperfections. Real skin texture with pores and fine lines, real cloth with creases and wear. Documentary framing chosen by physical distance, not by design. No colour grading, no stabilised glide.",
+        "palette_cn": "现场光的自然色偏，每帧只有一个实用光源作为重音色，中低饱和，不做调色。",
+        "palette_en": "natural available-light colour with a single practical accent source per frame, mid-to-low saturation, no graded look",
+        "material_rule": "皮肤必带不完美词（毛孔、细纹、轻微不对称）；禁磨皮与塑料高光"
+      },
+      "motion_pool": {
+        "main": [
+          "手持跟拍",
+          "肩扛式跟随",
+          "固定机位守候",
+          "轻微推拉找焦点",
+          "追焦"
+        ],
+        "limited": [
+          "快速转向",
+          "上车式进退",
+          "隔前景遮挡拍"
+        ],
+        "forbidden": [
+          "稳定器长镜",
+          "无人机弧线",
+          "完美对称构图",
+          "轨道横移",
+          "慢动作升格"
+        ]
+      },
+      "material_budget": {
+        "main": "皮肤与布料的真实质感",
+        "second": "环境材质（灰尘、水渍、反光、风化）",
+        "save": "远景细节、背景人群",
+        "forbidden_material": "塑料皮肤、完美对称脸、磨皮、镜面高光"
+      },
+      "collapse_risks": [
+        {
+          "symptom": "变精修广告片",
+          "cause": "出现 cinematic / film still / perfect lighting",
+          "fix": "压句首词 footage shot by a real camera in a real location，全片禁电影感类词"
+        },
+        {
+          "symptom": "变电影级 CGI",
+          "cause": "出现 render / CGI / subsurface scattering",
+          "fix": "删掉；皮肤只写毛孔与细纹"
+        },
+        {
+          "symptom": "皮肤变塑料磨皮",
+          "cause": "出现 flawless skin / smooth skin",
+          "fix": "必带不完美词：毛孔、细纹、轻微不对称、汗"
+        },
+        {
+          "symptom": "运镜变丝滑",
+          "cause": "出现 gimbal / drone / smooth camera",
+          "fix": "写手持微晃加呼吸感"
+        },
+        {
+          "symptom": "构图变设计感",
+          "cause": "写了三分线、对称、精美前景框",
+          "fix": "写由物理距离决定景别，允许构图临时失衡"
+        },
+        {
+          "symptom": "调色味出现",
+          "cause": "写了 teal orange / 电影调色",
+          "fix": "明写 no colour grading，重音色只给现场光源"
+        },
+        {
+          "symptom": "人物摆拍感",
+          "cause": "姿态写成展示式",
+          "fix": "写不摆拍，动作给日常目的"
+        }
+      ],
+      "dedupe_pairs": [
+        [
+          "cinematic",
+          "footage shot by a real camera"
+        ],
+        [
+          "film still",
+          "real location footage"
+        ],
+        [
+          "movie scene",
+          "real location footage"
+        ],
+        [
+          "电影感",
+          "真实摄影机拍到的素材"
+        ],
+        [
+          "flawless skin",
+          "skin with pores and fine lines"
+        ],
+        [
+          "smooth skin",
+          "skin with pores"
+        ],
+        [
+          "perfect face",
+          "slight asymmetry"
+        ],
+        [
+          "gimbal",
+          "natural handheld micro-shake"
+        ],
+        [
+          "studio lighting",
+          "available light only"
+        ],
+        [
+          "teal and orange",
+          "natural available-light colour"
+        ]
+      ],
+      "surface_notes": {
+        "h3": "压句写在 [Shot 1] 之前；英文正文，禁中文词",
+        "seedance_2_5": "压句写在【生成目标】段首，配色句写在【主体与关系】",
+        "cn": "压句写在整体风格段；无 negative 字段时压成 Must not 一行",
+        "dedupe_script": "不要跑 dedupe_style.py --style ink-wash-2d——本风格要体积与真实材质，去立体化会毁掉它"
+      },
+      "marker_words": [
+        "footage shot by a real camera",
+        "available light only",
+        "natural handheld micro-shake",
+        "unposed subjects",
+        "no colour grading",
+        "纪实",
+        "真实摄影机"
+      ],
+      "excludes": [
+        "photoreal-pbr",
+        "npr-celshaded-3d",
+        "stylized-pixar-3d",
+        "celshade-guoman-2d",
+        "ink-wash-2d"
+      ],
+      "ref_file": "references/风格锚_纪实实拍.md",
+      "status": "已落值",
+      "dimension_note": "实拍素材或模拟实拍观感：现场光、手持微晃、不摆拍，与影视级 CGI 的区别是「摄影师在场的痕迹」"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 编辑器与系统
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# 项目级数据（随 skill 分发的只是模板种子，不入仓 references 之外的实例）
+style-registry.json
+asset-registry.json
+
+# 运行产物
+build/
+dist/
+*.log
+
+# 本地历史存档：仅供本机回溯，不随开源仓库分发
+references/_旧版存档/
