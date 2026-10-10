@@ -108,8 +108,11 @@ pip install -r requirements.txt   # matplotlib + pillow; only two scripts need t
 - Zero npm dependencies
 - No python-docx, no pandas
 
-Optional external skills (**everything works without them**): MiniMax `h3-prompt-writing`,
-`lengyi-shotlist`, `seedance-video-prompt`.
+Optional external skills (**11 in total; everything works without them**): `h3-camera-shots`,
+`h3-shot-iteration`, `h3-storyboard`, MiniMax `h3-prompt-writing`, `md-to-docx`, `lengyi-shotlist`,
+`seedance-video-prompt`, `realistic-actor`, `cinematic-shot-prompt-expert`, `infimind-video-analysis`,
+`direct-seedance25-video`. See the "外部依赖与降级方案" table in `SKILL.md` for what each one does and
+the fallback when it is absent — no main workflow path requires any of them.
 
 ---
 

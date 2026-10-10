@@ -264,7 +264,7 @@ Restrained low-frequency scoring, no swelling strings.
 | 投国内面 | 压句取 §2.3，写在「整体风格」段；负面词压成 `Must not` 一行附正文末，≤1 行；**必跑 audit_risk** |
 | 出资产图 | `Seedream5适配.md`；出图提示词里压句同样逐字复用；**参考图必须是照片级** |
 | 写实终稿范式 | `写实向终稿示例.md`（滑窗范式 + 正向刚性约束 + 保真预算的完整落地形态） |
-| 具名运镜拼装 | `h3-camera-shots` skill |
+| 具名运镜拼装 | `h3-camera-shots` skill（可选）；未装则用 `镜头骨架库.md` 8 类 24 条骨架 + `光学与空间语言块.md` 的运镜写法自拼 |
 | 出片不对 | `失败诊断与返修映射.md` + `h3-shot-iteration` skill |
 | 去立体化扫描 | **不要跑 `dedupe_style.py --style ink-wash-2d`**（它是「去立体」的，本轨要体积），按 §9.1 手工清 |
 | 风格选型与 id 查表 | `风格路由表.md`；数值一律回查 L0 `style-registry.json` 的 `photoreal-pbr` 条目，不抄本文件副本 |

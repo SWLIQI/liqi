@@ -88,8 +88,10 @@ pip install -r requirements.txt   # matplotlib + pillow，仅两个脚本需要
 - 零 npm 依赖
 - 不依赖 python-docx / pandas
 
-可选的外部技能（**不装也能用**）：MiniMax 官方 `h3-prompt-writing`，  
-装了则 H3 字段以官方为准；`lengyi-shotlist` / `seedance-video-prompt` 用于专项转交。
+可选的外部技能（**共 11 项，不装也能用**）：`h3-camera-shots`、`h3-shot-iteration`、`h3-storyboard`、
+MiniMax 官方 `h3-prompt-writing`、`md-to-docx`、`lengyi-shotlist`、`seedance-video-prompt`、
+`realistic-actor`、`cinematic-shot-prompt-expert`、`infimind-video-analysis`、`direct-seedance25-video`。
+**逐项用途与「没装怎么办」见 `SKILL.md` 的「外部依赖与降级方案」表**——主流程没有任何一条路必须依赖它们。
 
 ---
 

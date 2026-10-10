@@ -22,8 +22,11 @@ H3-Context-IR / H3-Regenerate-2K 两条服务端增强）时的改写规则。�
 
 **上下游关系**：H3 字段格式以本文件为准；若本机装有 MiniMax 官方 `h3-prompt-writing` skill，
 其 `references/base-en.txt` 与 `ref-en.txt` 可作为权威补充。**两者均未安装也不影响使用本文件。**
-本文件不重复规定字段细节，只规定 liqi 各小节往哪个字段落。拆镜节拍参考 `h3-storyboard`，
-具名运镜参考 `h3-camera-shots`，出片返修参考 `h3-shot-iteration`。
+本文件不重复规定字段细节，只规定 liqi 各小节往哪个字段落。下面三个是**可选**外部 skill，
+**没装全部不影响出稿**：拆镜节拍可参考 `h3-storyboard`（没装就按本 skill Step 3 逐镜流程 + `镜头骨架库.md`，
+H3 只是换个落点、拆镜逻辑不变）；具名运镜可参考 `h3-camera-shots`（没装就按 `镜头骨架库.md` +
+`光学与空间语言块.md` 的运镜写法自拼）；出片返修可参考 `h3-shot-iteration`（没装就按
+`失败诊断与返修映射.md` 的四层定位，流程一致）。
 
 ---
 
