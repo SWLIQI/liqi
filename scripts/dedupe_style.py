@@ -48,6 +48,11 @@ import re
 import shutil
 import sys
 
+# Windows 下 stdout 重定向到管道/文件时默认 cp936，本脚本会 print ⚠/❌，
+# 不显式设 utf-8 会 UnicodeEncodeError。与其余 6 个脚本保持一致。
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 SEED = os.path.join(HERE, "..", "references", "style-registry.seed.json")
 

@@ -45,6 +45,11 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+# Windows 下 stdout 被重定向到管道/文件时默认走 cp936，本脚本会 print ⚠/❌，
+# 不显式设 utf-8 会 UnicodeEncodeError。与其余 6 个脚本保持一致。
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 # 兼容三种镜行写法：本包原生 `00:00-00:05 [镜头1] …` / `[00:00-00:05] …` / `[0-3秒] …`
 TS_RE = re.compile(
     r"^\s*\[?\s*(\d{1,2}(?::\d{2})?)\s*[-~—]\s*(\d{1,2}(?::\d{2})?)\s*秒?\s*\]?\s*(.*)$")

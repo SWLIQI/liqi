@@ -43,7 +43,9 @@ const SEED = path.join(__dirname, '..', 'references', 'style-registry.seed.json'
 
 if (!file) {
   console.log('用法: node check_style.mjs <包.md> [--surface auto|h3|seedance|cn] [--registry <path>]');
-  process.exit(0);
+  // 退出码与 check_prompt.mjs / check_prompt_h3.mjs 统一：用法错误 = 2，
+  // 否则 CI 里不带参数误跑会被当成通过。
+  process.exit(2);
 }
 if (!fs.existsSync(file)) { console.log('文件不存在: ' + file); process.exit(2); }
 

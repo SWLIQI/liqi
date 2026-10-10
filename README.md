@@ -46,7 +46,8 @@ layers built in upstream.
 
 ## 快速开始
 
-1. 把 `超级liqi提示词` 整个目录放进你的 skills 目录。
+1. 把整个目录放进你的 skills 目录，并重命名为 skill 名 `super-liqi-prompt`
+   （skill 规范要求目录名与 `SKILL.md` 的 `name` 字段一致，且 `name` 只能用小写字母、数字、连字符）。
 2. 复制注册表种子：`references/style-registry.seed.json` → 项目级 `style-registry.json`。
 3. 给一段故事或剧本，说清三锁。
 4. 按 Step -1 → 6 走；每一步该加载哪份 reference，查 `SKILL.md` 的 Load Map。
@@ -71,7 +72,8 @@ python scripts/audit_project.py <包.md> --script <剧本.txt> --assets <资产�
 python scripts/audit_risk.py <文件.md>
 ```
 
-**有 ERROR 不许交付。**&#x4E94;个脚本都不要求 PATH 里有特殊工具，除了两个 Python 包。
+**有 ERROR 不许交付。** 上面这五个必跑脚本都不要求 PATH 里有特殊工具，除了两个 Python 包。
+（本仓共 12 个脚本，其余按需跑，用途与参数见 `SKILL.md` 的 References 章节。）
 
 ---
 

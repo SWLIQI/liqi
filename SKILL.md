@@ -1,9 +1,9 @@
 ---
-name: 超级liqi提示词
+name: super-liqi-prompt
 description: 把故事、剧本或已有分镜锻造成可直接投喂 AI 视频模型的终稿级提示词包，并在上游补齐资产、剧本与表演三层。支持 Seedance 2.0 / Seedance 2.5 / MiniMax H3（含 H3 Max）三种投放目标与国内面、国际面两类段头骨架，六条风格轨道可切换，角色资产统一走 4 View 资产板。当用户要求生成视频提示词、分镜提示词、逐镜生成提示词、短片镜头脚本、整合镜拆分、资产设定图、角色一致性方案、台词诊断、语速排期、过审预检时使用（关键词：生成视频、分镜提示词、视频提示词、逐镜、时间线分镜、提示词优化包、资产图册、角色设定图、4 View、FACS、微表情、台词诊断、过审、被拦截、Seedance、MiniMax H3、H3）。交付前必须跑机械校验：投 Seedance 面跑 scripts/check_prompt.mjs，投 H3 面改跑 scripts/check_prompt_h3.mjs；有剧本或资产库时另跑 audit_project.py，投国内平台时另跑 audit_risk.py。英文触发词（English keywords - video generation prompt, shot list, storyboard, per-shot prompt, Seedance, MiniMax H3, character consistency, style anchor, 4 View asset board, FACS, dialogue timing, content moderation）。全文中英术语对照见 references/术语对照表_glossary.md，英文说明见 README.en.md。
 agent_created: true
 license: MIT
-version: "4.2.1"
+version: "4.2.2"
 ---
 
 # 超级 liqi提示词
@@ -35,6 +35,22 @@ version: "4.2.1"
 ⚠️ **武打的口径要说清楚**：本 skill 对打戏**只覆盖到「动作接触」这一通用层**——起势 / 发力 / 路径 / 接触 / 反馈 / 结果 六段链条（见 `references/任务模板路由.md` 第一节）。**专项打戏编排、大招终结技、兵器流派库、玄幻法术体系不在覆盖范围内**：另有一套外部的 10 份武打专项库（约 3.1 万字）**未并入本 skill、也不随本仓库分发**。要做专项打戏请按下表转交。
 
 不覆盖：电商带货、TVC 品牌落版、口播种草、舞蹈与 FPV 专项、专项武打 / 玄幻编排——按 `references/任务模板路由.md` 第四节转交对应 skill。
+
+### 外部依赖与降级方案（开源使用者必读）
+
+本 skill 的部分 references 会提到**不在本仓库内的其他 skill**。它们**全部是可选增强，没装不影响主流程**；
+下表列出每个依赖的用途、以及没装时用什么顶上。**没有任何一条路是必须依赖外部 skill 才能走完的。**
+
+| 外部 skill / 资产 | 被谁提及 | 用途 | 未安装时的降级方案 |
+|---|---|---|---|
+| `h3-camera-shots` | 各风格锚 §十 对接表 | H3 面具名运镜的拼装词库 | 用 `references/镜头骨架库.md`（8 类 24 条骨架）+ `references/光学与空间语言块.md` 的运镜写法自行拼装；运镜池另见各风格锚 §四 |
+| `h3-shot-iteration` | 各风格锚 §十 对接表 | H3 单镜出片不对时的迭代流程 | 用 `references/失败诊断与返修映射.md`（四层定位 + 症状→第一改项 + 禁止的返修动作），流程完全一致 |
+| `h3-prompt-writing`（MiniMax 官方） | `references/MiniMaxH3适配.md`、本文件 §70 | H3 字段定义的权威出处 | 本 skill 的 `MiniMaxH3适配.md` 已自带全套字段定义；装了则以官方为准，没装不影响 |
+| `md-to-docx` | `references/看板编译规范.md` | 交付物转 Word | 直接交付 `.md`，或用 `scripts/build_board_lite.py` 出 HTML 看板 |
+| `lengyi-shotlist` / `seedance-video-prompt` | `references/任务模板路由.md` §四 | 专项打戏 / 玄幻编排等不覆盖场景的转交目标 | 这两类不在本 skill 覆盖范围；通用层（动作接触六段链）仍可用本 skill 的 `任务模板路由.md` §一 |
+| 外部的 10 份武打专项库（约 3.1 万字） | 本文件「边界」一节 | 专项打戏编排 | 未随本仓库分发；需要专项打戏时按上条转交，或只做通用动作链 |
+
+> 在 references 里看到「转交 X skill」时，若本机没有 X，**按本表降级继续做，不要停下来等用户**。
 
 ---
 
@@ -164,7 +180,7 @@ H3 单条 **4–15 秒**，超过必拆——**滑窗阈值从 20 秒降到 15 �
 | 角色有多个版本 / 换装 | `references/版本拆分与互锁清单.md` |
 | 生图模型是 Seedream 5.0 Pro | `references/Seedream5适配.md` |
 | 画情绪张力曲线 / 自检节拍 | 跑 `scripts/generate_emotion_curve.py`（三条法则自检） |
-| 多人物镜定左右、写反打、跳轴 | `references/空间层_调度与轴线.md` + `references/轴线与反打规则.md` |
+| 多人物镜定左右、写反打、跳轴 | `references/空间层_调度与轴线.md`（站位四要素 / S0~S4 分级 / 取景半径）＋ `references/轴线与反打规则.md`（**跨轴四种合法过渡的唯一枚举** / 反打匹配表） |
 | 选镜头结构、定叙事功能 | `references/镜头骨架库.md` |
 | 写景别 / 透视 / 景深 / 空间位置 | `references/光学与空间语言块.md` |
 | 镜头不够帅、看不下去、画面平庸 | `references/视听层_镜头文法与光色.md` |
@@ -212,21 +228,10 @@ Step -1（可选·剧本门控） → Step 0（分级） → Step 1（时长/字
   → Step 4（质量过关） → Step 5（转场/台账） → Step 6（交付）
 ```
 
-### 旧编号对照（读继承文档时用）
+### 旧编号对照（读继承文档时才需要）
 
-原 liqi 体系的 `Step 3B / 3B2 / 3B3 / 3C / 4B / 4D / 7` 是**融合前的旧编号，在本 skill 中不存在**。遇到就按下表换算：
-
-| 旧编号 | 原含义 | 现归属 |
-|---|---|---|
-| Step 3B | 角色双视图人设图 | **Step 2.5**（角色资产板） |
-| Step 3B2 | 侧背补锚卡 | **Step 2.5** · 按需补卡（`资产层_锁定与一致性.md` 第二节） |
-| Step 3B3 | 版本拆分 / 图生图换装 | **Step 2.5** + `版本拆分与互锁清单.md` |
-| Step 3C | 逐镜阶段的投喂纪律 | **Step 3**；投喂细节在 `资产层_锁定与一致性.md` 第二节 |
-| Step 4B | 场景环境设定表 | **Step 2.5** + `场景资产与时间线光照.md` |
-| Step 4D | 持物设定图 | **Step 2.5** + `持物设定图_模板.md` |
-| Step 7 | 故障诊断与返修 | **Step 4** + `失败诊断与返修映射.md` |
-
-> 这张表存在的唯一原因是：融合过程中两部分文件被合并、编号被压缩，早期文档里的旧编号会指向不存在的步骤。**写新文档时禁止再用旧编号。**
+原 liqi 体系的 `Step 3B / 3B2 / 3B3 / 3C / 4B / 4D / 7` 与 `Step 3.5` 都是**融合前的旧编号，在本 skill 中不存在**。
+遇到就换算，不要照抄、也不要在新生成的文档里复用。**换算表见 `references/术语对照表_glossary.md` 第三节末尾**（只在读到继承稿需要解码时才加载）。
 
 ---
 
@@ -248,7 +253,7 @@ Step -1（可选·剧本门控） → Step 0（分级） → Step 1（时长/字
 **台词在这个阶段可以改，而且应该改**：跑台词七维诊断（辨识度 / 潜台词 / 冲突推进 / 类型语感 / 信息效率 / 节奏 / 金句潜力）+ 语速三档自检。
 **台词一旦定稿即冻结**——进到 Step 2 之后，一字不差，不许再改（这条是 liqi 铁律，与本层不冲突：老李管上游改，liqi 管下游冻）。
 
-**情绪张力曲线**：量化全片节拍点（0–10 分），画出曲线。**只吸收可移植的两条法则**：
+**情绪张力曲线**：量化全片节拍点（0–10 分），画出曲线。**只吸收可移植的两组判据**（共 3 条可机械判定 + 1 条人工判定，`scripts/generate_emotion_curve.py` 实现前三条）：
 
 - 全片波峰（≥9.0）不少于 2 次，高潮之间必须有回落——**严禁持续平庸（全片 5~6 分平铺）或持续高压无喘息**；
 - 开局 3 秒内必须伴随即时冲突，拒绝无事件铺垫。
@@ -308,9 +313,9 @@ Step -1（可选·剧本门控） → Step 0（分级） → Step 1（时长/字
 | ≤15s | **推荐值**（老李的质量实践，单段高动态直出最稳） |
 | 15–20s | 允许，需写明理由；15s 以上必须用官方 `[起-止秒]` 时间戳分段，一镜连贯运镜过渡（模型不支持组内硬切） |
 | 20–30s | 越过 20s 方法论红线，**建议拆**（>20s 不拆，模型只稳出约 20 秒，剩余靠循环播放凑——这是「后半段重复」事故的根因） |
+| >30s | **强制滑窗拆分**（30s→2 窗，45s→3 窗） |
 
 ⚠️ **投 MiniMax H3 面时这张表整体作废**：H3 单条硬上限 **15 秒**，4–15 秒之外根本跑不动，滑窗阈值按 **15 秒**算。数值以「投放面参数总表」为准，适配细节见 `references/MiniMaxH3适配.md`。
-| >30s | **强制滑窗拆分**（30s→2 窗，45s→3 窗） |
 
 滑窗规则：每个窗口独立自洽，角色重新用外观识别，**禁写「接上/继续/仍穿着」**，窗间靠视觉重叠衔接。
 
@@ -515,7 +520,7 @@ Step -1（可选·剧本门控） → Step 0（分级） → Step 1（时长/字
 node scripts/check_prompt.mjs <file> --surface cn|intl
 ```
 
-33 个规则码（`E-` 为阻断级、`W-` 为建议级），报错时按码查含义。**有 error 必须修完再交付**；warning 建议处理。
+36 个规则码（`E-` 15 个为阻断级、`W-` 21 个为建议级），报错时按码查含义（全表见 `references/质控层_门禁与过审.md` 第二节）。**有 error 必须修完再交付**；warning 建议处理。
 
 🔴 **拿错脚本会假报错**：脚本会自识别投放面，检测到 H3 六段式包就**直接早退**（退出码 2）并提示改跑
 `check_prompt_h3.mjs`，不会甩给用户一堆假的 `E-SECTION-MISSING`。确实要强行按 Seedance 面校验时追加 `--target seedance-off`。
@@ -529,7 +534,7 @@ node scripts/check_prompt.mjs <file> --surface cn|intl
 node scripts/check_prompt_h3.mjs <file> [--strict] [--all]
 ```
 
-H3 面的格式与上面 33 码不是一回事，别混跑。脚本同样会自识别：检测到 Seedance 面的中文【时间轴】
+H3 面的格式与上面 36 码不是一回事，别混跑。脚本同样会自识别：检测到 Seedance 面的中文【时间轴】
 或对应段头时，会明确提示改跑 `check_prompt.mjs`，不再让用户对着空结果发呆。它查：六段齐全与顺序、标签是否定义过、
 `<d>` 成对与语言标记、`[Shot N]` 切点、单条 4–15 秒、`Must not` 是否误入正文、
 否定式频率、`detailed_description` 350–500 词、英文正文混中文。
@@ -581,7 +586,7 @@ python scripts/audit_risk.py <file> [--shot 1,2,3] [--detail]
 
 修改类交付物文末必须附**《改动复验报告》**（改动清单 + 联动检查结论 + 全量审核结论），**未附视为未完成复验，禁止交付**。
 
-**④ 去 AI 味 + slop 门禁**：禁「电影感/高级感/氛围拉满/细节丰富」；材质必须可观测（粗糙/反光/湿润/起毛）；抽象意境允许保留但必须**紧跟一句可执行的画面支撑**。slop 词计数：0 → 提交；1–2 → 删除收紧；3–5 → 从主体重写；**5+ → 推倒重来**。
+**④ 去 AI 味 + slop 门禁**：禁「电影感/高级感/氛围拉满/细节丰富」；材质必须可观测（粗糙/反光/湿润/起毛）；抽象意境允许保留但必须**紧跟一句可执行的画面支撑**。slop 词计数（与 `check_prompt.mjs` 阈值一致）：0 → 提交；1–2 → 删除收紧；3–4 → 从主体重写；**≥5 → 推倒重来，`E-SLOP-OVERLOAD` 阻断**。
 **精度梯度**：Level 0 空泛 → 1 类型 → 2 布光 → 3 角度 → 4 数值。**至少做到 Level 3**；一致性要求极高时才上 Level 4（数值类不进正文）。
 
 **⑤ 预算体检**：可见性预算（每个出镜对象是否都写了可见范围）、色彩预算、材质继承、运动签名、保真预算（主花费是否只有一个）。
@@ -742,37 +747,28 @@ python scripts/audit_risk.py <file> [--shot 1,2,3] [--detail]
 
 ### scripts
 
-- `scripts/check_prompt.mjs`：Seedance 面单镜格式机械校验（33 规则码）。**交付前强制跑。**
-- `scripts/check_prompt_h3.mjs`：**MiniMax H3 面专用机械校验**（六段结构 / 标签一致性 /
-  `<d>` 对白 / 切点 / 4–15 秒 / 无 Must not / 词数 350–500 / 英文纯度）。投 H3 面时替代 check_prompt.mjs。
-- `scripts/audit_literal.py`：抽象表述与高敏感画面表述扫描（九类 + S 类，带误报剔除）。
-  中文规则外另含**英文对应规则**（H3 面正文为英文，中文规则命中不到）；命中文末附文
-  （全局制作纪律 / 改动复验报告 / 校验结果）即停扫。三个审计脚本均识别 `镜 N` / `段 N` / `U01` 三种编号。
-  **多镜 / 整合镜交付前强制跑。** 依据 `references/抽象表述判定口径.md`。
-- `scripts/audit_project.py`：项目级审计（台词一致性 / 资产锚覆盖 / 角色漂移 / 时长 / 转场）。
-- `scripts/audit_risk.py`：国内平台内容审核风险预检（风险分 + 退出码）。**只查词——
-  拿到结果后必须按 `质控层_门禁与过审.md` §6.3 给每拍配镜头手法。**
-- `scripts/extract_script_docx.py`：剧本 .docx → 标准 txt（供 `audit_project.py` 的 `--script` 用）。
-- `scripts/slice_reference.py`：设定卡裁切（需 Pillow）。**默认版式 `--layout 4view`**（左头部近景 + 右无头三联），另支持 `dualview` / `sideback` / `9view` 三种按需卡；输出 `manifest.txt` 投喂清单，并给出每格的头部像素评估（判断能不能当身份锚）。
-- `scripts/build_board_lite.py`：md → 单文件离线分镜看板（锁③ 选①或③ 时用）。
-- `scripts/h3pkg_to_board_src.py`：**H3 面提示词包 → 看板源 md**。
-  H3 面的包结构（〇 风格锚 / 〇.5 资产层 / 一 转场注记 / 二 台账 / 三 逐镜 U01…）与
-  `build_board_lite.py` 的输入契约不同，**直接拿包去编译会让 57 个单元全部报
-  「未找到围栏投喂原文」「未解析到 [起-止秒] 行」**——看板出得来但不可用。
-  本脚本补这一层：把六段正文压成 ```text 围栏、把 `[Shot N]` 与时间码推成 `[起-止秒]` 行、
-  把风格锚与资产层归到 P1 视听圣经 / P2 资产清单 / P2.5 出图提示词。
-  用法：`python scripts/h3pkg_to_board_src.py <包.md> --script <剧本.txt> --assets <资产条目.md> --out <看板源.md>`
-  然后 `python scripts/build_board_lite.py <看板源.md> --out <看板.html>`。逐镜正文一个字不改。
-- `scripts/dedupe_style.py`：**按风格清污染词（泛化版，新包一律用这个）**。
-  词表从 `style-registry.json` 的 `dedupe_pairs` 读，另叠一份内置长句精调表（目前只有 `ink-wash-2d` 有）。
-  用法 `python scripts/dedupe_style.py <包.md> --style <id> [--fix] [--aggressive]`。
-  style 不给时从包里的 `【风格】<id>` 或 `# style_id: <id>` 推断；推断不出就报错列可用 id，**不猜**。
-  词级「删除型」替换默认只报不删（容易把句子删残），确认安全再加 `--aggressive`。
-  🔴 **作用区间非空是硬断言**：区间为空直接退出（退出码 2），不做任何替换——
-  曾经按围栏切分而文件里围栏已丢，替换全部作用在空集合上，报「替换 0 处」却看着像成功，白跑两轮。
-- `scripts/check_style.mjs`：**风格一致性门禁（P0）**。交付前必跑。
-  用法 `node scripts/check_style.mjs <包.md> [--surface auto|h3|seedance|cn]`。
-  查 9 项：style_id 未声明 / 未注册 / 引用待建 / 同包多 id / **互斥风格特征词串轨** /
-  头身档混用 / **压句未逐字复用（逐词定位第一个改动点）** / 配色句缺失 / 压句语言串面。
-  有 ERROR 退出码 1，**不许交付**。串轨检测会跳过负面词上下文里的点名（负面词里必须写「禁赛璐璐」，那是合法的）。
-- `scripts/generate_emotion_curve.py`：情绪张力曲线绘图 + 三条法则自检（波峰不少于 2 次 / 高潮间必须回落 / 防全片平铺）。**只装可移植的两条法则**，不内置老李面向抖音的 12 节拍命名与分值（C15 已判不吸收）。
+**必跑门禁**（交付前，按投放面选）：
+
+| 脚本 | 什么时候跑 | 命令行 |
+|---|---|---|
+| `scripts/check_prompt.mjs` | Seedance 面（2.0 / 2.5）**交付前强制**，36 规则码 | `node scripts/check_prompt.mjs <file> [--surface intl\|cn\|auto] [--strict] [--all] [--official]` |
+| `scripts/check_prompt_h3.mjs` | MiniMax H3 面**替代上者**，两者不可混跑（脚本会自识别并早退） | `node scripts/check_prompt_h3.mjs <file> [--strict] [--all]` |
+| `scripts/check_style.mjs` | 风格一致性 P0 门禁，**交付前必跑**，查 9 项 | `node scripts/check_style.mjs <包.md> [--surface auto\|h3\|seedance\|cn]` |
+| `scripts/audit_literal.py` | 抽象表述 + 高敏感画面扫描，**多镜 / 整合镜交付前强制** | `python scripts/audit_literal.py <包.md> [--detail] [--seg 段1,段2]` |
+
+**有条件必跑 / 按需**：
+
+| 脚本 | 什么时候用 |
+|---|---|
+| `scripts/audit_project.py` | 有剧本或资产库时（台词一致性 / 资产锚覆盖 / 角色漂移 / 时长 / 转场） |
+| `scripts/audit_risk.py` | 投国内平台时（**只查词**，配手法看 `质控层_门禁与过审.md` §6.3） |
+| `scripts/extract_script_docx.py` | 剧本是 .docx，需转 txt 给 `audit_project.py --script` |
+| `scripts/slice_reference.py` | 设定卡裁片（需 Pillow），默认 `-l 4view` |
+| `scripts/build_board_lite.py` | md → 单文件离线分镜看板（锁③ 交付形态选 ① 或 ③） |
+| `scripts/h3pkg_to_board_src.py` | H3 面包 → 看板源，**编译看板前必须先过这一层** |
+| `scripts/dedupe_style.py` | 按风格清污染词（泛化版，新包一律用这个；旧 `dedupe25d.py` 已删） |
+| `scripts/generate_emotion_curve.py` | 情绪张力曲线 + 三条可机械判定的法则自检（需 matplotlib） |
+
+> 全量参数、退出码约定、每个脚本的踩坑注记 → **`references/脚本用法速查.md`**。
+> 拼命令行时再加载，不要预先读。三个 `.mjs` 统一 **有 error 1 / 全过 0 / 用法或输入问题 2**，
+> CI 按退出码判定，别只看有没有打印文字。

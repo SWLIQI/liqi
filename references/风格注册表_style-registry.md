@@ -87,7 +87,7 @@
 | 字段 | 含义与写法 |
 |---|---|
 | display_name | 中文名，写进交付物的风格声明 |
-| track | 卡通轨 / 写实轨 / 手绘轨 / 定格木偶轨 / 三渲二轨。轨道决定负面词与技术规格的**大方向**，风格决定落值 |
+| track | 六条轨道：**卡通轨 / 写实轨 / 手绘轨 / 定格木偶轨 / 三渲二轨 / 平面工艺轨**（皮影 / 剪纸 / 折纸，当前挂的都是待建 id）。轨道决定负面词与技术规格的**大方向**，风格决定落值；枚举与 `SKILL.md` 锁③ 的轨道表、`风格路由表.md` 一致 |
 | dimension | 2D / 3D / 平面工艺。决定能不能用体积光、能不能写横向视差 |
 | heads_range | 头身比区间（写实 7–7.5；日式 2D 5.5–6.5；皮影 5；剪纸 4–5；Q 版 2–3；孩童在该档 −1.5~2）。**同包禁混档** |
 | stability（可选） | 稳 / 中 / 险。长片一致性分级，供选型决策器排序。判据见《风格路由表》 |
@@ -107,6 +107,10 @@
 
 ## 四、首批种子数据（从现有两份风格锚抽取，阶段 1 落盘用）
 
+> ⚠️ **本节只是 ink-wash-2d 与 gothic-puppet 两条的字段摘录示例，不是事实源。**
+> L0 现在有 **9 条**已落值风格，全量数值一律看 `references/style-registry.seed.json`
+> （或项目级 `style-registry.json`）。本节任何一行与 L0 有出入，都以 L0 为准并回来改这里。
+
 ### ink-wash-2d（水墨淡彩东方手绘 2D）
 
 | 字段 | 值 | 来源 |
@@ -123,7 +127,7 @@
 | material_budget | main 面部与水痕晕染；second 衣料褶皱与发丝；save 远景群像与背景植被 | §五 |
 | collapse_risks | 出片 2.5D、变 3D 渲染、变赛璐璐卡通、饱和度失控、表情被抹平、动作像橡皮糖 | §六（9 条，阶段 1 全量搬） |
 | dedupe_pairs | 英文面：2D animation→picture；illustrated storybook→删；no rendered volume→Light is not modelled；glow→flat warm wash；横向平移→整幅同速率侧移。中文面另三条：**水墨动画/国漫→水墨淡彩画**（中文「动画」与英文 animation 是同一个路由开关）；不要渐变→光不做塑造；暗部提亮/降饱和→从正文删除只留参数行 | §9.1 五个来源 + §2.2 中文面纪律表 |
-| excludes | photoreal-pbr、celshade-guoman-2d、gothic-puppet | 手绘平面与体积感互斥 |
+| excludes | 8 项：gothic-puppet、photoreal-pbr、celshade-guoman-2d、npr-celshaded-3d、stylized-pixar-3d、anime-2d、webtoon-2d、documentary-live-action | 手绘平面与一切体积感方向互斥；**完整清单以 L0 `excludes` 字段为准，本行是摘录** |
 | ref_file | references/水墨淡彩2D风格锚.md | — |
 | status | 已落值（十节 schema 已改造，2026-10-10） | — |
 
@@ -143,7 +147,7 @@
 | material_budget | main 面部黏土质感与手工痕迹；second 布料做旧与微缩布景痕迹；save 远景群像与天空 | §五 |
 | collapse_risks | 变光滑 CGI、变写实真人、运动太顺滑、动漫化三渲二、色彩变鲜艳、布景变真实大小、表情过度灵活、暖光扩散污染 | §六（9 条） |
 | dedupe_pairs | **反向表**：丝滑/流畅/连续动作→二拍一顿挫、起收各留半拍静止；运动模糊→删除；高光/镜面反射/次表面散射/辉光→每个材质词后跟「哑光不反光」；真实人体解剖/肌肉/真实五官比例→木偶比例 1:3.5–1:4.5；辽阔/实景/真实世界尺度→微缩模型痕迹；温暖的光照亮房间→暖光只照亮相邻一小圈；细腻皮肤动态→眉/嘴角/眼睑大位移 | §9.1（阶段 1 正式登记） |
-| excludes | photoreal-pbr、ink-wash-2d、celshade-guoman-2d | 与写实轨材质词汇互斥；与手绘轨方向相反；赛璐璐会把木偶压成三渲二 |
+| excludes | 5 项：ink-wash-2d、photoreal-pbr、celshade-guoman-2d、npr-celshaded-3d、stylized-pixar-3d | 与写实轨材质词汇互斥；与手绘轨方向相反；赛璐璐与三渲二会抹掉手作痕迹；**完整清单以 L0 `excludes` 字段为准，本行是摘录** |
 | ref_file | references/哥特定格木偶风格锚.md | — |
 | status | 已落值（十节 schema 已改造，2026-10-10） | — |
 

@@ -42,7 +42,9 @@ surface. The authoritative comparison is the **"Delivery Surface Parameter Table
 
 ## Quick start
 
-1. Copy the whole `超级liqi提示词` directory into your skills directory.
+1. Copy the whole directory into your skills directory and rename it to the skill name
+   `super-liqi-prompt` (the folder name must match the `name` field in `SKILL.md`, which
+   only allows lowercase letters, digits and hyphens).
 2. Copy the registry seed: `references/style-registry.seed.json` → project-level `style-registry.json`.
 3. Give it a story or screenplay and state the three locks.
 4. Follow Step -1 → Step 6. Use the Load Map in `SKILL.md` to see which reference file to load

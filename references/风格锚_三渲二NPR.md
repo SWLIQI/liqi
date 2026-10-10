@@ -226,12 +226,17 @@ Upbeat or epic scoring depending on the scene, clear rhythmic accents, no muddy 
 
 ### 9.2 互斥风格
 
+与本风格互斥的 id（与 L0 `style-registry.json` 的 `excludes` 一致，**双向登记**；数值有出入时以 L0 为准）：
+
 | 互斥 id | 混了会怎样 |
 |---|---|
 | `celshade-guoman-2d`（纯 2D 赛璐璐） | 决定资产是 2D 还是 3D，进而决定能不能写环绕与转面。**选定后中途不得换** |
 | `photoreal-pbr`（写实 PBR） | 同为 3D 但着色逻辑相反：写实轨要真实材质与全局光照，本轨要平涂与硬边 |
 | `ink-wash-2d`（水墨淡彩） | 一个要平面无体积，一个要 3D 体积，方向相反 |
 | `gothic-puppet`（哥特定格木偶） | 定格轨要手作痕迹与实体微缩实拍，本轨要干净 CG；材质词汇互斥 |
+| `stylized-pixar-3d`（风格化 3D） | 两者都是 3D，但一个软过渡真实光影、一个两段式硬边平涂；混了会同时出现描边与软过渡 |
+| `anime-2d`（日系动画 2D） | 纯 2D 与 3D 建模资产互斥，投喂方式与转面写法都不一样 |
+| `documentary-live-action`（纪实实拍） | 实拍没有着色器，与本轨的 NPR 卡通着色完全对立 |
 
 **串轨怎么认**：看阴影边界与光照词。本轨正文里出现「柔和阴影 / 全局光照 / 次表面散射 / PBR」，
 或写实轨正文里出现「两段式 / 描边 / 平涂色块」，就是串了。
