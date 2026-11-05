@@ -26,11 +26,14 @@
 
 产出后：python scripts/build_board_lite.py <看板源.md> --out <看板.html>
 
+退出码（v4.8.3 A12 补记）：0 = 成功；1 = 没解析到任何单元（标题形状不对，须形如
+`### U01｜场 1 · 某处（日）· 标题（14s）`）或输入文件读取失败。
+
 已知口径（照抄即可，不必每次都重推）：
     · 围栏正文 = 从单元标题到「—— 以下不进正文 ——」之间的六段，即真正可复制投喂的那段。
     · 逐镜行 = 从 detailed_description 里的 `[Shot N]` 与 `At MM:SS.mmm` 推；最后一条的
       终点取单元时长。没有时间码的 Shot 一律按 0 秒起算（H3 面通常 Shot 1 无码）。
-    · 【画幅】【模型版本】是看板的 A/B 双锁，写在文件头一次即可；写在单元里会被吞进 meta，
+    · 【画幅】【模型版本】是看板的锁②/锁①，写在文件头一次即可；写在单元里会被吞进 meta，
       不会显示成卡片标签，所以单元里只用【时长】【场景】【参考素材】【交接】。
     · 文末的「四 全局制作纪律」进 P0A；「附一/附二」是交付记录，不进看板。
 """
@@ -39,11 +42,6 @@ import io
 import os
 import re
 import sys
-
-# Windows 下 stdout 重定向到管道/文件时默认 cp936，本脚本会 print ⚠/❌，
-# 不显式设 utf-8 会 UnicodeEncodeError。与其余 6 个脚本保持一致。
-if hasattr(sys.stdout, 'reconfigure'):
-    sys.stdout.reconfigure(encoding='utf-8')
 
 HEAD = re.compile(r'^#{0,6}\s*U(\d+)｜(.*?)(?:（(\d+)s）)?\s*$')
 TC = re.compile(r'At (\d{2}):(\d{2})\.(\d{3})')
@@ -180,7 +178,11 @@ def main():
     ap.add_argument('--title', default=None)
     args = ap.parse_args()
 
-    pkg = io.open(args.pkg, encoding='utf-8').read()
+    try:
+        pkg = io.open(args.pkg, encoding='utf-8').read()
+    except (OSError, UnicodeDecodeError) as e:
+        print('[-] 提示词包读不了：%s' % e, file=sys.stderr)
+        return 1
     units = parse_units(pkg)
     if not units:
         print('❌ 没解析到任何单元——确认标题形如 `### U01｜场 1 · 某处（日）· 标题（14s）`。')
@@ -237,8 +239,10 @@ def main():
             P += ['| %s | %s | %s | %s | %s |' % (code, name, view, img, duty)]
         P += ['']
 
-    # 附：编号表与光照锚点（标题故意不落进 assets 区，否则会混表头）
-    P += ['## 附一 · Subject 编号表与光照锚点', '',
+    # 编号表与光照锚点（标题故意不落进 assets 区，否则会混表头；
+    # v4.8.3 D3：原名「附一」与看板规范的保留名撞车——规范明言「附一/附二」是
+    # 改动复验报告等交付记录、不进看板，不能拿来命名进看板的内容节）
+    P += ['## 编号表与光照锚点', '',
           '| Subject 编号 | 主体 | 职责 |', '|---|---|---|']
     for line in grab(pkg, r'^###\s*5[.．、]\s*Subject', r'^#{2,3} ').splitlines():
         if re.match(r'^\|\s*Subject\s*\d+', line):

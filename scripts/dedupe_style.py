@@ -18,9 +18,14 @@ dedupe_style.py —— 按风格清污染词（dedupe25d.py 的泛化版）
 用法
   python dedupe_style.py <文件.md>                    # 只扫描报数
   python dedupe_style.py <文件.md> --fix              # 执行替换（默认备份 <名>.bak）
+  python dedupe_style.py <文件.md> --fix --no-backup  # 执行替换且不留 .bak（v4.8.3 A12 补记）
   python dedupe_style.py <文件.md> --style ink-wash-2d
   python dedupe_style.py <文件.md> --registry ../style-registry.json
   python dedupe_style.py <文件.md> --fix --aggressive # 连「删除型」词级替换也执行
+
+退出码（v4.8.3 A12 补记）：0 = 成功（含只扫描与无参打印用法）；
+  2 = 输入/环境异常——文件不存在、找不到注册表、拿不到 style_id、style_id 未注册、
+  作用区间为空（见下方硬断言）。带参跑不通时先看退出码是不是 2。
 
 style 的确定顺序
   1 --style 参数
@@ -47,11 +52,6 @@ import os
 import re
 import shutil
 import sys
-
-# Windows 下 stdout 重定向到管道/文件时默认 cp936，本脚本会 print ⚠/❌，
-# 不显式设 utf-8 会 UnicodeEncodeError。与其余 6 个脚本保持一致。
-if hasattr(sys.stdout, 'reconfigure'):
-    sys.stdout.reconfigure(encoding='utf-8')
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SEED = os.path.join(HERE, "..", "references", "style-registry.seed.json")

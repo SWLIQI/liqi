@@ -1,0 +1,13 @@
+{
+  "_note": "本文件把 audit_project 的 opt-in 输入固定下来。`audit_project.py 包.md --config auto --auto` 时门覆盖 18/18、未查 0（覆盖矩阵由 --auto 打印，--config 只负责把输入填满）；不写这份配置裸跑，每包报 10 条「未查」。所有路径相对本文件所在目录。",
+  "registry": "asset-registry.json",
+  "ledger": "continuity-ledger.md",
+  "decisions": "decisions.jsonl",
+  "foreshadow": "伏笔表.md",
+  "epstruct": "分集结构表.md",
+  "adapttable": "改编转换表.md",
+  "script": "剧本_标准.txt",
+  "beats": "beats.txt",
+  "model": "2.5",
+  "surface": "cn"
+}

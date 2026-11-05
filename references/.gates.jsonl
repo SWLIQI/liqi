@@ -1,0 +1,5 @@
+{"ts":"2026-10-17T05:38:41.841Z","tool":"check_prompt.mjs","file":"写实向终稿示例.md","exit":1,"errors":4,"warns":3,"codes":{"E-TIMELINE-GAP":2,"E-SKELETON-MIX":1,"E-PARAM-IN-BODY":1,"W-LENGTH-CAP":1,"W-SHOTSIZE-MISSING":1,"W-AXIS-MISSING":1},"target":"cn"}
+{"ts":"2026-10-17T06:45:53.653Z","tool":"check_prompt.mjs","file":"写实向终稿示例.md","exit":0,"errors":0,"warns":7,"codes":{"W-SHOTSIZE-MISSING":2,"W-GAZE-MISSING":1,"W-AXIS-MISSING":2,"W-STAGING-NO-ANCHOR-WIDE":2},"target":"cn"}
+{"ts":"2026-10-17T06:45:57.995Z","tool":"check_prompt.mjs","file":"写实向终稿示例.md","exit":0,"errors":0,"warns":7,"codes":{"W-SHOTSIZE-MISSING":2,"W-GAZE-MISSING":1,"W-AXIS-MISSING":2,"W-STAGING-NO-ANCHOR-WIDE":2},"target":"cn"}
+{"ts":"2026-10-17T06:47:10.412Z","tool":"check_prompt.mjs","file":"写实向终稿示例.md","exit":0,"errors":0,"warns":7,"codes":{"W-SHOTSIZE-MISSING":2,"W-GAZE-MISSING":1,"W-AXIS-MISSING":2,"W-STAGING-NO-ANCHOR-WIDE":2},"target":"cn"}
+{"ts":"2026-10-17T06:47:35.452Z","tool":"check_prompt.mjs","file":"写实向终稿示例.md","exit":0,"errors":0,"warns":7,"codes":{"W-SHOTSIZE-MISSING":2,"W-GAZE-MISSING":1,"W-AXIS-MISSING":2,"W-STAGING-NO-ANCHOR-WIDE":2},"target":"cn"}

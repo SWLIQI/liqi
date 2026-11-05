@@ -9,14 +9,25 @@ Thumbs.db
 .vscode/
 .idea/
 
-# 项目级数据（随 skill 分发的只是模板种子，不入仓 references 之外的实例）
+# 项目级数据（随 skill 分发的只是模板种子，不入仓 references 之外的实例）。
+# 例外：examples/ 下的实例是「一键复跑」的必需输入，随包提交（待办路线图 P0-1）。
 style-registry.json
+!examples/**/style-registry.json
 asset-registry.json
+!examples/**/asset-registry.json
 
 # 运行产物
 build/
 dist/
 *.log
 
-# 本地历史存档：仅供本机回溯，不随开源仓库分发
-references/_旧版存档/
+# 门失败日志（本地统计用，随被校验文件所在目录生成）——examples/ 下的随包提交
+#（SKILL.md 5.37.16 纪律：.gates.jsonl 保留并随包提交，与 registry / ledger 同级）。
+/.gates.jsonl
+!examples/**/.gates.jsonl
+
+# 文档转换产物：仓库只收 Markdown 源。
+# references/ 下的 docx 曾与同名 md 重复（约 280KB 二进制、无法 diff），已移除；
+# 需要给非技术同事看的 docx 时现场用任意 md2docx 工具生成即可。
+*.docx
+!docs/**/*.docx

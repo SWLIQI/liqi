@@ -1,0 +1,160 @@
+{"ts":"2026-10-17T07:52:18.146Z","tool":"check_prompt.mjs","file":"包.md","exit":1,"errors":1,"warns":10,"codes":{"E-PARAM-IN-BODY":1,"W-AXIS-STATE-IN-BODY":5,"W-PROP-HAND":4,"W-STAGING-OTS-DISTANCE":1},"target":"cn"}
+{"ts": "2026-10-17T07:52:18.429Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-17T07:52:18.678Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-17T07:52:19.097Z","tool":"check_style.mjs","file":"包.md","exit":1,"errors":1,"warns":0,"codes":{"S5-CROSS-STYLE":1},"target":"cn"}
+{"ts":"2026-10-17T07:52:33.303Z","tool":"check_prompt.mjs","file":"包.md","exit":1,"errors":1,"warns":10,"codes":{"E-PARAM-IN-BODY":1,"W-AXIS-STATE-IN-BODY":5,"W-PROP-HAND":4,"W-STAGING-OTS-DISTANCE":1},"target":"cn"}
+{"ts":"2026-10-17T07:52:33.627Z","tool":"check_style.mjs","file":"包.md","exit":1,"errors":1,"warns":0,"codes":{"S5-CROSS-STYLE":1},"target":"cn"}
+{"ts":"2026-10-17T07:56:13.080Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":1,"codes":{"W-PROP-HAND":1},"target":"cn"}
+{"ts": "2026-10-17T07:56:13.326Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-17T07:56:13.578Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-17T07:56:14.000Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-17T07:56:29.219Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":1,"codes":{"W-PROP-HAND":1},"target":"cn"}
+{"ts":"2026-10-17T07:57:38.108Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-17T07:57:38.351Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-17T07:57:38.588Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-17T07:57:39.014Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-17T07:58:16.496Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-17T07:58:16.744Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-17T07:58:16.980Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-17T07:58:17.414Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-17T07:58:43.834Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-17T07:58:44.093Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-17T07:58:44.325Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-17T07:58:44.744Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-17T07:59:53.060Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-17T07:59:53.309Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-17T07:59:53.547Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-17T07:59:53.967Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-17T08:06:21.815Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-17T08:06:55.669Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-17T08:06:55.912Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-17T08:06:56.140Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-17T08:06:56.558Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-17T19:02:16.783Z","tool":"check_prompt.mjs","file":"continuity-ledger.md","exit":0,"errors":0,"warns":4,"codes":{"W-ALLOCATION-MISSING":1,"W-LENGTH-CAP":1,"W-CONTEXT-LEAK":1,"W-STAGING-OTS-DISTANCE":1},"target":"auto"}
+{"ts":"2026-10-17T19:07:59.353Z","tool":"check_prompt.mjs","file":"continuity-ledger.md","exit":0,"errors":0,"warns":4,"codes":{"W-ALLOCATION-MISSING":1,"W-LENGTH-CAP":1,"W-CONTEXT-LEAK":1,"W-STAGING-OTS-DISTANCE":1},"target":"auto"}
+{"ts":"2026-10-17T19:38:18.476Z","tool":"check_prompt.mjs","file":"continuity-ledger.md","exit":0,"errors":0,"warns":4,"codes":{"W-ALLOCATION-MISSING":1,"W-LENGTH-CAP":1,"W-CONTEXT-LEAK":1,"W-STAGING-OTS-DISTANCE":1},"target":"auto"}
+{"ts":"2026-10-18T09:46:02.619Z","tool":"check_prompt.mjs","file":"continuity-ledger.md","exit":0,"errors":0,"warns":4,"codes":{"W-ALLOCATION-MISSING":1,"W-LENGTH-CAP":1,"W-CONTEXT-LEAK":1,"W-STAGING-OTS-DISTANCE":1},"target":"auto"}
+{"ts":"2026-10-19T18:53:04.875Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T18:53:05.135Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-19T18:53:05.371Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-19T18:53:05.821Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-19T19:02:50.173Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T19:02:50.428Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts": "2026-10-19T19:02:50.666Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "codes": {}}
+{"ts":"2026-10-19T19:02:51.098Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"codes":{},"target":"cn"}
+{"ts":"2026-10-19T19:10:56.972Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:11:43.795Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:13:33.474Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:15:53.139Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:20:21.398Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:22:13.032Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:23:44.382Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:25:20.656Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:37:11.449Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:41:45.176Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:43:29.014Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T19:43:29.270Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:43:29.514Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:43:29.793Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}, "target": "2.5"}
+{"ts":"2026-10-19T19:43:29.951Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T19:43:30.196Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts":"2026-10-19T19:44:21.589Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:49:20.797Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T19:56:35.000Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T19:56:35.261Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:35.504Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:35.794Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}, "target": "2.5"}
+{"ts":"2026-10-19T19:56:35.955Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T19:56:36.210Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts":"2026-10-19T19:56:39.984Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T19:56:40.247Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:40.496Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:40.794Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}, "target": "2.5"}
+{"ts":"2026-10-19T19:56:40.957Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T19:56:41.216Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts":"2026-10-19T19:56:45.164Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T19:56:45.435Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:45.677Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:45.967Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}, "target": "2.5"}
+{"ts":"2026-10-19T19:56:46.125Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T19:56:46.379Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts":"2026-10-19T19:56:51.000Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":16,"skips":0,"codes":{"W-SKELETON-MODEL-MISMATCH":10,"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T19:56:51.258Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:51.502Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:51.787Z", "tool": "audit_project.py", "file": "包.md", "exit": 1, "errors": 1, "warns": 0, "skips": 0, "codes": {"E-DECISIONS-MISMATCH": 1}, "target": "2.0"}
+{"ts":"2026-10-19T19:56:51.945Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T19:56:52.198Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts":"2026-10-19T19:56:52.758Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T19:56:53.036Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:53.320Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T19:56:53.618Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}, "target": "2.5"}
+{"ts": "2026-10-19T19:56:53.867Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts":"2026-10-19T20:04:30.011Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:07:37.505Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:11:58.332Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T20:11:58.585Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T20:11:58.823Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T20:11:59.112Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}, "target": "2.5"}
+{"ts":"2026-10-19T20:11:59.268Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T20:11:59.520Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts":"2026-10-19T20:14:55.053Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:16:37.704Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:20:53.503Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T20:20:53.757Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T20:20:54.015Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts": "2026-10-19T20:20:54.296Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}, "target": "2.5"}
+{"ts":"2026-10-19T20:20:54.450Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T20:20:54.696Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "codes": {}}
+{"ts":"2026-10-19T20:23:12.541Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:24:17.962Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:25:14.845Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:26:07.198Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:27:05.868Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:31:24.802Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:32:26.042Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:33:50.396Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:34:24.954Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts":"2026-10-19T20:36:56.685Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:38:27.859Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:44:17.725Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"ts":"2026-10-19T20:46:19.391Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T20:46:19.661Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"ts": "2026-10-19T20:46:19.916Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"ts": "2026-10-19T20:46:20.226Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}, "target": "2.5"}
+{"ts":"2026-10-19T20:46:20.389Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T20:46:20.657Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"ts":"2026-10-19T20:46:21.433Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"ts": "2026-10-19T20:46:21.720Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"ts": "2026-10-19T20:46:21.991Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"ts": "2026-10-19T20:46:22.305Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}, "target": "2.5"}
+{"ts":"2026-10-19T20:46:22.481Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"ts": "2026-10-19T20:46:22.749Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v":2,"ts":"2026-10-19T20:48:36.095Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v":2,"ts":"2026-10-19T20:54:23.916Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v":2,"ts":"2026-10-19T20:58:30.724Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v":2,"ts":"2026-10-19T21:13:52.229Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v": 2, "ts": "2026-10-19T22:07:08.232Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v": 2, "ts": "2026-10-19T22:07:08.282Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v": 2, "ts": "2026-10-19T22:07:08.368Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}, "target": "2.5"}
+{"v":2,"ts":"2026-10-19T22:07:08.476Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"v": 2, "ts": "2026-10-19T22:07:08.676Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v": 2, "ts": "2026-10-19T22:07:08.724Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v": 2, "ts": "2026-10-19T22:07:08.801Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}, "target": "2.5"}
+{"v":2,"ts":"2026-10-19T22:07:08.876Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"v":2,"ts":"2026-10-19T22:08:13.927Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v":2,"ts":"2026-10-19T22:10:23.936Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v":2,"ts":"2026-10-22T14:20:06.153Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v":2,"ts":"2026-10-22T14:51:50.923Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v":2,"ts":"2026-10-22T14:52:02.078Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"auto"}
+{"v":2,"ts":"2026-10-22T18:59:23.491Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"v": 2, "ts": "2026-10-22T18:59:23.800Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v": 2, "ts": "2026-10-22T18:59:24.101Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v": 2, "ts": "2026-10-22T18:59:24.443Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}, "target": "2.5"}
+{"v":2,"ts":"2026-10-22T18:59:24.538Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"v": 2, "ts": "2026-10-22T18:59:24.843Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v":2,"ts":"2026-10-24T01:27:30.343Z","tool":"check_prompt.mjs","file":"包.md","exit":0,"errors":0,"warns":6,"skips":0,"codes":{"W-BEAT-BUDGET":1,"W-BEAT-LENGTH":4,"W-ACTION-DENSITY":1},"target":"cn"}
+{"v": 2, "ts": "2026-10-24T01:27:30.401Z", "tool": "audit_literal.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v": 2, "ts": "2026-10-24T01:27:30.439Z", "tool": "audit_risk.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}
+{"v": 2, "ts": "2026-10-24T01:27:30.517Z", "tool": "audit_project.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}, "target": "2.5"}
+{"v":2,"ts":"2026-10-24T01:27:30.574Z","tool":"check_style.mjs","file":"包.md","exit":0,"errors":0,"warns":0,"skips":0,"codes":{},"target":"cn"}
+{"v": 2, "ts": "2026-10-24T01:27:30.638Z", "tool": "audit_contract.py", "file": "包.md", "exit": 0, "errors": 0, "warns": 0, "skips": 0, "nas": 0, "codes": {}}

@@ -1,0 +1,227 @@
+{
+  "project": "黄金样例 A2 · 夜巡",
+  "tier": "A2",
+  "note": "A2 级端到端样例：跨镜角色与场景一致性。单集 10 镜、2 场景、2 角色、1 关键道具。",
+  "units": {
+    "length": "s",
+    "timebase": "sec"
+  },
+  "lighting_anchors": {
+    "night": {
+      "label": "深夜",
+      "kelvin": "7000-10000",
+      "quality": "极弱、单光源",
+      "angle": "单一（手电/台灯）",
+      "shadow": "浓黑、对比极强",
+      "artificial": "残灯/手电",
+      "feature": "大面积暗部，仅轮廓微光"
+    },
+    "evening": {
+      "label": "入夜",
+      "kelvin": "2000-2700",
+      "quality": "弱、点光源",
+      "angle": "不适用（多点）",
+      "shadow": "短、围绕光源",
+      "artificial": "点亮",
+      "feature": "灯晕衰减快，光域小"
+    }
+  },
+  "atmosphere": {
+    "particles": "悬浮灰尘",
+    "fog": "无",
+    "rain": "无",
+    "rule": "尘埃是逆光产物：只有手电或台灯形成光柱的镜头里才可见，漫射场景不出现"
+  },
+  "color_rhythm": {
+    "baseline": "低饱和都市冷灰",
+    "turning_point": "镜8 空屋台灯，转暖橙一点",
+    "rule": "除镜8 外全部锁定基准调"
+  },
+  "characters": {
+    "chen-mo": {
+      "display_name": "陈默",
+      "identity_verdict": "reuse",
+      "gender": "男性",
+      "age": "27~28",
+      "heads": "7",
+      "face_anchor": "严格沿用参考图片全部五官样貌；短寸头；眉骨平直，眼窝浅；鼻梁直；下颌线清楚；皮肤可见毛孔与细纹，无磨皮",
+      "costume": "深蓝保安制服外套，肩线略垮，袖口磨白，左胸口袋有一支笔",
+      "softspot": "props/tong-pai",
+      "lock_out": [
+        "红色外套",
+        "长发",
+        "圆脸",
+        "高饱和暖光"
+      ],
+      "outputs": [
+        "images/chen-mo-sheet.png"
+      ],
+      "versions": {
+        "base": {
+          "codename": "常规造型"
+        },
+        "alt": {
+          "codename": "雨夜外套"
+        }
+      }
+    },
+    "lao-zhou": {
+      "display_name": "老周",
+      "identity_verdict": "reuse",
+      "gender": "男性",
+      "age": "61~63",
+      "heads": "7",
+      "face_anchor": "严格沿用参考图片全部五官样貌；灰白短发贴头皮；眼睑下垂；法令纹深；下巴有短硬胡茬；皮肤干燥起皮",
+      "costume": "深灰旧棉袄，肘部补丁，领口起毛",
+      "lock_out": [
+        "短发油头",
+        "西装",
+        "青年面孔",
+        "红晕"
+      ],
+      "outputs": [
+        "images/lao-zhou-sheet.png"
+      ],
+      "versions": {
+        "base": {
+          "codename": "常规造型"
+        },
+        "alt": {
+          "codename": "雨夜外套"
+        }
+      }
+    }
+  },
+  "props": {
+    "tong-pai": {
+      "display_name": "铜牌",
+      "category": "softspot",
+      "identity_verdict": "reuse",
+      "material": "黄铜，边缘磨圆，表面一层旧包浆",
+      "size": "约拇指长",
+      "mark": "无刻字，只有一道旧划痕",
+      "outputs": [
+        "images/tong-pai-sheet.png"
+      ]
+    },
+    "tie-pi-shou-dian": {
+      "display_name": "铁皮手电",
+      "category": "key",
+      "identity_verdict": "reuse",
+      "material": "铁皮外壳，灯罩有划痕，光斑边缘发毛",
+      "size": "约二十厘米",
+      "outputs": [
+        "images/shou-dian-sheet.png"
+      ]
+    }
+  },
+  "creatures": {},
+  "scenes": {
+    "lou-dao": {
+      "display_name": "老旧居民楼楼道",
+      "identity_verdict": "reuse",
+      "dedupe_key": "老旧居民楼三楼楼道",
+      "structure": "水泥楼梯，铁扶手，配电箱在左墙，消防栓在右墙，三楼走廊尽头一扇防盗门",
+      "light_port": {
+        "desc": "三楼层间一扇小窗",
+        "wall": "西墙高处",
+        "fixed": true,
+        "note": "进光口位置全时段固定，变的只有月光角度"
+      },
+      "palette": {
+        "primary": "都市冷灰",
+        "secondary": "旧木暗褐",
+        "accent": "手电冷白光斑"
+      },
+      "permanent_marks": [
+        "配电箱左下角有一道斜裂纹",
+        "三楼台阶边缘缺一小角"
+      ],
+      "baseline_time": "night",
+      "variants": {
+        "night": {
+          "light": "仅手电与残存声控灯",
+          "atmosphere": "灰尘在手电光柱里可见",
+          "lock_out": [
+            "日光",
+            "天光",
+            "暖橙夕照",
+            "长投影",
+            "均匀顶光"
+          ]
+        },
+        "evening": {
+          "light": "手电与声控灯同时亮起",
+          "atmosphere": "灰尘在光柱里可见",
+          "lock_out": [
+            "日光",
+            "天光",
+            "正午顶光",
+            "短锐阴影"
+          ]
+        }
+      },
+      "light_anchors": [
+        "night"
+      ],
+      "outputs": [
+        "scenes/lou-dao-night.png"
+      ]
+    },
+    "zhi-ban-shi": {
+      "display_name": "小区值班室",
+      "identity_verdict": "reuse",
+      "dedupe_key": "小区门岗值班室",
+      "structure": "一张旧木桌，桌上搪瓷缸与台灯，墙上挂钟，窗朝院内",
+      "light_port": {
+        "desc": "朝院内的推拉窗",
+        "wall": "南墙",
+        "fixed": true,
+        "note": "窗位固定，夜间只透进院内路灯的一点余光"
+      },
+      "palette": {
+        "primary": "暗褐",
+        "secondary": "都市冷灰",
+        "accent": "台灯暖橙"
+      },
+      "permanent_marks": [
+        "桌面有一圈深色茶渍",
+        "墙皮在挂钟下方剥落一块"
+      ],
+      "baseline_time": "evening",
+      "variants": {
+        "evening": {
+          "light": "台灯点光源 + 院内余光",
+          "atmosphere": "无尘，漫射为主",
+          "lock_out": [
+            "日光",
+            "天光",
+            "正午顶光",
+            "长投影",
+            "月光直射"
+          ]
+        },
+        "night": {
+          "light": "台灯与院内路灯余光",
+          "atmosphere": "无尘，漫射为主",
+          "lock_out": [
+            "日光",
+            "天光",
+            "正午顶光",
+            "长投影"
+          ]
+        }
+      },
+      "light_anchors": [
+        "evening"
+      ],
+      "outputs": [
+        "scenes/zhi-ban-shi-evening.png"
+      ]
+    }
+  },
+  "provenance": {
+    "created": "2026-10-17",
+    "purpose": "liqi A2 端到端黄金样例"
+  }
+}

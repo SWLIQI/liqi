@@ -4,15 +4,14 @@
 
 对应超级 liqi提示词 的 Step -1 第 4 项：量化全片节拍点（0~10 分），画出曲线。
 
-本脚本实现 SKILL.md Step -1 所吸收法则中**可机械判定的三条**（口径见 references/叙事层_剧本门控与台词.md）：
+本脚本实现「可移植的四条法则」（见 references/叙事层_剧本门控与台词.md 第五节），
+自检拆成四条断言：
   法则一  全片波峰（>=9.0）不少于 2 次
   法则二  高潮之间必须有回落（相邻波峰之间至少一个点比前波峰低 >=1.0）
   法则三  严禁持续平庸（极差 < 2.0 视为平铺）
+  法则四  开局冲突（首个节拍点 >= 3.0，拒绝无事件铺垫）
 
-SKILL.md 里还有第四条「开局 3 秒内必须伴随即时冲突」——它要看节拍里有没有事件，
-不是分值能判的，**本脚本不实现**，留给人工复核。
-
-刻意不内置老李面向抖音短剧的 12 节拍命名与分值（起势/硬刚/反杀那一套）——
+刻意不内置面向信息流短剧的 12 节拍命名与分值（起势/硬刚/反杀那一套）——
 那套结构对文艺短片、毕设、公益片会反向伤害，已在冲突裁决 C15 中判定不吸收。
 默认示例改用题材无关的五幕结构。
 
@@ -23,18 +22,37 @@ SKILL.md 里还有第四条「开局 3 秒内必须伴随即时冲突」——�
   python generate_emotion_curve.py --beats-file beats.csv --out curve.png
   python generate_emotion_curve.py --beats "..." --out curve.png --no-plot   # 只自检
 
-beats.csv 每行 `名称,分值`（无表头），或单行逗号分隔分值。
+--no-plot 不依赖 matplotlib（v4.8.3 D2：出图栈改为惰性导入，缺包只拦出图不拦自检）。
+未装 matplotlib 时只跑自检：`--no-plot`；要出图：`pip install -r requirements.txt`。
+
+beats.csv 三种合法格式（v4.8.2 修：旧版把单行分值串整行吃成 1 拍、多列数据裸 traceback）：
+  1. 每行 `名称,分值`（无表头）
+  2. 单行逗号分隔分值：`3.0,5.5,9.2,4.2,9.0`
+  3. 单列分值（每行一个数）
+多列数据（如 `镜号,名称,分值`）取名称列与分值列；无法解析时报带行号的明确错误。
 """
 import argparse
 import os
 import sys
 
-try:
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-except ImportError:
-    sys.exit("缺少 matplotlib。先装：pip install -r requirements.txt")
+# matplotlib 惰性导入（v4.8.3 D2）：旧版顶层 import + sys.exit，没装 matplotlib 的用户
+# 连 --no-plot 法则自检都进不去——自检是纯算术，不该被图形栈绑架。
+matplotlib = None
+plt = None
+
+
+def _ensure_mpl():
+    """按需导入 matplotlib；缺包时给出「只自检加 --no-plot」的明确出路。"""
+    global matplotlib, plt
+    if plt is not None:
+        return
+    try:
+        import matplotlib as _mpl
+        _mpl.use("Agg")
+        import matplotlib.pyplot as _plt
+    except ImportError:
+        sys.exit("缺少 matplotlib。只跑法则自检请加 --no-plot；要出图请先装：pip install -r requirements.txt")
+    matplotlib, plt = _mpl, _plt
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -44,6 +62,7 @@ PEAK = 9.0
 MIN_PEAKS = 2
 FALLBACK = 1.0      # 相邻波峰之间要求的回落幅度
 FLAT_SPAN = 2.0     # 低于此极差视为平铺
+OPENING = 3.0       # 首个节拍点的开局冲突下限（叙事层第五节法则二）
 
 # 题材无关的五幕示例：两个波峰（9.2 / 9.0），中间有一次明显回落（4.2）
 DEFAULT_BEATS = [
@@ -61,6 +80,7 @@ def setup_cjk_font():
     旧版只列了 macOS 与 Linux 路径，在 Windows 上中文标签全变方块
     （实测 UserWarning: Glyph 3341 缺失）。这里补上 Windows 的 msyh / simhei。
     """
+    _ensure_mpl()
     candidates = [
         r"C:\Windows\Fonts\msyh.ttc",            # Windows 微软雅黑
         r"C:\Windows\Fonts\msyhbd.ttc",
@@ -109,7 +129,22 @@ def parse_beats(spec):
     return out
 
 
+def _is_float(s):
+    try:
+        float(s)
+        return True
+    except (TypeError, ValueError):
+        return False
+
+
 def load_beats_file(path):
+    """读取 beats 文件，三种合法格式见模块 docstring。
+
+    旧版两处坑（v4.8.2 修）：
+    1. 单行逗号分隔分值（如 `3.0,5.5,9.2,4.2,9.0`）被按「名称,分值」解析——
+       整行吃成 1 拍（名称='3.0'、分值=5.5），后 4 拍静默丢失，曲线全错无报错；
+    2. 多列数据（如 `B01,引子,3.0`）让 float() 吃到名称列，裸 ValueError traceback。
+    """
     beats = []
     with open(path, encoding="utf-8") as f:
         for i, line in enumerate(f, 1):
@@ -117,11 +152,26 @@ def load_beats_file(path):
             if not s or s.startswith("#"):
                 continue
             s = s.replace("，", ",").replace("：", ":")
-            parts = s.split(",")
-            if len(parts) >= 2:
-                beats.append((parts[0].strip(), float(parts[1])))
-            else:
-                beats.append((parts[0].strip(), float(parts[1])))
+            parts = [p.strip() for p in s.split(",") if p.strip()]
+            if not parts:
+                continue
+            # 格式 2/3：整行都是数值 —— 逐值成拍（单行分值串 / 单列分值）
+            if all(_is_float(p) for p in parts):
+                for v in parts:
+                    beats.append(("第 %d 拍" % (len(beats) + 1), float(v)))
+                continue
+            # 格式 1：名称,分值；多列数据取倒数第二列为名、末列为分值
+            name, raw = parts[0], parts[1] if len(parts) >= 2 else None
+            if raw is None or not _is_float(raw):
+                if len(parts) >= 3 and _is_float(parts[-1]):
+                    name, raw = parts[-2], parts[-1]
+            if raw is None or not _is_float(raw):
+                sys.exit(
+                    "beats 文件第 %d 行无法解析：%r\n"
+                    "期望格式：每行「名称,分值」；或单行/单列纯分值。\n"
+                    "当前行既不是纯数值、也取不到分值列——若是「镜号,名称,分值」等多列数据，"
+                    "请先整理成两列。" % (i, s))
+            beats.append((name, float(raw)))
     return beats
 
 
@@ -161,10 +211,20 @@ def check_laws(beats):
         lines.append("  [FAIL] 法则三：极差仅 %.1f，全片平铺（阈值 %.1f）" % (span, FLAT_SPAN))
     else:
         lines.append("  [PASS] 法则三：极差 %.1f，非平铺" % span)
+
+    # 法则四：开局冲突（叙事层第五节：首个节拍点须 >= 3.0 且伴随即时冲突，
+    # 拒绝无事件铺垫。旧版未实现此断言，文档写了代码没查——v4.8.2 补）
+    if scores[0] < OPENING:
+        ok = False
+        lines.append("  [FAIL] 法则四：开局冲突——首个节拍点「%s」仅 %.1f，须 >= %.1f 且伴随即时冲突（拒绝无事件铺垫）"
+                     % (names[0], scores[0], OPENING))
+    else:
+        lines.append("  [PASS] 法则四：首个节拍点 %.1f，开局有事件" % scores[0])
     return ok, lines
 
 
 def plot_curve(beats, out_png):
+    _ensure_mpl()
     names = [b[0] for b in beats]
     scores = [b[1] for b in beats]
     n = len(beats)
@@ -197,7 +257,7 @@ def plot_curve(beats, out_png):
 
 def main():
     ap = argparse.ArgumentParser(
-        description="情绪张力曲线绘图 + 三条法则自检（波峰数 / 回落 / 防平铺）")
+        description="情绪张力曲线绘图 + 四条法则自检（波峰数 / 回落 / 防平铺 / 开局冲突）")
     ap.add_argument("--beats", help='逗号分隔，如 "3.0,5.5,9.2,4.2,9.0" 或 "引子:3,转折:9.2,收束:9"')
     ap.add_argument("--beats-file", help="CSV：每行 名称,分值（无表头）")
     ap.add_argument("--out", default="emotion_beat_curve.png", help="输出 PNG 路径")

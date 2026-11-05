@@ -61,6 +61,8 @@ clean cel-shaded palette where shadow is the local colour one step darker, never
 | `soft shadow` / `ambient occlusion` / `global illumination` | `two flat tones with a hard edge` | 写实渲染管线的默认光照是本轨头号崩点，一开就变写实 CG |
 | `subsurface scattering` / `skin pores` | 删除 | 写实皮肤词会把卡通着色顶掉 |
 
+**压句字数纪律（H3 面）**：正文有 350–500 词区间门禁，压句一涨就把贴上限的单元顶出去。改压句前先算 Δ，改完跑 `check_prompt_h3.mjs` 确认仍是 0 warning。本锚英文压句现长 47 词（按校验器空白分词口径实测），在全库锚中排第 17（按词数降序），偏短，仍有加词空间，但别把否定串堆进来（扩散模型对否定基本不生效）。
+
 **两处必须同时出现**：风格压句放在 `detailed_description` 开头；配色句放在 `<Subject N>` 的风格条目里。
 只写一句会导致色域漂移。
 
@@ -117,7 +119,7 @@ clean cel-shaded palette where shadow is the local colour one step darker, never
 **色彩预算纪律照旧**：每镜只声明一个唯一重音色，其余压成同色系。
 **暗部纪律**：暗部 = 固有色加深一档，绝不用灰或黑当阴影。
 
-**同步纪律**：本表与 L0 `style-registry.json` 的 `palette` 必须一致，改一处要同步另一处。
+**同步纪律**：本表与 L0 注册表 的 `palette` 必须一致，改一处要同步另一处。
 
 ---
 
@@ -226,22 +228,43 @@ Upbeat or epic scoring depending on the scene, clear rhythmic accents, no muddy 
 
 ### 9.2 互斥风格
 
-与本风格互斥的 id（与 L0 `style-registry.json` 的 `excludes` 一致，**双向登记**；数值有出入时以 L0 为准）：
-
 | 互斥 id | 混了会怎样 |
 |---|---|
 | `celshade-guoman-2d`（纯 2D 赛璐璐） | 决定资产是 2D 还是 3D，进而决定能不能写环绕与转面。**选定后中途不得换** |
 | `photoreal-pbr`（写实 PBR） | 同为 3D 但着色逻辑相反：写实轨要真实材质与全局光照，本轨要平涂与硬边 |
 | `ink-wash-2d`（水墨淡彩） | 一个要平面无体积，一个要 3D 体积，方向相反 |
 | `gothic-puppet`（哥特定格木偶） | 定格轨要手作痕迹与实体微缩实拍，本轨要干净 CG；材质词汇互斥 |
-| `stylized-pixar-3d`（风格化 3D） | 两者都是 3D，但一个软过渡真实光影、一个两段式硬边平涂；混了会同时出现描边与软过渡 |
-| `anime-2d`（日系动画 2D） | 纯 2D 与 3D 建模资产互斥，投喂方式与转面写法都不一样 |
-| `documentary-live-action`（纪实实拍） | 实拍没有着色器，与本轨的 NPR 卡通着色完全对立 |
 
 **串轨怎么认**：看阴影边界与光照词。本轨正文里出现「柔和阴影 / 全局光照 / 次表面散射 / PBR」，
 或写实轨正文里出现「两段式 / 描边 / 平涂色块」，就是串了。
 
 ---
+
+**以下补登自 L0 excludes 全量对齐（v4.8.2，P1-1）**——上表/上文为人工维护的重点对因，此处补齐其余互斥 id，保证锚文件与 L0 无漏：（v5.42.0 批 3 已续补六个新锚）
+
+| 互斥 id | 混了会怎样 |
+|---|---|
+| `stylized-pixar-3d`（风格化 3D（皮克斯式）） | 着色方式相反：npr 保留描边与平涂，pixar 软多调无描边 |
+| `anime-2d`（日系动画 2D（anime 通用档）） | 2D 资产 vs 3D 资产，体积逻辑与投喂方式互斥 |
+| `documentary-live-action`（纪实 / 纪录片式实拍） | 实拍毛孔 / 老胶片颗粒 vs CG 次表面渲染，混写恐怖谷 |
+| `guofeng-cine-3d`（国风电影级 3D（唐代院线动画）） | 实拍毛孔 / 老胶片颗粒 vs CG 次表面渲染，混写恐怖谷 |
+| `urban-folk-filmstill`（市井写实·中式都市志怪） | 写实实拍电影画面 vs 卡通着色，负面词方向完全相反，混写全片污染 |
+| `papercut-2d`（剪纸） | 3D 体积 vs 平面无体积，根本对立 |
+| `shadow-puppet-2d`（皮影） | 3D 体积 vs 平面无体积，根本对立 |
+| `guochao-2d`（国潮新中式） | 3D 体积 vs 平面无体积，根本对立 |
+| `nianhua-2d`（民俗年画） | 3D 体积 vs 平面无体积，根本对立 |
+| `gothic-2d`（暗黑哥特 2D） | 要平面 vs 要 3D 体积，词向量相反 |
+| `webtoon-2d`（韩漫条漫（竖屏专项）） | 2D 资产 vs 3D 资产，体积逻辑与投喂方式互斥 |
+| `thickpaint-2d`（厚涂二次元） | 3D 资产 vs 2D 绘画资产，体积逻辑与投喂方式互斥 |
+| `claymation-3d`（黏土定格） | 干净 CG 与均匀描边会抹掉手作不完美痕迹 |
+| `comic-popart-2d`（美漫波普） | 2D 印刷资产 vs 3D 资产，体积逻辑与投喂方式互斥 |
+| `ghibli-2d`（吉卜力系） | 2D 手绘资产 vs 3D 资产，体积逻辑与投喂方式互斥 |
+| `lowpoly-iso-3d`（Low-poly / 等距 3D） | 同为 3D 但面数与明暗逻辑相反：三渲二要平滑渐变与描边，本风格要硬边面块无描边，混写两头不是 |
+| `dark-anime-2d`（暗黑二次元） | 2D 资产 vs 3D 资产，维度互斥 |
+| `dunhuang-gongbi-2d`（敦煌 / 工笔重彩） | 2D 手绘 vs 3D 卡通着色，维度互斥 |
+| `chibi-qban-2d`（Q 版 / 超变形） | 2D Q 版 vs 3D 正常比例，维度与头身档双互斥 |
+| `shinkai-2d`（新海诚 / 京都动画系） | 2D 手绘背景 vs 3D 卡通渲染，维度互斥 |
+| `gouache-2d`（绘本水粉） | 2D 手绘 vs 3D 渲染，维度互斥 |
 
 ## 十、与 liqi 既有 references 的对接
 
@@ -256,7 +279,8 @@ Upbeat or epic scoring depending on the scene, clear rhythmic accents, no muddy 
 | 投 Seedance 2.5 | `Seedance2.5适配.md`；压句取 §2.2，写在【生成目标】段首 |
 | 投国内面 | 压句取 §2.3，写在「整体风格」段；负面词压成 `Must not` 一行附正文末，≤1 行 |
 | 出资产图 | `Seedream5适配.md`；出图提示词里压句同样逐字复用，且**必须写正交相机、无透视畸变** |
-| 具名运镜拼装 | `h3-camera-shots` skill（可选）；未装则用 `镜头骨架库.md` 8 类 24 条骨架 + `光学与空间语言块.md` 的运镜写法自拼 |
+| 具名运镜拼装 | `h3-camera-shots` skill |
 | 出片不对 | `失败诊断与返修映射.md` + `h3-shot-iteration` skill |
 | 去立体化扫描 | **不要跑 `dedupe_style.py --style ink-wash-2d`**（那份词表是手绘轨的，会删掉本轨的阴影与体积），按 §9.1 手工清 |
-| 风格选型与 id 查表 | `风格路由表.md`；数值一律回查 L0 `style-registry.json` 的 `npr-celshaded-3d` 条目，不抄本文件副本 |
+| 风格选型与 id 查表 | `风格路由表.md`；数值一律回查 L0 注册表 的 `npr-celshaded-3d` 条目，不抄本文件副本 |
+

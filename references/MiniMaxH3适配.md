@@ -22,11 +22,8 @@ H3-Context-IR / H3-Regenerate-2K 两条服务端增强）时的改写规则。�
 
 **上下游关系**：H3 字段格式以本文件为准；若本机装有 MiniMax 官方 `h3-prompt-writing` skill，
 其 `references/base-en.txt` 与 `ref-en.txt` 可作为权威补充。**两者均未安装也不影响使用本文件。**
-本文件不重复规定字段细节，只规定 liqi 各小节往哪个字段落。下面三个是**可选**外部 skill，
-**没装全部不影响出稿**：拆镜节拍可参考 `h3-storyboard`（没装就按本 skill Step 3 逐镜流程 + `镜头骨架库.md`，
-H3 只是换个落点、拆镜逻辑不变）；具名运镜可参考 `h3-camera-shots`（没装就按 `镜头骨架库.md` +
-`光学与空间语言块.md` 的运镜写法自拼）；出片返修可参考 `h3-shot-iteration`（没装就按
-`失败诊断与返修映射.md` 的四层定位，流程一致）。
+本文件不重复规定字段细节，只规定 liqi 各小节往哪个字段落。拆镜节拍参考 `h3-storyboard`，
+具名运镜参考 `h3-camera-shots`，出片返修参考 `h3-shot-iteration`。
 
 ---
 
@@ -35,7 +32,7 @@ H3 只是换个落点、拆镜逻辑不变）；具名运镜可参考 `h3-camera
 | 项 | H3 面取值 |
 |---|---|
 | 段头骨架 | `[Shot 1] 英文画面描述`；第二镜起 `[Shot N] At MM:SS.mmm, ...` |
-| 风格轨道 | 卡通轨 / 写实轨 / **手绘轨**（水墨、水彩、绘本、版画等，见 `水墨淡彩2D风格锚.md`） / **定格木偶轨**（哥特、Burton 暗黑童话、微缩布景，见 `哥特定格木偶风格锚.md`） |
+| 风格轨道 | 卡通轨 / 写实轨 / **手绘轨**（水墨、水彩、绘本、版画等，见 `风格锚_水墨淡彩2D.md`） / **定格木偶轨**（哥特、Burton 暗黑童话、微缩布景，见 `风格锚_哥特定格木偶.md`） |
 
 **轨道判定**：用户给的是水墨淡彩设定图、绘本插画、水彩分镜，一律走**手绘轨**；
 给的是木偶质感、微缩布景、大头细肢的暗黑童话设定图，走**定格木偶轨**。
@@ -67,6 +64,9 @@ H3 只是换个落点、拆镜逻辑不变）；具名运镜可参考 `h3-camera
 
 **liqi 主流程（跨镜一致性生产）对应 Ref2VA**，本文件默认按 Ref2VA 讲。
 只有单镜独立素材、不需要跨镜继承时才走 base 三字段模式。
+
+> **提示词包必须写 `# mode:`**（五选一）。校验器据此选判据集：base 模式只查三字段、Ref2VA 查六段顺序；
+> 不写时靠结构反推，反推不出来会报 `W-MODE-UNDECLARED`（v5.37.1 起）。
 
 **H3 与 H3 Max**：Max 只出 480P/768P、5–15 秒，仅标准生成端点，**不支持 2K**；
 两者共用同一套请求协议（只改 `model` 字段），**提示词写法完全通用**。
@@ -169,8 +169,9 @@ subject_definitions  →  summary  →  retention_analysis  →  detailed_descri
 | 镜号与标题 | `[Shot N]` 标记 + 参数行 | 时长不写进正文，落参数行 |
 | 场景与人物 | `detailed_description` 各 Shot 内 | 出场对象逐 Shot 写明位置；画外者写 off-screen |
 | 站位与轴线 | `detailed_description` 内，英文写三行 | 画面位置 + 依托物 + 朝向 + 位移，与 liqi 站位行同构 |
-| 生成视频起始行 | 不进正文 → 参数行 | H3 无此字段 |
-| 整体风格 | `detailed_description` **开头一句**，在 `[Shot 1]` 之前 | 风格锚英文压句，见 `水墨淡彩2D风格锚.md` |
+| 标题参数行（v5.28.0 前叫「生成视频起始行」） | 不进正文 → 参数行 `# title:` | H3 无此字段 |
+| **出场人物**（Step 3 第 5 小节） | **`subject_definitions` + 各 Shot 内** | **身份描述进 `<Subject N>`（英文），出场者逐 Shot 具名**；H3 面同样**必须在出场处内联认人**——`E-IDENTITY-NOT-INLINE` 在 H3 面改查 `subject_definitions`。一行一个职责：身份归这里，画风归「整体风格」 |
+| 整体风格 | `detailed_description` **开头一句**，在 `[Shot 1]` 之前 | 风格锚英文压句，见 `风格锚_水墨淡彩2D.md` |
 | 本镜保真预算 | `detailed_description` 内正向写 | 主/次/省写成「Detail goes to X; Y stays flat」 |
 | 本镜光色基调 + 色彩预算 | `detailed_description` 内 | 唯一重音色写成「the only strong hue in the frame is X」 |
 | 时间线分镜（【时间轴】段） | 拆成 `[Shot N]`，**一段一镜** | 切点写 `[Shot N] At MM:SS.mmm` |
@@ -258,8 +259,8 @@ liqi 的九段风格锚在 H3 面压成两句英文，写在 `[Shot 1]` 之前�
 | 排除项 | **丢弃** | H3 无 negative，见第六节 |
 
 **压句逐字复用铁律**：全片每一条提示词的风格压句必须**一字不差**。
-改一个词，不同镜头的质感就会漂移。压句统一存放在风格锚文件里（手绘轨 `水墨淡彩2D风格锚.md`、
-定格木偶轨 `哥特定格木偶风格锚.md`），用哪套风格就复制哪套。
+改一个词，不同镜头的质感就会漂移。压句统一存放在风格锚文件里（手绘轨 `风格锚_水墨淡彩2D.md`、
+定格木偶轨 `风格锚_哥特定格木偶.md`），用哪套风格就复制哪套。
 
 ---
 
@@ -334,13 +335,52 @@ N/A
 ## 十一、交付前校验（H3 面专用流程）
 
 ```bash
-node scripts/check_prompt_h3.mjs <file>
+node scripts/check_prompt_h3.mjs <file> [--model h3|h3max]
 ```
+
+`--model` 只影响时长闸门：`h3` = 4–15s（默认），`h3max` = 5–15s。两档参数来自
+`references/model-limits.json`（与 `check_prompt.mjs` / `audit_project.py` 同源），
+写成 4s 的 Max 条会被 `E-DURATION` 拦下——这是过去只在文档里写着、代码里没生效的那条。
 
 必查项：六段齐全且顺序对、字段名逐字对、标签在四段里保持一致、`<d>` 成对且带语言标记、
 单镜时长 4–15 秒、`detailed_description` 350–500 词、正文无 `Must not` 行、无高频否定式。
 
-另外三个脚本照跑：
+### 11.1 H3 校验器码表（v5.16.0 补登记）
+
+此前本文件的「必查项」只有散文描述、没有码号——用户跑出 `E-DIALOG-PAIR` 无处可查。
+现按脚本实际实现补全（与 `质控层_门禁与过审.md` 的 L1 码表同口径）：
+
+| 码 | 级别 | 触发条件 | 处理 |
+|---|---|---|---|
+| `E-SECTION-ORDER` | ERROR | 六段式缺段或顺序错 | 按 §十 单镜模板重排 |
+| `E-SECTION-DUP` | ERROR | 同一段出现两次 | 去重 |
+| `E-SHOT-ORDER` | ERROR | `[Shot N]` 编号乱序 / 断号 | 重排编号 |
+| `E-SHOT-TIME` | ERROR | `[Shot N] At MM:SS.mmm` 时间戳格式错或不递增 | 修正时间戳 |
+| `E-DURATION` | ERROR | 单镜时长不在 4–15 秒 | 改时长或拆镜 |
+| `E-DIALOG-PAIR` | ERROR | `<d>` 标签不成对 | 补闭合标签 |
+| `E-DIALOG-LANG` | ERROR | `<d>` 缺语言标记 | 补 `[语言]` |
+| `E-DIALOG-IN-SUMMARY` | ERROR | 台词写进了 `detailed_description` 而非 `<d>` | 挪回 `<d>` |
+| `E-TAG-UNDEFINED` | ERROR | 引用了未定义的 `<Subject N>` / `<Picture N>` | 先定义后用 |
+| `E-REF-LIMIT` | ERROR | 素材引用超 12 个上限 | 减引用或合并职责 |
+| `E-MUSTNOT-INLINE` | ERROR | `Must not` 行误入正文（H3 无 negative 字段，须留参数行） | 移到参数行 |
+| `E-RETENTION-MARKER` | ERROR | 缺少保留标记（`<d>` 台词逐字保留的锚点） | 按 §五 补 |
+| `E-CN-IN-EN` | ERROR | 英文正文里混入中文（`<d>` 台词与画内真实文字除外） | 改译或按例外挪位 |
+| `W-NO-SHOT` | WARN | 整包解析不到任何 Shot 块 | 查单元标题格式 |
+| `W-WORDCOUNT` | WARN | `detailed_description` 不在 350–500 词 | 增减到区间 |
+| `W-NEGATION` | WARN | 否定式频率过高 | 改正向表述 |
+| `W-TAG-UNUSED` | WARN | 定义了标签但全文未引用 | 删定义或补使用 |
+| `W-STYLE-ANCHOR` | WARN | 风格锚压句缺失或未逐字复用 | 按 §八 补 |
+| `W-DURATION-UNK` | WARN | 时长无法解析 | 显式写秒数 |
+| `W-MODE-UNDECLARED`（v5.37.1 立） | WARN | 判不出模式：既无 `# mode:` 参数行，也没有可反推结构的字段；或 `# mode:` 的值不是五选一 | 补 `# mode: T2VA / I2VA / FL2VA / L2VA / Ref2VA`。写错模式不会报错，只会**静默用错一套判据**，比缺字段更贵 |
+| `W-MODE-FIELD-MISMATCH`（v5.37.1 立） | WARN | 声明的模式与正文结构打架：声明 base 却出现 `subject_definitions` / `retention_analysis` / `detailed_description` / `summary`；声明 Ref2VA 却写 `integrated_multimodal_description` | 统一到一套：改 `# mode:`，或按该模式的字段名重写 |
+
+> **校验器按 `# mode:` 分流（v5.37.1）**：base 模式（T2VA / I2VA / FL2VA / L2VA）只要求三字段
+> `integrated_multimodal_description` / `overall_soundscape` / `non_diegetic_music`；
+> Ref2VA 要求六段齐全且顺序固定。没写 `# mode:` 时按结构反推（有 `subject_definitions` 等 → Ref2VA；
+> 只有 `integrated_multimodal_description` → base）。此前无条件按六段判，base 包会连
+> 「提示词块」都识别不出来，直接 `exit 1` 报「没有找到任何含 H3 字段的提示词块」。
+
+其余门禁照跑（H3 面不豁免）：
 
 - `python scripts/audit_literal.py <file>`——画面表述抽象九类 + 高敏感画面。
   **英文正文同样要跑**，抽象词禁令不分语言：脚本内置英文对应规则（程度评价 / 画面比喻

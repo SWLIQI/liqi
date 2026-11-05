@@ -1,0 +1,235 @@
+{
+  "project": "《梦中人》场 1 实战（源自 梦中人终版.docx）",
+  "tier": "A2",
+  "lighting_anchors": {
+    "day": {
+      "label": "日",
+      "kelvin": "5600-6500",
+      "quality": "硬光、现场日光",
+      "angle": "单一（日光方向）",
+      "shadow": "短而实",
+      "artificial": "无（殿内长明灯为独立光源）",
+      "feature": "户外曝光充分，暗部保留细节"
+    },
+    "interior-day": {
+      "label": "殿内日",
+      "kelvin": "3200-4300",
+      "quality": "弱、点光源",
+      "angle": "门窗入光",
+      "shadow": "长影、衰减快",
+      "artificial": "长明灯点亮",
+      "feature": "殿内比户外暗两档，灯焰为唯一暖色重音"
+    }
+  },
+  "atmosphere": {
+    "particles": "扫地扬尘、倒灰扬灰",
+    "fog": "无",
+    "rain": "无",
+    "rule": "扬尘只在动作发生的光柱内可见"
+  },
+  "characters": {
+    "a-ying": {
+      "display_name": "阿莹",
+      "identity_verdict": "reuse",
+      "gender": "女性",
+      "age": "19~21",
+      "heads": "7",
+      "face_anchor": "严格沿用参考图片全部五官样貌；素脸，颊边两颗浅痣；眼窝略深，目光向下成习惯；嘴唇干裂；肤色晒后的浅麦色",
+      "costume": "灰褐粗布短褂，袖口卷起，围一条洗旧的靛蓝围裙，布鞋",
+      "softspot": "props/paper-lantern",
+      "lock_out": [
+        "红唇",
+        "长发披肩",
+        "细皮嫩肉",
+        "现代服装"
+      ],
+      "outputs": [
+        "images/a-ying-sheet.png"
+      ],
+      "versions": {
+        "base": {
+          "codename": "常规造型"
+        },
+        "alt": {
+          "codename": "入梦装束"
+        }
+      }
+    },
+    "zhu-weng": {
+      "display_name": "祝翁",
+      "identity_verdict": "reuse",
+      "gender": "男性",
+      "age": "60~65",
+      "heads": "7",
+      "face_anchor": "严格沿用参考图片全部五官样貌；枯瘦；花白短须稀疏；颧骨高；眼皮下垂；右手食指一道横旧刀伤；皮肤灰黄起皱",
+      "costume": "褪色藏青道袍，肘部磨亮，腰间系一根红绳坠半枚铜钱",
+      "softspot": "props/bronze-bell",
+      "lock_out": [
+        "黑发",
+        "体格壮硕",
+        "官服",
+        "红润面色"
+      ],
+      "outputs": [
+        "images/zhu-weng-sheet.png"
+      ],
+      "versions": {
+        "base": {
+          "codename": "常规造型"
+        },
+        "alt": {
+          "codename": "入梦装束"
+        }
+      }
+    }
+  },
+  "props": {
+    "paper-lantern": {
+      "display_name": "白纸灯",
+      "category": "softspot",
+      "identity_verdict": "reuse",
+      "material": "白纸灯罩已泛黄，竹骨，底座白蜡",
+      "size": "约一掌高",
+      "mark": "灯罩一处补过的纸痕",
+      "outputs": [
+        "images/paper-lantern-sheet.png"
+      ]
+    },
+    "bronze-bell": {
+      "display_name": "黄铜铃",
+      "category": "softspot",
+      "identity_verdict": "reuse",
+      "material": "黄铜被摩挲发亮，铃身一道裂纹从铃口裂到铃顶，铃舌只剩半边断口是旧的",
+      "size": "巴掌大",
+      "mark": "无刻字",
+      "outputs": [
+        "images/bronze-bell-sheet.png"
+      ]
+    },
+    "censer": {
+      "display_name": "香炉",
+      "category": "key",
+      "identity_verdict": "reuse",
+      "material": "粗陶，炉口积灰，香脚数十根还立在炉里",
+      "size": "双手可端",
+      "outputs": [
+        "images/censer-sheet.png"
+      ]
+    },
+    "broom": {
+      "display_name": "竹笤帚",
+      "category": "normal",
+      "identity_verdict": "reuse",
+      "material": "竹枝扎成，帚尖散开",
+      "size": "半人高",
+      "outputs": [
+        "images/broom-sheet.png"
+      ]
+    }
+  },
+  "creatures": {},
+  "scenes": {
+    "jiao-hu-outside": {
+      "display_name": "焦湖庙外",
+      "identity_verdict": "reuse",
+      "dedupe_key": "焦湖干涸湖床上的小庙外",
+      "structure": "干涸湖床龟甲状裂纹，断木桩，远处旧屋脊成排；湖岸高处一座小庙，门匾字掉光只剩「焦」字刻痕；庙门前一片空地",
+      "light_port": {
+        "desc": "无遮蔽全天光",
+        "wall": "不适用（外景）",
+        "fixed": true,
+        "note": "日光方向全时段一致"
+      },
+      "palette": {
+        "primary": "土黄灰",
+        "secondary": "枯木褐",
+        "accent": "白纸灯的暖白"
+      },
+      "permanent_marks": [
+        "门匾「焦」字刻痕",
+        "湖床龟甲裂纹的走向"
+      ],
+      "baseline_time": "day",
+      "variants": {
+        "day": {
+          "light": "日光直射，无遮挡",
+          "atmosphere": "扫地扬尘",
+          "lock_out": [
+            "夜色",
+            "雨",
+            "雾",
+            "人工光源"
+          ]
+        },
+        "dusk": {
+          "light": "低角度夕照，庙体长影",
+          "atmosphere": "扬尘在逆光里发白",
+          "lock_out": [
+            "正午顶光",
+            "夜色",
+            "雨",
+            "人工光源"
+          ]
+        }
+      },
+      "light_anchors": [
+        "day"
+      ],
+      "outputs": [
+        "scenes/jiao-hu-outside-day.png"
+      ]
+    },
+    "dian-nei": {
+      "display_name": "焦湖庙正殿",
+      "identity_verdict": "reuse",
+      "dedupe_key": "焦湖庙正殿内",
+      "structure": "一排石凿灯座长明灯全亮，灯座底积凝固蜡泪；供桌正中供黄铜铃；墙根草丛（门外可见）",
+      "light_port": {
+        "desc": "殿门入光",
+        "wall": "南墙殿门",
+        "fixed": true,
+        "note": "殿内以长明灯为主光"
+      },
+      "palette": {
+        "primary": "暖褐",
+        "secondary": "石灰",
+        "accent": "长明灯焰暖橙"
+      },
+      "permanent_marks": [
+        "灯座底下凝固蜡泪",
+        "供桌正中的铃位"
+      ],
+      "baseline_time": "interior-day",
+      "variants": {
+        "interior-day": {
+          "light": "长明灯焰加殿门入光",
+          "atmosphere": "倒灰扬尘",
+          "lock_out": [
+            "日光直射殿内",
+            "现代照明",
+            "夜色"
+          ]
+        },
+        "night": {
+          "light": "仅长明灯焰，殿内暗四档",
+          "atmosphere": "灯焰周围飞虫",
+          "lock_out": [
+            "日光",
+            "殿门入光",
+            "现代照明"
+          ]
+        }
+      },
+      "light_anchors": [
+        "interior-day"
+      ],
+      "outputs": [
+        "scenes/dian-nei-day.png"
+      ]
+    }
+  },
+  "provenance": {
+    "created": "2026-10-17",
+    "purpose": "《梦中人》场 1 实战：真实剧本走全链路"
+  }
+}

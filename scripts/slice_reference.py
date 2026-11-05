@@ -15,14 +15,28 @@ slice_reference.py —— 把角色设定卡裁成可直接投喂视频模型的
 
 版式对应（本 skill 的资产层规范见 references/资产层_锁定与一致性.md）
 --------------------------------------------------------------------
-  **4view（默认版式）**  左区头部近景（身份锚）+ 右区无头三联（正面 / 90° 侧面 / 背面）
+  **4view（默认版式）**  左区头部近景（身份锚）+ 右区保头无脸三联（正面 / 90° 侧面 / 背面）
+                         + **图底音纹条（v5.10.0 起，声纹波形 + ≤8 词英文音色速览标签）**
   dualview               左脸特写 + 右全身正面          —— 按需补出的单卡
   sideback               左纯侧头 + 右纯背头            —— 按需补出的单卡
   9view                  左 2/3 全身三视图 + 右 1/3 六表情 —— 本 skill 默认不出，兼容保留
 
+⚠️ 图底细节条（--band）
+-----------------------
+v5.10.0 起 4 View 卡底部有一条通宽细节条（约占画面高度 12%），它**不是参考素材**，
+不应该被裁进任何一张裁片。故 4view 默认预留底部 12%（`--band 0.12`），
+只裁上方 88% 的主视图区。
+
+**老版式卡（v5.9.0 及以前，没有图底条）必须显式加 `--band 0`**，
+否则默认的 12% 预留会把三格最底部的鞋一起切掉——这是本参数最容易出的一类误操作。
+
 用法
 ----
   python slice_reference.py 角色A_4view.png --layout 4view          （默认版式）
+  python slice_reference.py 角色A_4view.png --layout 4view -o out_dir  （自定义输出目录）
+  python slice_reference.py 角色A_4view.png --layout 4view --no-manifest （不出投喂清单）
+  python slice_reference.py 角色A_老卡无图底条.png --layout 4view --band 0
+  python slice_reference.py 角色A_4view.png --layout 4view --band 0.15  （图底条更宽的卡）
   python slice_reference.py 角色A_侧背补锚.png --layout sideback
   python slice_reference.py 角色A_九视图.png --layout 9view --expr 平静,担忧,疲惫,释然,焦急,含笑
   python slice_reference.py 卡片.png --layout 4view --ratio 0.25 --margin 12 --gap 4
@@ -32,6 +46,9 @@ slice_reference.py —— 把角色设定卡裁成可直接投喂视频模型的
 输出
 ----
   默认在图片同目录建 <图片名>_slices/，内含裁好的子图 + manifest.txt（投喂清单）
+
+退出码（v4.8.3 A12 补记）：0 = 成功；1 = 缺 Pillow 或找不到图片；2 = 命令行参数错误
+  （argparse 标准行为）。
 
 依赖
 ----
@@ -54,32 +71,49 @@ if hasattr(sys.stdout, "reconfigure"):
 DEFAULT_EXPR = ["温柔", "惊讶", "坚定", "悲伤", "冷傲", "微笑"]
 DEFAULT_FULL = ["front", "side", "back"]
 FULL_CN = {"front": "正面", "side": "侧面", "back": "背面"}
-# 4 View 版的右区三联是无头的，标签要带"无头"以免被误当身份锚
-FULL_CN_HEADLESS = {"front": "无头正面", "side": "无头90°侧面", "back": "无头背面"}
+# 4 View 版的右区三联是保头无脸的，标签要带"无脸"以免被误当身份锚
+FULL_CN_HEADLESS = {"front": "无脸正面", "side": "无脸90°侧面", "back": "无脸背面"}
 
 LAYOUT_CN = {
-    "4view": "4 View 资产板（左头部近景 + 右无头三联）——本 skill 默认版式",
+    "4view": "4 View 资产板（左头部近景 + 右保头无脸三联 + 图底音纹条，v5.10.0）——本 skill 默认版式",
     "dualview": "双视图人设卡（左脸 + 右全身）——按需补出的单卡",
     "sideback": "侧背头部特写卡（左侧头 + 右背头）——按需补出的单卡",
     "9view": "九视图人设卡（左全身三视图 + 右六表情）——本 skill 默认不出，兼容保留",
 }
 
 
-def slice_4view(img, ratio, full_names, margin, gap):
-    """本 skill 的默认版式：左区头部近景（身份锚）+ 右区无头三联。
+def main_h(H, band):
+    """主视图区高度 = 总高 × (1 - 图底细节条占比)。
 
-    右区三联（正面 / 90° 侧面 / 背面）都是**无头**的，只承担服装廓形、
-    侧背结构与机位体型参考，不参与锁脸。左区头部近景是唯一像素够当
-    身份锚的一格（3840x2160 下裁开脸约 1920 px，右区全身格里的脸仅约 320 px）。
+    v5.10.0：4 View 卡底部有一条通宽图底音纹条（声纹波形 + 英文音色速览标签），
+    它不属于任何一张裁片。band>0 时把这条排除在裁切范围外。
+    """
+    if band <= 0:
+        return H
+    return H * (1.0 - band)
+
+
+def slice_4view(img, ratio, full_names, margin, gap, band=0.0):
+    """本 skill 的默认版式：左区头部近景（身份锚）+ 右区保头无脸三联。
+
+    右区三联（正面 / 90° 侧面 / 背面）都**头部完整入画但不刻画五官**，
+    只承担服装廓形、侧背结构、机位体型与头身比参考，不参与锁脸。
+    左区头部近景是唯一有清晰五官、像素够当身份锚的一格
+    （3840x2160 下、按整幅高度裁开脸约 1922 px，右区全身格里的脸仅约 320 px；
+    预留图底条 12% 后等比缩小为约 1710 / 285 px，差 6 倍的结论不变）。
+
+    band：图底细节条占比（默认 0.12，见模块 docstring）。裁切高度取
+    H×(1-band)，保证三格最底部的鞋不被图底条顶出画外。
     """
     W, H = img.size
+    Hm = main_h(H, band)
     left_w = W * ratio
     right_w = W - left_w
-    out = [((0, 0, left_w, H), "face_hd", "face_hd", "头部近景（身份锚）")]
+    out = [((0, 0, left_w, Hm), "face_hd", "face_hd", "头部近景（身份锚）")]
 
     col_w = right_w / 3
     for col in range(3):
-        box = (left_w + col * col_w, 0, left_w + (col + 1) * col_w, H)
+        box = (left_w + col * col_w, 0, left_w + (col + 1) * col_w, Hm)
         key = full_names[col] if col < len(full_names) else "v%d" % (col + 1)
         cn = FULL_CN_HEADLESS.get(key, FULL_CN.get(key, key))
         out.append((box, "full", safe_name(key), cn))
@@ -126,15 +160,17 @@ def crop_box(box, img_w, img_h, margin=0, gap=0):
     return (int(l), int(t), int(r), int(b))
 
 
-def slice_9view(img, wratio, expr_names, full_names, margin, gap):
+def slice_9view(img, wratio, expr_names, full_names, margin, gap, band=0.0):
     """2026-09-06 新版式：左 2/3 三个全身视图 + 右 1/3 3行x2列 表情头部特写
 
     旧版（上 2x3 表情 + 下 1x3 全身）把全身格压到 159 px 头高，侧背锚不可用。
     新版全身三视图占比提到三分之二（头部约 350 px），表情格竖排 3 行 2 列
     （头部约 600 px）。左区最左侧预留身高参照线带宽（约占左区宽度 6%），
     避免身高线被裁进正面格。
+    band：图底细节条占比（本版式默认 0）。
     """
     W, H = img.size
+    Hm = main_h(H, band)
     left_w = W * wratio
     right_w = W - left_w
     out = []
@@ -147,7 +183,7 @@ def slice_9view(img, wratio, expr_names, full_names, margin, gap):
             hline_w + col * col_w,
             0,
             hline_w + (col + 1) * col_w,
-            H,
+            Hm,
         )
         key = full_names[col] if col < len(full_names) else "v%d" % (col + 1)
         cn = FULL_CN.get(key, key)
@@ -159,9 +195,9 @@ def slice_9view(img, wratio, expr_names, full_names, margin, gap):
             idx = row * 2 + col
             box = (
                 left_w + col * right_w / 2,
-                row * H / 3,
+                row * Hm / 3,
                 left_w + (col + 1) * right_w / 2,
-                (row + 1) * H / 3,
+                (row + 1) * Hm / 3,
             )
             name = expr_names[idx] if idx < len(expr_names) else "expr%d" % (idx + 1)
             out.append((box, "face", safe_name(name), name))
@@ -169,22 +205,24 @@ def slice_9view(img, wratio, expr_names, full_names, margin, gap):
     return out
 
 
-def slice_sideback(img, ratio, margin, gap):
+def slice_sideback(img, ratio, margin, gap, band=0.0):
     """左 50% 纯侧面头部特写 + 右 50% 纯背面头部特写（侧背补锚卡）"""
     W, H = img.size
+    Hm = main_h(H, band)
     return [
-        ((0, 0, W * ratio, H), "face_hd", "side", "纯侧面头部特写"),
-        ((W * ratio, 0, W, H), "face_hd", "back", "纯背面头部特写"),
+        ((0, 0, W * ratio, Hm), "face_hd", "side", "纯侧面头部特写"),
+        ((W * ratio, 0, W, Hm), "face_hd", "back", "纯背面头部特写"),
     ]
 
 
-def slice_dualview(img, ratio, full_names, margin, gap):
+def slice_dualview(img, ratio, full_names, margin, gap, band=0.0):
     """左 60% 脸部特写 + 右 40% 全身正面"""
     W, H = img.size
+    Hm = main_h(H, band)
     out = [
         # 双视图左侧按排版段"头部占左侧区域高度的90%"，所以单独用 face_hd 类目
-        ((0, 0, W * ratio, H), "face_hd", "face_hd", "脸部高清特写"),
-        ((W * ratio, 0, W, H), "full", safe_name(full_names[0]), FULL_CN.get(full_names[0], "全身")),
+        ((0, 0, W * ratio, Hm), "face_hd", "face_hd", "脸部高清特写"),
+        ((W * ratio, 0, W, Hm), "full", safe_name(full_names[0]), FULL_CN.get(full_names[0], "全身")),
     ]
     return out
 
@@ -208,7 +246,7 @@ def estimate_face_px(kind, box, heads):
 def verdict(px):
     """给个够不够用的判断"""
     if px == 0:
-        return "无头格，不参与锁脸（服装廓形 / 侧背结构参考）"
+        return "无脸格，不参与锁脸（服装廓形 / 侧背结构参考）"
     if px >= 900:
         return "优秀，可直接当主身份锚"
     if px >= 500:
@@ -218,7 +256,7 @@ def verdict(px):
     return "偏小，模型读不出五官，会自己编脸——不要用这张当身份锚"
 
 
-def write_manifest(path, src, slices, files, heads, layout):
+def write_manifest(path, src, slices, files, heads, layout, band=0.0):
     """纯文本投喂清单（不用 Markdown 符号，方便直接看）"""
     L = []
     A = L.append
@@ -229,6 +267,12 @@ def write_manifest(path, src, slices, files, heads, layout):
     A("源文件：%s" % os.path.basename(src))
     A("布局  ：%s" % LAYOUT_CN.get(layout, layout))
     A("头身比：%s（用于估算头部像素）" % heads)
+    if band > 0:
+        A("图底条：已预留底部 %.0f%% 不裁 —— 那是图底音纹条（声纹波形 + 英文音色速览标签），"
+          % (band * 100))
+        A("        它不是参考素材，喂给模型只会变成噪声。")
+    elif layout == "4view":
+        A("图底条：--band 0，整幅高度都参与裁切（老版式卡口径，无图底条）。")
     A("")
     A("裁出 %d 张。下表按推荐用途排序，@ 编号即为视频模型的引用标签。" % len(files))
     A("")
@@ -254,17 +298,20 @@ def write_manifest(path, src, slices, files, heads, layout):
     A("分工（谁有资格当锚，看头部像素说话）")
     A("-" * 72)
     if layout == "4view":
-        A("  正面身份锚（五官）        左区头部近景裁出的 face_hd，头部约 1900 px")
-        A("  服装廓形（正面）          右区 full_front，无头，脸不参与锁脸")
-        A("  侧面结构                  右区 full_side，无头，仅廓形与厚度")
-        A("  背面结构                  右区 full_back，无头，仅廓形与衣背纹样")
+        A("  正面身份锚（五官）        左区头部近景裁出的 face_hd，头部约 1922 px"
+          + ("（预留图底条后约 1710 px）" if band > 0 else ""))
+        A("  服装廓形（正面）          右区 full_front，无脸，脸不参与锁脸")
+        A("  侧面结构                  右区 full_side，无脸，仅廓形与厚度")
+        A("  背面结构                  右区 full_back，无脸，仅廓形与衣背纹样")
         A("")
-        A("  ⚠️ 右区三联是无头的。片中有侧脸 / 背身【特写】时，另出侧背头部特写卡")
+        A("  ⚠️ 右区三联是保头无脸的。片中有侧脸 / 背身【特写】时，另出侧背头部特写卡")
         A("     （--layout sideback），否则转过去的镜没有侧背头部的锚。")
+        A("  ⚠️ 图底音纹条未参与裁切（见上方「图底条」行）。不要把它当参考图喂——")
+        A("     它只是跨图识别同一角色的索引标记，混进投喂包只会占图位并带来噪声。")
     else:
-        A("  正面身份锚（五官）        双视图裁出的 face_hd，头部约 1900 px")
-        A("  侧面锚（鼻梁下颌轮廓）    侧背补锚卡裁出的 face_side，约 1900 px")
-        A("  背面锚（后脑发型发髻）    侧背补锚卡裁出的 face_back，约 1900 px")
+        A("  正面身份锚（五官）        双视图裁出的 face_hd，头部约 1922 px")
+        A("  侧面锚（鼻梁下颌轮廓）    侧背补锚卡裁出的 face_side，约 1922 px")
+        A("  背面锚（后脑发型发髻）    侧背补锚卡裁出的 face_back，约 1922 px")
         A("  表情参考                  九视图 face_* 表情格，约 600 px，锁不住五官")
         A("  机位 / 体型 / 服装        九视图 full_* 全身格，脸约 320 px，别指望锁脸")
         A("")
@@ -329,7 +376,7 @@ def main():
     ap.add_argument("-o", "--out", default=None, help="输出目录（默认：图片同目录/<图片名>_slices）")
     ap.add_argument("-l", "--layout", default=None,
                     choices=["4view", "9view", "dualview", "sideback"],
-                    help="布局：4view=左头部近景+右无头三联（本 skill 默认版式）/ "
+                    help="布局：4view=左头部近景+右保头无脸三联（本 skill 默认版式）/ "
                          "dualview=左脸+右全身 / sideback=左侧脸特写+右背头特写 / "
                          "9view=左2/3全身三视图+右1/3六表情（兼容保留，默认不出）"
                          "（默认按文件名自动判断，判不出用 4view）")
@@ -347,6 +394,11 @@ def main():
                     help="格子间隙（像素），用于避开分隔线，建议 2-6")
     ap.add_argument("--heads", type=float, default=6.0,
                     help="头身比，用于估算头部像素（默认 6）")
+    ap.add_argument("--band", type=float, default=None,
+                    help="图底细节条（声纹条）占画面高度的比例，不裁入任何裁片。"
+                         "4view 默认 0.12（v5.10.0 新卡）；其余布局默认 0。"
+                         "⚠️ v5.9.0 及以前的老版式卡（无图底条）必须显式写 --band 0，"
+                         "否则默认预留会把三格最底部的鞋切掉")
     ap.add_argument("--no-manifest", action="store_true", help="不生成投喂清单")
 
     args = ap.parse_args()
@@ -359,7 +411,18 @@ def main():
     expr_names = [s.strip() for s in args.expr.split(",")] if args.expr else DEFAULT_EXPR
     full_names = [s.strip() for s in args.full.split(",")] if args.full else DEFAULT_FULL
 
-    img = Image.open(src)
+    # 图底细节条：4view 默认预留 12%（v5.10.0 起的卡底部有音纹条），其余布局默认不预留
+    if args.band is not None:
+        band = args.band
+    else:
+        band = 0.12 if layout == "4view" else 0.0
+    if band < 0 or band >= 0.5:
+        sys.exit("--band 取值应在 [0, 0.5) 之间，收到 %s" % band)
+
+    try:
+        img = Image.open(src)
+    except (OSError, ValueError) as e:
+        sys.exit('参考图读不了：%s' % e)
     W, H = img.size
     prefix = os.path.splitext(os.path.basename(src))[0]
 
@@ -369,6 +432,12 @@ def main():
     print("源文件：%s" % src)
     print("尺寸  ：%d x %d" % (W, H))
     print("布局  ：%s" % LAYOUT_CN.get(layout, layout))
+    if band > 0:
+        print("图底条：预留底部 %.0f%%（%.0f px 不裁）—— 这是 v5.10.0 起的图底音纹条"
+              % (band * 100, H * band))
+        print("        ⚠️ 若你的卡是 v5.9.0 及以前的老版式（没有图底条），请改用 --band 0")
+    elif layout == "4view":
+        print("图底条：--band 0，按整幅高度裁切（老版式卡口径）")
     print("输出  ：%s" % outdir)
     print()
 
@@ -376,13 +445,13 @@ def main():
         {"4view": 0.25, "dualview": 0.6, "sideback": 0.5, "9view": 0.667}[layout]
 
     if layout == "4view":
-        slices = slice_4view(img, ratio, full_names, args.margin, args.gap)
+        slices = slice_4view(img, ratio, full_names, args.margin, args.gap, band)
     elif layout == "9view":
-        slices = slice_9view(img, ratio, expr_names, full_names, args.margin, args.gap)
+        slices = slice_9view(img, ratio, expr_names, full_names, args.margin, args.gap, band)
     elif layout == "sideback":
-        slices = slice_sideback(img, ratio, args.margin, args.gap)
+        slices = slice_sideback(img, ratio, args.margin, args.gap, band)
     else:
-        slices = slice_dualview(img, ratio, full_names, args.margin, args.gap)
+        slices = slice_dualview(img, ratio, full_names, args.margin, args.gap, band)
 
     files = []
     for box, kind, slug, label in slices:
@@ -392,7 +461,7 @@ def main():
             continue
         px = estimate_face_px(kind, cb, args.heads)
         if layout == "4view" and kind == "full":
-            px = 0  # 4 View 右区三联是无头的，估"脸像素"没有意义
+            px = 0  # 4 View 右区三联是无脸的，估"脸像素"没有意义
         if kind == "face_hd":
             # sideback 卡两格都是 face_hd，用 slug 区分（side / back）
             fname = ("%s_face_hd.png" % prefix) if slug == "face_hd" \
@@ -409,7 +478,7 @@ def main():
 
     if not args.no_manifest:
         mp = os.path.join(outdir, "manifest.txt")
-        write_manifest(mp, src, slices, files, args.heads, layout)
+        write_manifest(mp, src, slices, files, args.heads, layout, band)
         print()
         print("投喂清单：%s" % mp)
 

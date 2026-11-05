@@ -12,10 +12,14 @@
     创作蓝图层: Ⅰ 创作基准(P0A) · Ⅱ 剧本层(P1) · Ⅲ 视听圣经(P1)
     分镜生产层: ① 时间轴泳道 · ② 镜头卡矩阵(拆解) · ③ 投喂提示词原文(成品)
                 ④ 资产总表(P2) · ⑤ 资产出图提示词(P2.5·与③必同板) · ⑥ 发布文案(P6·可选)
+                ⑦ 其他章节(K-lite-6：md 里未被归区的章节原文照录，信息零丢失)
+
+退出码（v4.8.3 A11 补记）: 0 = 编译成功（有 WARN 也出板，WARN 只提示不阻断）；
+    1 = 源文件不存在；2 = 命令行参数错误（argparse 标准行为）。
 
 输入 md 最小契约:
     # 项目标题
-    【画幅】：16:9        【模型版本】：2.5        ← A/B 双锁回显
+    【画幅】：16:9        【模型版本】：2.5        ← 锁②/锁① 回显
     ## P0A · 创作基准     ← 可选表格: 项 | 内容
     ## P1 · 剧本          ← 可选，正文照录
     ## P1 · 视听圣经      ← 可选表格或正文
@@ -45,22 +49,37 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-# Windows 下 stdout 被重定向到管道/文件时默认走 cp936，本脚本会 print ⚠/❌，
-# 不显式设 utf-8 会 UnicodeEncodeError。与其余 6 个脚本保持一致。
-if hasattr(sys.stdout, 'reconfigure'):
-    sys.stdout.reconfigure(encoding='utf-8')
-
 # 兼容三种镜行写法：本包原生 `00:00-00:05 [镜头1] …` / `[00:00-00:05] …` / `[0-3秒] …`
 TS_RE = re.compile(
     r"^\s*\[?\s*(\d{1,2}(?::\d{2})?)\s*[-~—]\s*(\d{1,2}(?::\d{2})?)\s*秒?\s*\]?\s*(.*)$")
+# 第四种：liqi 标准镜块里的时间轴行带小节前缀「【时间轴】0-5s：…」
+# （见 references/终稿格式示例.md 与 2.5 面五小节）。旧版只认裸时间戳，
+# 标准包因此整档报「未解析到 [起-止秒] 逐镜时间戳行」。
+TS_PREFIX_RE = re.compile(r"^【[^】]{2,6}】\s*")
+TS_AXIS_RE = re.compile(
+    r"^【时间轴】\s*(\d{1,2}(?::\d{2})?)\s*[-~—]\s*(\d{1,2}(?::\d{2})?)\s*s?\s*[：:]\s*(.*)$")
 SHOT_NO_RE = re.compile(r"^\[镜头\s*\d+\]\s*")
+# liqi 标准镜块标题：纯文本行「镜 N｜标题（Xs）」——可能出现在围栏内（标准终稿把
+# 整个镜块包进 ``` ）也可能是裸文本行。两种都要认，否则整档解析成 0 段。
+SHOT_HEAD_RE = re.compile(r"^镜\s*(\d+[a-z]?)\s*[｜|]\s*(.+)$")
 
 
 def shot_text(s: str) -> str:
     """镜行文本：剥掉 `[镜头N] ` 前缀，卡片上只留景别·运镜·动作。"""
     return SHOT_NO_RE.sub("", (s or "").strip())
-FENCE_RE = re.compile(r"```(?:text|prompt)?\s*\n(.*?)```", re.S)
-FIELD_RE = re.compile(r"^【([^】]{2,8})】\s*[:：]\s*(.+)$")
+# 围栏信息串宽容：```text / ```prompt 后可跟中文描述（如「```text 投喂提示词」，
+# 本脚本文档契约就这么写）；空信息串也认。不吞 python/json 等其他语言块——
+# 否则 max(len) 取最长时会改抓示例代码块（4.8.3 二检）。
+FENCE_RE = re.compile(r"```(?:[ \t]*|(?:text|prompt)[^\n]*)\n(.*?)```", re.S)
+# 行首锁探测（只判「这行是不是以 【key】： 开头」，值不由它收）
+FIELD_RE = re.compile(r"^【([^】]{2,8})】\s*[:：]")
+# 同行多锁逐个收：值停在「下一把真锁」前（否则「【画幅】：16:9  【模型版本】：2.5」
+# 会被贪婪 (.+) 吞成 aspect=整行、模型版本判未锁定——见 CHANGELOG 4.8.3 D1）
+# 截断判据必须是「下一把锁」而不是「任意 【」：值本身可以含 【（如
+# 「【标题】：【精选】逆袭」「【备注】：参见【附录A】 【标题】：xxx」），
+# 见 4.8.3 二检——早期写法按任意 【 截断，会把这两类整行/半行吞掉。
+FIELD_INLINE_RE = re.compile(
+    r"【([^】]{2,8})】\s*[:：]\s*(.+?)(?=\s*【[^】]{2,8}】\s*[:：]|$)")
 
 
 def to_seconds(tok: str) -> float:
@@ -84,6 +103,9 @@ def table_rows(lines):
 # ── 宽容章节识别：不要求 md 照抄「## P2 · 资产清单」这类标题，按关键词归区 ──
 def zone_of(title: str) -> str:
     t = title or ""
+    # v5.18.0：生产调度两张表（船长套件汲取）归生产层「拿去干活的那一份」
+    if re.search(r"生成批次单|配音对齐单", t):
+        return "ap"
     if re.search(r"发布文案|P6", t) and not re.search(r"投喂", t):
         return "publish"
     if re.search(r"出图提示词|P2\.5|P2c|资产出图", t):
@@ -193,12 +215,23 @@ def parse_md(md_text: str) -> dict:
         s = line.strip()
 
         if s.startswith("```"):
+            # 第一个围栏＝镜块投喂正文，收口后不再并进段原文（其后还有 Must not + 参数行围栏）
+            if in_fence and seg is not None and ap is None:
+                seg["_fence_done"] = True
             in_fence = not in_fence
             continue
         if in_fence:
+            # 围栏里装的可能是 liqi 镜块本体（标准终稿把整个镜块包进 ```）。
+            # 旧版在围栏内只做「收原文」不判结构，标准包因此整档 0 段 0 镜。
+            # 资产出图块（ap）优先：它的围栏是出图提示词，不该被镜标题抢走。
+            m_fence_shot = SHOT_HEAD_RE.match(s) if ap is None else None
+            if m_fence_shot:
+                seg = {"no": len(data["segments"]) + 1, "name": s,
+                       "raw": "", "shots": [], "fields": {}, "warnings": []}
+                data["segments"].append(seg)
             if ap is not None:
                 ap.setdefault("fence_body", []).append(line)
-            elif seg is not None:
+            elif seg is not None and not seg.get("_fence_done"):
                 seg.setdefault("fence_body", []).append(line)
             continue
 
@@ -245,17 +278,36 @@ def parse_md(md_text: str) -> dict:
                 ap = None
             continue
 
+        # liqi 标准分镜块标题是**纯文本行**「镜 N｜标题（Xs）」，不是 markdown 标题
+        # （见 references/终稿格式示例.md 的镜块本体）。旧版只认 `### 段N`，
+        # 导致 liqi 分镜包整档解析为 0 段 0 镜（实测 5 镜全漏）。
+        m_shot_head = SHOT_HEAD_RE.match(s)
+        if m_shot_head:
+            flush_plain()
+            sub_head = s
+            seg = {"no": len(data["segments"]) + 1, "name": sub_head,
+                   "raw": "", "shots": [], "fields": {}, "warnings": []}
+            data["segments"].append(seg)
+            ap = None
+            continue
+
         fm_meta = FIELD_RE.match(s)
         if fm_meta:
-            key, val = fm_meta.group(1), fm_meta.group(2).strip()
-            if key in ("画幅", "模型版本"):        # A/B 双锁：任意位置声明都认
-                data["meta"][key] = val
-                continue
-            if seg is not None:
-                seg["fields"][key] = val
-                continue
-            if zone_of(section) == "publish":
-                data["publish"].append({"k": key, "v": val})
+            # 同行可能有多把锁（契约写法「【画幅】：16:9  【模型版本】：2.5」）：
+            # 逐对拆分路由，任一对命中即消费整行（与原单锁语义一致）
+            hit = False
+            for m_lock in FIELD_INLINE_RE.finditer(s):
+                key, val = m_lock.group(1), m_lock.group(2).strip()
+                if key in ("画幅", "模型版本"):        # 锁①/锁②：任意位置声明都认
+                    data["meta"][key] = val
+                    hit = True
+                elif seg is not None:
+                    seg["fields"][key] = val
+                    hit = True
+                elif zone_of(section) == "publish":
+                    data["publish"].append({"k": key, "v": val})
+                    hit = True
+            if hit:
                 continue
 
         if s.startswith("|") and section:
@@ -271,7 +323,7 @@ def parse_md(md_text: str) -> dict:
             if rows:
                 cells = rows[0]
                 k0 = re.sub(r"[*`]", "", cells[0]).strip()
-                # meta 兜底：从 A/B 双锁表等任意表格里捞模型版本/画幅
+                # meta 兜底：从三锁回显表等任意表格里捞模型版本/画幅
                 if data["meta"]["模型版本"] == "未锁定" and "模型版本" in k0 and len(cells) > 1:
                     m = re.search(r"Seedance\s*[\d.]+|\d+(?:\.\d+)?", re.sub(r"[*`]", "", cells[1]))
                     if m:
@@ -338,6 +390,11 @@ def parse_md(md_text: str) -> dict:
             if first == seg["name"] or first.startswith(token):
                 seg["raw"] = fence_of("\n".join(chunk.splitlines()[1:]))
                 break
+    for seg in data["segments"]:
+        # liqi 镜块的围栏不挂在 `###` 小标题下（镜块标题是纯文本行，可能就在围栏内），
+        # 上面按 ### 切片的归属会整档落空；解析时已按行收过围栏正文，这里直接兜底。
+        if not seg["raw"] and seg.get("fence_body"):
+            seg["raw"] = "\n".join(seg["fence_body"]).strip()
     for ap in data["asset_prompts"]:
         for chunk in parts[1:]:
             first = chunk.splitlines()[0].strip()
@@ -351,7 +408,9 @@ def parse_md(md_text: str) -> dict:
             seg["warnings"].append("未找到 ```text 围栏投喂原文（无法直接复制投喂）")
         if not seg["shots"]:
             for l in seg["raw"].splitlines():     # K-lite-2 降级：从围栏内提取时间戳
-                fm = TS_RE.match(l.strip())
+                # liqi 标准时间轴行带小节前缀「【时间轴】0-5s：…」，先剥前缀再套裸时间戳式，
+                # 否则标准包整档报「未解析到 [起-止秒] 逐镜时间戳行」
+                fm = TS_AXIS_RE.match(l.strip()) or TS_RE.match(TS_PREFIX_RE.sub("", l.strip()))
                 if fm:
                     try:
                         a, b = to_seconds(fm.group(1)), to_seconds(fm.group(2))
@@ -380,9 +439,9 @@ def parse_md(md_text: str) -> dict:
         data["warnings"].append({"seg": 0,
             "msg": "未解析到「## P2.5 · 资产出图提示词」——⑤ 资产出图提示词与 ③ 分镜投喂提示词必须同板呈现（K-lite-4）"})
     if data["meta"]["画幅"] == "未锁定":
-        data["warnings"].append({"seg": 0, "msg": "未声明【画幅】——B 锁未锁定（用户未指定 ≠ 默认 9:16）"})
+        data["warnings"].append({"seg": 0, "msg": "未声明【画幅】——锁②未锁定（用户未指定 ≠ 默认 9:16）"})
     if data["meta"]["模型版本"] == "未锁定":
-        data["warnings"].append({"seg": 0, "msg": "未声明【模型版本】——A 锁未锁定（用户未指定 ≠ 默认 2.5）"})
+        data["warnings"].append({"seg": 0, "msg": "未声明【模型版本】——锁①未锁定（用户未指定 ≠ 默认 2.5）"})
 
     # 时间轴排布：段内独立计时 → 按累计偏移铺成整片时间轴（泳道才读得出 57s 成片节奏）
     off = 0.0
@@ -420,7 +479,15 @@ def build_html(d: dict) -> str:
         "assets": d["assets"], "aprompts": d["asset_prompts"], "publish": d["publish"],
         "segments": d["segments"], "warnings": d["warnings"], "extras": d["extras"],
     }
-    return TEMPLATE.replace("@@DATA@@", json.dumps(payload, ensure_ascii=False)) \
+    data_json = json.dumps(payload, ensure_ascii=False)
+    # HTML 注入防护：payload 含围栏原文等用户可控字段，正文里出现 </script> 会提前闭合
+    # <script> 元素——其后 JSON 全变成可见垃圾文本（看板 JS 断裂），注入的 <img onerror>
+    # 还会执行。JSON 字符串内的 < > & 按 \uXXXX 输出：HTML 解析器不识别这些转义序列，
+    # 而 JS 字符串字面量 / JSON.parse 都会透明还原，语义无损。
+    data_json = (data_json.replace("<", "\\u003c")
+                          .replace(">", "\\u003e")
+                          .replace("&", "\\u0026"))
+    return TEMPLATE.replace("@@DATA@@", data_json) \
                    .replace("@@TITLE@@", html.escape(d["title"], quote=True))
 
 
@@ -679,7 +746,11 @@ def main():
     if not src.exists():
         print(f"[X] 源文件不存在：{src}")
         sys.exit(1)
-    data = parse_md(src.read_text(encoding="utf-8"))
+    try:
+        data = parse_md(src.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError) as e:
+        print(f"[X] 源文件读不了：{e}")
+        sys.exit(1)
     out = Path(a.out) if a.out else src.with_name(src.stem + "_分镜看板.html")
     out.write_text(build_html(data), encoding="utf-8")
     n_shots = sum(len(s["shots"]) for s in data["segments"])

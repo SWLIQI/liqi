@@ -1,0 +1,125 @@
+{
+ "version": "v5.49.0",
+ "authority": "本文件是锁①模型版本硬参数的**数值唯一事实源**（check_prompt / check_prompt_h3 / audit_project 三脚本共读）。SKILL.md「投放面参数总表」是展示速查：数字冲突以本文件为准，改数字只改这里并回改速查表（v5.43.0 收敛，此前与 SKILL.md:442「以本表为准」循环指认）。",
+ "fetched_at": "2026-10-28 重读官方源复核 2.5 档素材分项与 prompt_length（本次复核真读了《创建视频生成任务》API 文档与 2.5 提示词指南，见 verified_against / refs_source）；其余字段的历史抓取日期口径不变",
+ "verified_against": [
+  "火山方舟官方《创建视频生成任务》 https://www.volcengine.com/docs/82379/1520757（2.5 参考视频 ≤10 / 总 ≤30s；2.0 系列 [2,15]s / ≤3 / 总 ≤15s）",
+  "火山方舟官方《Doubao Seedance 2.5 提示词指南》 https://www.volcengine.com/docs/82379/2607689（v5.44.0 实读：2.5 单次最多 50 个参考素材 = 图 ≤30 + 视 ≤10 + 音 ≤10；设「负向控制」专章；2026-10-28 复核可用编号链接，ark 镜像 ark.volcengine.com/region:cn-beijing/docs/seedance-2-5-prompt-guide 正文可读）",
+  "MiniMax H3 官方能力页 https://minimaxh3.co/how-to-use-minimax-h3 与 https://minimaxh3.co/blog/minimax-h3-reference-to-video（v5.44.0 实读：up to 9 images / 3 videos / 3 audio，**no more than 12 files in total**）",
+  "MiniMax H3 提示词指南 https://minimaxh3.co/prompt-guide（注：中文整理页 https://www.ai-indeed.com/encyclopedia/29229.html 为二手转载，核数时以官方页为准）"
+ ],
+ "refs_semantics": "🔴 **refs.total 的语义是「总量上限」，不是「分项之和」**，两者是并存的两种约束（v5.44.0 立，此前有审查意见把 9+3+3=15 与 total=12 判为「自相矛盾」，实为语义误读）。官方口径（MiniMax H3 官方页原文）：up to 9 images / 3 videos / 3 audio, **no more than 12 files in total** —— 即分类上限可以分别取到 9/3/3，但同时提交的总数不得超过 12，两类约束取交集。因此 **total ≤ image+video+audio 是恒成立的正常关系**（12 ≤ 15），不是错误；2.5 档恰好相等（50 = 30+10+10）只是该档没有额外收紧。改数时务必保持 total ≤ 分项和，且不得把 total 改成分项和——那会把「总量上限」错误地放松成 15。机检见 check_skill.mjs 第五项「数值源自洽」。 🔒 另：已核实档位带 `total_checked` 字段（官方原文值），机检比对 `total === total_checked`；`null` 表示**未核实**（按四态口径是「未查」，不是通过）。改 total 必须同步改 total_checked 并在 refs_source 里写明新来源。",
+ "note": "锁①模型版本的硬参数单一事实源。外部核验来源与日期见 verified_against / fetched_at——**本文件不含抓取日期的历史缺口已于 v5.43.0 显式登记**。",
+ "why": "历史缺陷：这些数字曾有四个副本 —— check_prompt.mjs 写死 30/20、check_prompt_h3.mjs 写死 `dur < 4 || dur > 15`、audit_project.py 一份 MODEL_DURATION、H3 Max 的 5s 下限只在文档里。后果：同一份 Seedance 2.0 面 20s 包，一台判过、一台判 ERROR（审查报告 MA-1/MA-2）；Max 的 5s 下限从未生效（MA-4）。现在三个脚本共用本文件（JS 侧经 scripts/model_limits.mjs 加载），改动请只改这里。",
+ "consumers": [
+  "scripts/model_limits.mjs（JS 侧唯一加载入口，内含读不到时的内置副本）",
+  "scripts/check_prompt.mjs（--model auto|2.5|2.0|h3|h3max，判 E-OVER-30S / W-OVER-20S / W-PARAM-DUR-RANGE / E-REF-OVER-LIMIT；v5.49.0 起另读 prompt_length 与 ratio_whitelist——W-OFFICIAL-500/1000W 与 W-PARAM-RATIO 的阈值不再活在代码常量里）",
+  "scripts/check_prompt_h3.mjs（--model h3|h3max，判 E-DURATION）",
+  "scripts/audit_project.py（load_model_limits()，判 D 门时长一致性与下限）"
+ ],
+ "prompt_length": {
+  "note": "官方对提示词长度的口径是「建议」不是硬限制——W-OFFICIAL-500 / W-OFFICIAL-1000W 维持 opt-in warn。v5.49.0 起数值唯一事实源在此，check_prompt.mjs --official 从这里读取（此前活在代码常量里，同 MA-5 病型）。🔴 v6.0.2 曾把默认改成开且未同步本注记；v6.4.2 实测裁决改回 opt-in——500 字为通用建议口径，不适用 30s 长段六段式（**① 官方文档口径，2026-10-28 已核官方源**：《创建视频生成任务》https://docs.volcengine.com/docs/82379/1520757 措辞即「提示词字数**建议**」、prompt 参数无字符硬校验；2.5 提示词指南 https://docs.volcengine.com/docs/82379/2607689 全文无字数上限，30s 指导走时间戳内容密度（「指定时间段内容过多，则会导致过度剪切或剧情遗漏」）；实测超出可正常生成③《圆桌》制式），默认开＝每段恒响纯噪声（项目日志 1872 次、零修复动作）。",
+  "cjk_chars_max": 500,
+  "en_words_max": 1000,
+  "caliber": "①官方（建议级）",
+  "source": "火山方舟官方《创建视频生成任务》（docs.volcengine.com/docs/ark/create-video-generation-task-api，2026-10-20 更新，v5.45.0 取得；2026-10-28 复核，可用编号链接 https://docs.volcengine.com/docs/82379/1520757，ark 镜像 ark.volcengine.com/region:cn-beijing/docs/create-video-generation-task-api 正文可读）原文：「提示词字数建议：中文提示词不超过 500 字，英文提示词不超过 1000 词。字数过多易导致信息分散，模型可能忽略细节、仅关注重点，进而造成视频缺失部分元素。」"
+ },
+ "ratio_whitelist": {
+  "values": ["16:9", "9:16", "21:9", "4:3", "3:4", "1:1"],
+  "extra": ["adaptive"],
+  "h3_values": ["16:9", "9:16", "21:9", "1:1"],
+  "note": "锁② 画幅白名单（v5.45.0 扩 4:3 / 3:4）。官方 ratio 可选值原文：16:9、4:3、1:1、3:4、9:16、21:9、adaptive（同 prompt_length.source）；adaptive 为 2.5 / 2.0 系列视频编辑任务的官方默认值。H3 面维持四值——官方清单取自 Seedance 系文档，H3 是否支持 4:3 / 3:4 未核实（check_prompt_h3.mjs 现不查 ratio，扩容先不动 H3 面）。check_prompt.mjs 的 W-PARAM-RATIO 从这里读取。",
+  "source_caliber": "①官方（ratio 可选值清单）；③ 建议档位划分（4:3/3:4 与 1:1 同档「明确指定时可用」为本库口径）"
+ },
+ "freshness_days": 90,
+ "freshness_note": "（v5.52.0 · C20，吸收 Emily2040 api-status 思想——机制参考，零拷贝）models.<面>.last_verified 距今超过 freshness_days，check_skill 第五项报 WARN：模型官方参数会静默过期（Seedance/H3 都在快速迭代期）。**重盖 last_verified 之前必须真的重读 refs_source 官方源**——只改日期不改来源，等于记录了一次从未发生的核实（假绿家族新成员）。首次落库 2026-10-24，四档戳值即各档最近一次官方核实的真实日期（见 refs_source / verified_against），不为上线而追新。",
+ "models": {
+  "2.5": {
+   "label": "Seedance 2.5",
+   "last_verified": "2026-10-28",
+   "cap": 30,
+   "soft": 20,
+   "floor": null,
+   "refs": {
+    "image": 30,
+    "video": 10,
+    "audio": 10,
+    "total": 50,
+    "total_checked": 50
+   },
+   "refs_note": "上限是「不报错」；官方推荐稳定区间是图 1-8、素材总量 4-5 份（见 Seedance2.5适配.md 第二节第 5 条）——别按上限塞满。另：2.5 支持仅传音频（2.0 不可单独输入音频，须至少配 1 个参考视频或图片，官方原文同 refs_source）",
+   "refs_source": "✅ 已核（2026-10-28 实读《创建视频生成任务》 https://docs.volcengine.com/docs/82379/1520757，ark 镜像正文可读）原文三则：概述「输入参考图片（0-30 张）+ 参考视频（0-10 个）+ 参考音频（0-10 个）」；分项「Seedance 2.5 全模态参考生视频：1-30 张」「最多传入 10 个参考视频，所有视频总时长不超过 30 s」「最多传入 10 段参考音频，所有音频总时长不超过 30 s」。与库内 30/10/10 逐项一致；total=50 是分项之和（该档无额外收紧的总量上限），语义见顶层 refs_semantics。⚠️ 社区流传「30 图/50 素材」的合计 50 说法与官方一致（50=30+10+10），但官方未给独立的 total 条款——机检口径维持分项与总量并存。"
+  },
+  "2.0": {
+   "label": "Seedance 2.0",
+   "last_verified": "2026-10-23",
+   "cap": 15,
+   "soft": 15,
+   "floor": 4,
+   "refs": {
+    "image": 9,
+    "video": 3,
+    "audio": 3,
+    "total": 12,
+    "total_checked": 12
+   },
+   "refs_note": "2.0 系列混合输入总上限 12 个文件；音频不可单独输入，须至少配 1 个参考视频或图片",
+   "refs_source": "✅ 分项已核（v5.44.0）：火山引擎官方开发者社区《Seedance 2.0 上线火山方舟体验中心》https://developer.volcengine.com/articles/7606009619928449070 原文「支持最多 9 张图片、3 段视频、3 段音频，最长可生成 15 秒时长」——与库内 9/3/3 逐项一致。⚠️ 总量 12 的强度低于分项：官方该文未提总文件数上限；「Maximum 12 materials in total across all types」见二手源（seevio.ai《Reference To Video》Seedance 2.0 页、CSDN 实操教程表：文件上限 12 个，含图片+视频+音频总和），多源一致但**非官方原文**。若在火山方舟《Seedance 2.0 快速入门》82379/2291680 正文取到官方表述，请回填并把本注改为「已核」。注：另有审查意见称 2.0 官方写「混合输入无总文件数上限」，本次复核**未找到支持该说法的任何来源**，反而多源指向 12。"
+  },
+  "h3": {
+   "label": "MiniMax H3",
+   "last_verified": "2026-10-23",
+   "cap": 15,
+   "soft": 15,
+   "floor": 4,
+   "refs": {
+    "image": 9,
+    "video": 3,
+    "audio": 3,
+    "total": 12,
+    "total_checked": 12
+   },
+   "refs_note": "Ref2VA 全参考模式；H3 侧由 check_prompt_h3.mjs 的 E-REF-LIMIT（≤12）兜底",
+   "refs_source": "✅ 已核（v5.44.0）：官方原文 up to 9 images / 3 videos / 3 audio, no more than 12 files in total（minimaxh3.co/how-to-use-minimax-h3）。与库内 9/3/3/12 逐项一致。"
+  },
+  "h3max": {
+   "label": "MiniMax H3 Max",
+   "last_verified": "2026-10-23（沿用 H3 同日已核的分档；官方未单独发布 Max 素材上限，refs_source 有注）",
+   "cap": 15,
+   "soft": 15,
+   "floor": 5,
+   "refs": {
+    "image": 9,
+    "video": 3,
+    "audio": 3,
+    "total": 12,
+    "total_checked": 12
+   },
+   "refs_note": "Max 仅 480P/768P、5-15s、不支持 2K；与 H3 共用请求协议，只改 model 字段",
+   "refs_source": "沿用 H3 分档（同请求协议，官方未单独给出 Max 的素材上限）；分类上限与总量上限并存，语义见顶层 refs_semantics。"
+  }
+ },
+ "fallback": {
+  "cap": 15,
+  "soft": 15,
+  "floor": null,
+  "refs": {
+   "image": 9,
+   "video": 3,
+   "audio": 3,
+   "total": 12,
+   "total_checked": 12
+  },
+  "note": "包内未识别到【模型版本】/【三锁】模型声明时的兜底：取最严的 15s / 12 份素材，绝不静默放宽到 30s / 50 份。与 audit_project.py 的 FALLBACK_CAP 同口径。",
+  "refs_source": "兜底取从严值 12（小于等于任何已登记档位的总量上限）。分类上限沿用 9/3/3，与总量上限并存，语义见顶层 refs_semantics。"
+ },
+ "detect": {
+  "note": "识别顺序：① 包内【模型版本】：<值> ②【三锁】模型=<值> ③ 全文搜型号串。与 audit_project.py 的 detect_model_version 保持一致。",
+  "patterns": {
+   "2.5": "seedance\\s*2\\.5|【模型版本】\\s*[:：]?\\s*2\\.5",
+   "2.0": "seedance\\s*2\\.0|【模型版本】\\s*[:：]?\\s*2\\.0",
+   "h3max": "minimax[\\s-]*h3\\s*max|h3\\s*max",
+   "h3": "minimax[\\s-]*h3|h3"
+  }
+ }
+}

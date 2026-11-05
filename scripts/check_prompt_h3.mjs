@@ -2,14 +2,21 @@
 /**
  * check_prompt_h3.mjs —— MiniMax H3 面专用机械校验
  *
- * 用法: node check_prompt_h3.mjs <file> [--strict] [--all]
+ * 用法: node check_prompt_h3.mjs <file> [--model h3|h3max] [--strict] [--all]
  *
- * 只做机械判定：六段结构、标签一致性、<d> 对白、切点标记、时长闸门、正文纯度。
+ * 只做机械判定：结构（按 # mode: 分 Ref2VA 六段 / base 三字段两套）、标签一致性、<d> 对白、
+ * 切点标记、时长闸门、正文纯度。
  * 审美与逻辑仍按 SKILL.md Step 4 人工复核。
  * 字段口径见 references/MiniMaxH3适配.md，权威来源为 h3-prompt-writing skill 的
  * references/base-en.txt 与 references/ref-en.txt。
  */
 import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { appendGateLog, logDisabled } from './gates_log.mjs';
+// v5.37.1：时长闸门的下限/上限从锁①单一事实源取（H3 4-15s / H3 Max 5-15s），
+// 与 check_prompt.mjs、audit_project.py 同源。旧版本这里写死 4 / 15，Max 的 5s 下限永不生效。
+import { MODEL_LIMITS } from './model_limits.mjs';
 
 const SECTIONS = [
   'subject_definitions',
@@ -22,6 +29,20 @@ const SECTIONS = [
 
 const RETENTION_VISUAL = ['fully_preserved', 'partially_preserved', 'attribute_transfer', 'weak_reference'];
 const RETENTION_AUDIO = ['fully_copy', 'partially_copy', 'reference', 'weak_reference'];
+
+// v5.37.1（审查报告 MA-3）：H3 有两套输出结构，不是一套。
+//   base 模式（T2VA / I2VA / FL2VA / L2VA）= 三字段：integrated_multimodal_description / overall_soundscape / non_diegetic_music
+//   Ref2VA                          = 六段式：subject_definitions / summary / retention_analysis / detailed_description / overall_soundscape / non_diegetic_music
+// 官方提示词指南把「用一套通用公式套所有模式」列为最常见失败之首（Base 只需一条视听时间线；
+// Full-Reference 必须先定义每个素材贡献什么、再追踪其保留强度）。旧实现无条件要求六段 →
+// base 模式的包连「提示词块」都识别不出来，直接报「没有找到任何含 H3 字段的提示词块」并 exit 1。
+const BASE_FIELDS = ['integrated_multimodal_description', 'overall_soundscape', 'non_diegetic_music'];
+const ALL_FIELDS = [...SECTIONS, ...BASE_FIELDS];
+// 模式别名 → 结构族。写 T2VA / I2VA / FL2VA / L2VA 都落到 base，写法完全相同（只多一行对齐指令）。
+const MODE_ALIAS = {
+  t2va: 'base', i2va: 'base', fl2va: 'base', l2va: 'base',
+  ref2va: 'ref2va', 'ref': 'ref2va', minimaxh3ref: 'ref2va',
+};
 
 const NEG_WORDS = /\b(no|not|never|avoid|without|free of|devoid of)\b/gi;
 
@@ -51,12 +72,14 @@ function splitBlocks(lines) {
 
 // ---------------------------------------------------------------- 取段
 
-/** 把块切成 {name: 段名, body: 段正文} 列表；正文里排除 liqi 参数行（以 # 开头）。 */
+/** 把块切成 {name: 段名, body: 段正文} 列表；正文里排除 liqi 参数行（以 # 开头）。
+ *  v5.37.1：段名取两套结构的并集 —— 只认六段名会把 base 三字段包整包当「无提示词块」。 */
 function parseSections(block) {
   const out = [];
   let cur = null;
+  const nameRe = new RegExp(`^(${ALL_FIELDS.join('|')})\\s*:\\s*(.*)$`);
   for (const line of block.lines) {
-    const m = line.match(/^(subject_definitions|summary|retention_analysis|detailed_description|overall_soundscape|non_diegetic_music)\s*:\s*(.*)$/);
+    const m = line.match(nameRe);
     if (m) {
       cur = { name: m[1], body: m[2] ? [m[2]] : [], line: 0 };
       out.push(cur);
@@ -70,6 +93,29 @@ function parseSections(block) {
   return out;
 }
 
+/** 判定本块的模式族：ref2va（六段）或 base（三字段）。
+ *  判据顺序：① 参数行 `# mode: X`（官方写法）② 结构反推 ③ 都判不出 → 按六段要求并出声。 */
+function resolveMode(block) {
+  // 参数行常把所有键挤在一行：`# model: MiniMax-H3 | # mode: Ref2VA | # duration: 8s`
+  // ——所以不能在行首锚定 `# mode:`，要在整块文本里找。`# model:` 不会被误吃（mode 后必须紧跟冒号）。
+  const text = block.lines.join('\n');
+  const mm = text.match(/#\s*mode\s*[:：]\s*([A-Za-z0-9_-]+)/i);
+  const has = (n) => block.lines.some((l) => new RegExp(`^${n}\\s*:`).test(l));
+  if (mm) {
+    const fam = MODE_ALIAS[mm[1].toLowerCase().replace(/[_-]/g, '')];
+    if (fam) return { mode: fam, declared: true, raw: mm[1] };
+    // 写了 mode 但值不认识：不能猜，落回结构反推，并在下面出声
+    return { ...inferMode(has), declared: false, raw: mm[1], badValue: mm[1] };
+  }
+  return { ...inferMode(has), declared: false, raw: '' };
+}
+
+function inferMode(has) {
+  if (has('subject_definitions') || has('retention_analysis') || has('summary')) return { mode: 'ref2va' };
+  if (has('integrated_multimodal_description')) return { mode: 'base' };
+  return { mode: 'ref2va', unknown: true };
+}
+
 /** 正文 = 六个段的内容，排除参数行 */
 function bodyText(sections) {
   return sections
@@ -79,71 +125,127 @@ function bodyText(sections) {
 
 // ---------------------------------------------------------------- 检查
 
-function checkBlock(block, issues) {
+function checkBlock(block, issues, limit = MODEL_LIMITS.h3) {
   const where = block.title;
   const sections = parseSections(block);
   const found = sections.map((s) => s.name);
+  const { mode, declared: modeDeclared, raw: modeRaw, unknown: modeUnknown, badValue } = resolveMode(block);
+  const required = mode === 'base' ? BASE_FIELDS : SECTIONS;
+  const structLabel = mode === 'base' ? 'base 三字段' : 'Ref2VA 六段';
 
-  // 1. 六段齐全 + 顺序 + 重复
-  for (const need of SECTIONS) {
+  // 1. 段齐全 + 顺序 + 重复（按模式取要求集，v5.37.1）
+  for (const need of required) {
     if (!found.includes(need)) {
       issues.push({
         level: 'error',
         code: 'E-SECTION-MISSING',
         where,
-        msg: `缺少字段 ${need}`,
-        hint: 'Ref2VA 六段顺序固定：subject_definitions / summary / retention_analysis / detailed_description / overall_soundscape / non_diegetic_music',
+        msg: `缺少字段 ${need}（按 ${structLabel} 要求）`,
+        hint: mode === 'base'
+          ? 'base 模式三字段：integrated_multimodal_description / overall_soundscape / non_diegetic_music；'
+            + '要写六段式请改 # mode: Ref2VA'
+          : 'Ref2VA 六段顺序固定：subject_definitions / summary / retention_analysis / detailed_description / '
+            + 'overall_soundscape / non_diegetic_music',
       });
     }
   }
-  const order = found.filter((n) => SECTIONS.includes(n));
+  const order = found.filter((n) => required.includes(n));
   for (let i = 1; i < order.length; i++) {
-    if (SECTIONS.indexOf(order[i]) <= SECTIONS.indexOf(order[i - 1])) {
+    if (required.indexOf(order[i]) <= required.indexOf(order[i - 1])) {
       issues.push({
         level: 'error',
         code: 'E-SECTION-ORDER',
         where,
         msg: `字段顺序错：${order[i - 1]} 之后出现 ${order[i]}`,
-        hint: '顺序与字段名一个字都不能改',
+        hint: mode === 'base'
+          ? 'base 三字段顺序：integrated_multimodal_description → overall_soundscape → non_diegetic_music'
+          : '顺序与字段名一个字都不能改',
       });
     }
   }
   const dup = order.filter((n, i) => order.indexOf(n) !== i);
   if (dup.length) {
-    issues.push({ level: 'error', code: 'E-SECTION-DUP', where, msg: `字段重复出现：${[...new Set(dup)].join(', ')}`, hint: '一条提示词只有一套六段' });
+    issues.push({ level: 'error', code: 'E-SECTION-DUP', where, msg: `字段重复出现：${[...new Set(dup)].join(', ')}`, hint: '一条提示词只有一套结构' });
+  }
+
+  // 1b. 模式声明的三段防线（v5.37.1 · MA-3）
+  //   ① 判不出模式：六段要求会连带报一堆 E-SECTION-MISSING，先点明根因是「没写 # mode:」
+  if (modeUnknown) {
+    issues.push({
+      level: 'warn',
+      code: 'W-MODE-UNDECLARED',
+      where,
+      msg: '判不出模式：既没有 # mode: 参数行，也没有任何可反推结构的字段——已按 Ref2VA 六段要求判',
+      hint: 'base 模式（T2VA / I2VA / FL2VA / L2VA）写 # mode: T2VA 等；Ref2VA 写 # mode: Ref2VA。'
+        + '写错模式的代价是整包判据用错一套，比缺字段更贵',
+    });
+  }
+  if (badValue) {
+    issues.push({
+      level: 'warn',
+      code: 'W-MODE-UNDECLARED',
+      where,
+      msg: `# mode: ${badValue} 不是已知模式（T2VA / I2VA / FL2VA / L2VA / Ref2VA），已按结构反推`,
+      hint: '模式名照官方五选一写；写错的模式不会报错，只会静默用错一套判据',
+    });
+  }
+  //   ② 声明与结构打架：声明 base 却带了 Ref 独有字段（或反过来）
+  const REF_ONLY = ['subject_definitions', 'retention_analysis', 'detailed_description', 'summary'];
+  if (modeDeclared) {
+    const conflicting = mode === 'base'
+      ? found.filter((n) => REF_ONLY.includes(n))
+      : found.filter((n) => n === 'integrated_multimodal_description');
+    if (conflicting.length) {
+      issues.push({
+        level: 'warn',
+        code: 'W-MODE-FIELD-MISMATCH',
+        where,
+        msg: `# mode: ${modeRaw} 与正文结构不符：出现了 ${[...new Set(conflicting)].join(', ')}`,
+        hint: mode === 'base'
+          ? 'base 模式只要三字段；若这些字段确实要用，把 # mode: 改成 Ref2VA（六段式）'
+          : 'Ref2VA 六段式用 detailed_description，不写 integrated_multimodal_description；改 mode 或改字段名',
+      });
+    }
   }
 
   const defSec = sections.find((s) => s.name === 'subject_definitions');
   const sumSec = sections.find((s) => s.name === 'summary');
   const retSec = sections.find((s) => s.name === 'retention_analysis');
-  const descSec = sections.find((s) => s.name === 'detailed_description');
+  // 画面正文：Ref2VA 用 detailed_description，base 用 integrated_multimodal_description
+  const descSec = sections.find((s) => s.name === 'detailed_description')
+    || sections.find((s) => s.name === 'integrated_multimodal_description');
+  const bodyName = descSec ? descSec.name : 'detailed_description';
 
   const defText = defSec ? defSec.body.join('\n') : '';
   const descText = descSec ? descSec.body.join('\n') : '';
   const allText = bodyText(sections);
 
-  // 2. 标签体系
+  // 2. 标签体系（base 模式没有 subject_definitions，标签只作首帧指代，不做未定义判定）
   const defined = new Set();
   for (const m of defText.matchAll(/<(Subject|Picture|Video|Audio)\s*(\d+)>/g)) defined.add(`${m[1]} ${m[2]}`);
 
   const used = new Set();
   for (const m of allText.matchAll(/<(Subject|Picture|Video|Audio)\s*(\d+)>/g)) used.add(`${m[1]} ${m[2]}`);
 
-  for (const u of used) {
-    if (!defined.has(u)) {
-      issues.push({
-        level: 'error',
-        code: 'E-TAG-UNDEFINED',
-        where,
-        msg: `<${u.replace(' ', ' ')}> 在正文出现，但 subject_definitions 里没有定义`,
-        hint: '所有标签必须在 subject_definitions 定义一次，之后全片沿用，不得在 summary / retention_analysis 引入新标签',
-      });
+  if (mode === 'ref2va' || defSec) {
+    for (const u of used) {
+      if (!defined.has(u)) {
+        issues.push({
+          level: 'error',
+          code: 'E-TAG-UNDEFINED',
+          where,
+          msg: `<${u.replace(' ', ' ')}> 在正文出现，但 subject_definitions 里没有定义`,
+          hint: '所有标签必须在 subject_definitions 定义一次，之后全片沿用，不得在 summary / retention_analysis 引入新标签',
+        });
+      }
     }
   }
-  if (defined.size > 12) {
-    issues.push({ level: 'error', code: 'E-REF-LIMIT', where, msg: `参考标签 ${defined.size} 个，超过 Ref2VA 上限 12`, hint: '砍素材再写，不要靠截断' });
+  // 素材上限只对 Ref2VA 成立（base 模式最多 1~2 张帧图，没有这张表）；数值从锁①读，不写死
+  const _refCap = (limit && limit.refs && limit.refs.total) || 12;
+  if (mode === 'ref2va' && defined.size > _refCap) {
+    issues.push({ level: 'error', code: 'E-REF-LIMIT', where, msg: `参考标签 ${defined.size} 个，超过 Ref2VA 上限 ${_refCap}`, hint: '砍素材再写，不要靠截断' });
   }
-  if (used.size && defined.size > used.size) {
+  if (defSec && used.size && defined.size > used.size) {
     const unused = [...defined].filter((d) => !used.has(d));
     issues.push({ level: 'warn', code: 'W-TAG-UNUSED', where, msg: `定义了但正文从未使用：${unused.join(', ')}`, hint: '确认是否漏写，或从 subject_definitions 删掉' });
   }
@@ -188,16 +290,27 @@ function checkBlock(block, issues) {
     if (t) maxSec = Math.max(maxSec, Number(t[1]) * 60 + Number(t[2]) + Number(t[3]) / 1000);
   });
   if (shots.length === 0 && descText.trim()) {
-    issues.push({ level: 'warn', code: 'W-NO-SHOT', where, msg: 'detailed_description 里没有 [Shot N] 标记', hint: '单镜也要写 [Shot 1]' });
+    issues.push({ level: 'warn', code: 'W-NO-SHOT', where, msg: `${bodyName} 里没有 [Shot N] 标记`, hint: '单镜也要写 [Shot 1]' });
   }
 
-  // 5. 时长闸门 4-15s
+  // 5. 时长闸门（下限/上限由锁①档位给：H3 4-15s，H3 Max 5-15s）
+  // v5.37.1：旧写法写死 `dur < 4 || dur > 15` —— H3 Max 的 5s 下限三处文档都写了，
+  // 代码里从来没有生效过（审查报告 MA-4）。现在与 check_prompt.mjs / audit_project.py 同源。
   const paramDur = block.lines.map((l) => l.match(/#\s*duration\s*:\s*(\d+(?:\.\d+)?)\s*s/i)).find(Boolean);
   const dur = paramDur ? Number(paramDur[1]) : maxSec || 0;
+  const floor = limit.floor;
   if (dur === 0) {
-    issues.push({ level: 'warn', code: 'W-DURATION-UNK', where, msg: '读不到时长（参数行 # duration 或 Shot 切点）', hint: 'H3 单条 4-15s，必须可判定' });
-  } else if (dur < 4 || dur > 15) {
-    issues.push({ level: 'error', code: 'E-DURATION', where, msg: `时长 ${dur}s 越界（H3 单条 4-15s）`, hint: '超过 15 秒必须拆成多条分别生成再拼' });
+    issues.push({ level: 'warn', code: 'W-DURATION-UNK', where, msg: '读不到时长（参数行 # duration 或 Shot 切点）', hint: `${limit.label} 单条 ${floor}-${limit.cap}s，必须可判定` });
+  } else if ((floor && dur < floor) || dur > limit.cap) {
+    issues.push({
+      level: 'error',
+      code: 'E-DURATION',
+      where,
+      msg: `时长 ${dur}s 越界（${limit.label} 单条 ${floor}-${limit.cap}s）`,
+      hint: dur > limit.cap
+        ? `超过 ${limit.cap} 秒必须拆成多条分别生成再拼`
+        : `${limit.label} 最短 ${floor} 秒，短于下限会被接口拒绝；用 --model h3 覆盖档位（H3 下限 4s）`,
+    });
   }
 
   // 6. Must not 不得进正文
@@ -217,7 +330,7 @@ function checkBlock(block, issues) {
   const descBody = shots.length ? descText.slice(descText.indexOf('[Shot 1]')) : descText;
   const neg = (descBody.match(NEG_WORDS) || []).length;
   if (neg > 6) {
-    issues.push({ level: 'warn', code: 'W-NEGATION', where, msg: `detailed_description 里否定词 ${neg} 处（阈值 6）`, hint: '命名即种下。改成正面描述，例如不写 no 3D，写 flat hand-painted artwork on paper' });
+    issues.push({ level: 'warn', code: 'W-NEGATION', where, msg: `${bodyName} 里否定词 ${neg} 处（阈值 6）`, hint: '命名即种下。改成正面描述，例如不写 no 3D，写 flat hand-painted artwork on paper' });
   }
 
   // 8. 体量 350-500 英文词
@@ -227,7 +340,7 @@ function checkBlock(block, issues) {
       level: 'warn',
       code: 'W-WORDCOUNT',
       where,
-      msg: `detailed_description ${words} 词（生成任务通常 350-500）`,
+      msg: `${bodyName} ${words} 词（生成任务通常 350-500）`,
       hint: '对白密集时优先保证台词时间轴完整，不凑字数；编辑类任务不受此范围限制',
     });
   }
@@ -241,7 +354,7 @@ function checkBlock(block, issues) {
         level: 'error',
         code: 'E-CN-IN-EN',
         where,
-        msg: `detailed_description 中文占比 ${(cn / chars * 100).toFixed(0)}%（阈值 30%）`,
+        msg: `${bodyName} 中文占比 ${(cn / chars * 100).toFixed(0)}%（阈值 30%）`,
         hint: '正文必须英文，只有 <d> 对白与画面可见文字保留原语言',
       });
     }
@@ -264,12 +377,14 @@ function checkBlock(block, issues) {
     }
   }
 
-  // 11. 风格锚必须在 [Shot 1] 之前
-  if (shots.length) {
+  // 11. 风格锚必须在 [Shot 1] 之前 —— 这条只对 Ref2VA 成立。
+  // v5.37.1：base 模式的官方写法与之相反（风格句在 [Shot 1] **之后**起头），
+  // 旧实现不分模式一律要求「[Shot 1] 之前有 40 字以上」，等于给所有 base 包刷一条假 WARN。
+  if (shots.length && mode === 'ref2va') {
     const idx = descText.indexOf('[Shot 1]');
     const head = descText.slice(0, idx).trim();
     if (head.length < 40) {
-      issues.push({ level: 'warn', code: 'W-STYLE-ANCHOR', where, msg: '[Shot 1] 之前没有风格锚句（或过短）', hint: '风格锚写 1-2 句英文，全片逐字复用，见 水墨淡彩2D风格锚.md' });
+      issues.push({ level: 'warn', code: 'W-STYLE-ANCHOR', where, msg: '[Shot 1] 之前没有风格锚句（或过短）', hint: '风格锚写 1-2 句英文，全片逐字复用，见 风格锚_水墨淡彩2D.md' });
     }
   }
 
@@ -279,6 +394,8 @@ function checkBlock(block, issues) {
     duration: dur || '?',
     words,
     refs: defined.size,
+    mode,                    // v5.37.1：报告里必须看得见「按哪套结构判的」
+    bodyField: bodyName,
   };
 }
 
@@ -287,12 +404,17 @@ function checkBlock(block, issues) {
 function main() {
   const argv = process.argv.slice(2);
   if (argv.length === 0 || argv[0] === '-h' || argv[0] === '--help') {
-    console.log('用法: node check_prompt_h3.mjs <file> [--strict] [--all]');
+    console.log('用法: node check_prompt_h3.mjs <file> [--model h3|h3max] [--strict] [--all]');
+    console.log('      --model 指定锁①档位（默认 h3）：h3 = 4-15s，h3max = 5-15s（Max 仅 480P/768P，不支持 2K）');
     process.exit(2);
   }
   const file = argv[0];
   const strict = argv.includes('--strict');
   const showAll = argv.includes('--all');
+  // 型号档位：非法/缺省一律落 h3（最宽松的 H3 档），但在报告头写明用的是哪一档。
+  const modelArgRaw = argv.includes('--model') ? String(argv[argv.indexOf('--model') + 1] || '') : '';
+  const modelKey = /^h3max$/.test(modelArgRaw.toLowerCase()) ? 'h3max' : 'h3';
+  const limit = MODEL_LIMITS[modelKey];
   const MAX_PER_CODE = showAll ? Infinity : 4;
 
   let raw;
@@ -307,19 +429,22 @@ function main() {
   const blocks = splitBlocks(lines);
 
   // 交付稿里常混有说明段落、风格锚、参数行。只有真正出现 H3 字段名的块才是提示词块，
-  // 其余跳过——否则说明段会被当成「缺六个字段」狂报，噪音淹没真问题。
+  // 其余跳过——否则说明段会被当成「缺若干个字段」狂报，噪音淹没真问题。
+  // v5.37.1：识别字段取两套结构的并集。只认六段名时，base 三字段的包整包被当成「没有提示词块」
+  // 直接 exit 1 —— 用户拿着合法的 T2VA 包也只会看到「没有找到任何含 H3 字段的提示词块」（MA-3）。
   const isPromptBlock = (b) =>
-    /^\s*(subject_definitions|summary|retention_analysis|detailed_description|overall_soundscape|non_diegetic_music)\s*:/m.test(
+    /^\s*(subject_definitions|summary|retention_analysis|detailed_description|overall_soundscape|non_diegetic_music|integrated_multimodal_description)\s*:/m.test(
       b.lines.join('\n')
     );
   const promptBlocks = blocks.filter(isPromptBlock);
   const skipped = blocks.length - promptBlocks.length;
 
   const issues = [];
-  const summary = promptBlocks.map((b) => checkBlock(b, issues));
+  const summary = promptBlocks.map((b) => checkBlock(b, issues, limit));
 
   console.log(`\n校验（MiniMax H3 面）：${file}`);
   console.log(`提示词条数：${summary.length}${skipped ? `　（跳过 ${skipped} 个非提示词块）` : ''}`);
+  console.log(`锁①：${modelKey}（${limit.label}｜单条 ${limit.floor}-${limit.cap}s）`);
   if (summary.length === 0) {
     console.log('❌ 没有找到任何含 H3 字段的提示词块。\n');
     if (/\[?【时间轴】|Shot \d+ \(\d/.test(raw)) {
@@ -327,18 +452,22 @@ function main() {
       console.log('   H3 字段才是本脚本的识别依据，拿 Seedance 包跑这里必然查不出东西。');
       console.log('   请改跑：node scripts/check_prompt.mjs <file> [--surface cn|intl]\n');
     } else {
-      console.log('   确认文件里有没有 subject_definitions / summary / detailed_description 等 H3 字段。\n');
+      console.log('   确认文件里有没有这些 H3 字段：');
+      console.log('     Ref2VA（六段）：subject_definitions / summary / retention_analysis /');
+      console.log('                     detailed_description / overall_soundscape / non_diegetic_music');
+      console.log('     base（三字段）：integrated_multimodal_description / overall_soundscape / non_diegetic_music\n');
     }
     process.exit(1);
   }
   console.log('─'.repeat(60));
   for (const s of summary) {
-    console.log(`  ${s.title}　Shot ${s.shots}　时长 ${s.duration}s　正文 ${s.words} 词　参考 ${s.refs}`);
+    console.log(`  ${s.title}　[${s.mode}]　Shot ${s.shots}　时长 ${s.duration}s　正文 ${s.words} 词　参考 ${s.refs}`);
   }
   console.log('─'.repeat(60));
 
   if (issues.length === 0) {
     console.log('\n✅ 全部通过（0 error / 0 warning）\n');
+    if (!logDisabled(argv)) appendGateLog({ tool: 'check_prompt_h3.mjs', file, exit: 0, issues: [] });
     process.exit(0);
   }
 
@@ -365,7 +494,15 @@ function main() {
   console.log('提示：本工具只做机械判定。审美、逻辑与跨镜一致性仍按 SKILL.md Step 4 人工复核。');
   console.log('      其他脚本照跑：audit_literal.py（抽象表述）、audit_project.py、audit_risk.py。\n');
 
-  process.exit(errors.length > 0 || (strict && warns.length > 0) ? 1 : 0);
+  const exitCode = errors.length > 0 || (strict && warns.length > 0) ? 1 : 0;
+  if (!logDisabled(argv)) appendGateLog({ tool: 'check_prompt_h3.mjs', file, exit: exitCode, issues });
+  process.exit(exitCode);
 }
 
-main();
+// v5.37.1：加 invokedDirectly 守卫 + 导出，让 selftest 能在进程内跑 checkBlock（免 spawn）。
+// 此前 `main()` 无条件执行 —— import 这个模块就等于跑一次 CLI 并 process.exit。
+const invokedDirectly = process.argv[1]
+  && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+if (invokedDirectly) main();
+
+export { checkBlock, parseSections, resolveMode, splitBlocks, BASE_FIELDS, SECTIONS };
