@@ -1,7 +1,7 @@
 ---
 name: liqi-cast
 description: 角色一致性专精包。给一个角色设定，产出可直接投喂的 4 View 资产板提示词（左头部近景 + 右保头无脸三联 + 身高线/色板/图底音色条），并机检五官 10 项、服装 6 项、身高、色板与版本互锁词（非空 / 不自我矛盾 / 不雷同）。适用于要做多镜/多集、角色脸和服装必须不漂移的项目；单张插图、不需要跨镜一致性的活不要用。
-version: "0.2.1"
+version: "0.2.2"
 category: "图像与视频生成"
 platforms: ["WorkBuddy", "Claude Code", "Codex", "任意可执行 Node 的 Agent"]
 license: MIT

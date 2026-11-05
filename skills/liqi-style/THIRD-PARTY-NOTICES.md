@@ -12,10 +12,10 @@
 |---|---|---|---|
 | `references/anchors/*.md`（50 份） | `liqi-video-forge/references/风格锚_*.md` | 6.19.8 | MIT |
 | `references/style-registry.seed.json` | 同上 | 6.19.8 | MIT |
-| `references/ip-notes.local.json` | 本仓库作者撰写的本地合规补丁 | 0.2.1 | MIT |
-| `SKILL.md` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.1 | MIT |
+| `references/ip-notes.local.json` | 本仓库作者撰写的本地合规补丁 | 0.2.2 | MIT |
+| `SKILL.md` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.2 | MIT |
 
-上游许可：MIT License，Copyright (c) 2026 超级liqi提示词 contributors。
+上游许可：MIT License，Copyright (c) 2026 liqi-video-forge contributors。
 
 ## 三、同步
 

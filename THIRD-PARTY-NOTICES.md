@@ -1,6 +1,6 @@
 # 第三方内容与许可声明
 
-本仓库（超级liqi提示词 / liqi）自身以 **MIT** 许可发布，全文见 [LICENSE](LICENSE)。
+本仓库（liqi-video-forge / liqi）自身以 **MIT** 许可发布，全文见 [LICENSE](LICENSE)。
 
 `references/external/` 下收录了若干开源项目的文件，用于横向调研与互证。这些文件**原样未改**，
 仅在文件头加了来源与许可注记。**版权归各自作者所有，按其原始许可分发。**

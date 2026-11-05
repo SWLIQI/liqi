@@ -13,10 +13,10 @@
 | `move-index.json` | `liqi-video-forge/references/镜头骨架库.md` | 6.19.8 | MIT |
 | `move-vocab.json` 用词部分 | 同上 | 6.19.8 | MIT |
 | `move-vocab.json` 禁止清单（7 条来源词） | `liqi-video-forge/references/MiniMaxH3适配.md` §九 | 6.19.8 | MIT |
-| `move-vocab.json` 禁止清单（3 条本地扩展） | `references/bans.json`（本仓库作者策展） | 0.2.0 | MIT |
-| `SKILL.md` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.0 | MIT |
+| `move-vocab.json` 禁止清单（3 条本地扩展） | `references/bans.json`（本仓库作者策展） | 0.2.1 | MIT |
+| `SKILL.md` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.1 | MIT |
 
-上游许可：MIT License，Copyright (c) 2026 超级liqi提示词 contributors。
+上游许可：MIT License，Copyright (c) 2026 liqi-video-forge contributors。
 
 ## 三、一条已知缺口
 

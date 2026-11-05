@@ -1,7 +1,7 @@
 ---
 name: liqi-script
 description: 剧本门控与台词专精包。检查一场/一集剧本的五阶门控（前提/结构/因果链/实体/脚本页）、台词七维标注、语速排期、VO/OS 红线与去AI味，输出剧本卡与逐句时长表。适合短剧/短片剧本写完自检；只写分镜镜头、调运镜或改画风的活不要用。
-version: "0.2.0"
+version: "0.2.1"
 category: "AI 视频 / 剧本"
 platforms: ["WorkBuddy", "Claude Code", "Codex", "任意可执行 Node 的 Agent"]
 license: MIT

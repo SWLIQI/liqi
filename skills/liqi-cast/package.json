@@ -1,6 +1,6 @@
 {
   "name": "liqi-cast",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "type": "module",
   "description": "角色一致性专精包：4 View 资产板提示词生成与校验",

@@ -6,7 +6,7 @@ Turn a story, a screenplay or a rough storyboard into **production-ready prompts
 straight into an AI video model** — and build the asset, screenplay and acting layers upstream
 instead of patching them afterwards.
 
-Current version **v6.19.8** (tag `v6.19.8`); the five standalone skill packs under `skills/`
+Current version **v6.19.9** (tag `v6.19.9`); the five standalone skill packs under `skills/`
 are versioned 0.2.x — see the repository map below.
 
 > **Names**: the GitHub repository is `liqi`, the skill `name` is `liqi-video-forge`, and they are
@@ -20,12 +20,12 @@ are versioned 0.2.x — see the repository map below.
 
 | What you want | Where | Version |
 |---|---|---|
-| **Main pack** (full Step -1 ~ Step 6 pipeline) | repository root, entry [`SKILL.md`](SKILL.md) | v6.19.8 |
-| Character consistency self-check (4-View sheet, face / wardrobe / interlock) | [`skills/liqi-cast/`](skills/liqi-cast/SKILL.md) | 0.2.1 |
-| 50 pre-filled style anchors (hex / camera / break modes) | [`skills/liqi-style/`](skills/liqi-style/SKILL.md) | 0.2.1 |
-| 8×3 scene-type camera skeletons (three hard blocks) | [`skills/liqi-move/`](skills/liqi-move/SKILL.md) | 0.2.0 |
-| Shot list and light (size / FOV / light position / axis / quotas) | [`skills/liqi-lens/`](skills/liqi-lens/SKILL.md) | 0.2.0 |
-| Screenplay gates and dialogue (five gates / seven dimensions / speech-rate scheduling) | [`skills/liqi-script/`](skills/liqi-script/SKILL.md) | 0.2.0 |
+| **Main pack** (full Step -1 ~ Step 6 pipeline) | repository root, entry [`SKILL.md`](SKILL.md) | v6.19.9 |
+| Character consistency self-check (4-View sheet, face / wardrobe / interlock) | [`skills/liqi-cast/`](skills/liqi-cast/SKILL.md) | 0.2.2 |
+| 50 pre-filled style anchors (hex / camera / break modes) | [`skills/liqi-style/`](skills/liqi-style/SKILL.md) | 0.2.2 |
+| 8×3 scene-type camera skeletons (three hard blocks) | [`skills/liqi-move/`](skills/liqi-move/SKILL.md) | 0.2.1 |
+| Shot list and light (size / FOV / light position / axis / quotas) | [`skills/liqi-lens/`](skills/liqi-lens/SKILL.md) | 0.2.1 |
+| Screenplay gates and dialogue (five gates / seven dimensions / speech-rate scheduling) | [`skills/liqi-script/`](skills/liqi-script/SKILL.md) | 0.2.1 |
 | Index of the five packs | [`skills/README.md`](skills/README.md) | — |
 | Release history | [`CHANGELOG.md`](CHANGELOG.md) | — |
 
@@ -185,7 +185,7 @@ references/              115 files (113 md at top level + style-registry.seed.js
 scripts/                 51 checkers and tools (14 Node + 36 Python + 1 shell)
 examples/                golden sample (a complete package + beat list)
 docs/                    sample-emotion-curve.png
-skills/                  5 standalone packs: liqi-cast 0.2.1 / liqi-style 0.2.1 / liqi-move 0.2.0 / liqi-lens 0.2.0 / liqi-script 0.2.0
+skills/                  5 standalone packs: liqi-cast 0.2.2 / liqi-style 0.2.2 / liqi-move 0.2.1 / liqi-lens 0.2.1 / liqi-script 0.2.1
                          └ index and usage in skills/README.md; each pack ships its own selftest and check_sync
 LICENSE / THIRD-PARTY-NOTICES.md / README.md / README.en.md / CHANGELOG.md / requirements.txt / .gitignore
 ```

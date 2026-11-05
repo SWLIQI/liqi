@@ -14,9 +14,9 @@
 | `references/02-text-locks.md` | `liqi-video-forge/references/资产层_锁定与一致性.md` 第三节 | 6.19.8 | MIT |
 | `references/03-version-interlock.md` | `liqi-video-forge/references/版本拆分与互锁清单.md` | 6.19.8 | MIT |
 | `references/04-feeding-and-rework.md` | `liqi-video-forge/references/4View资产板_模板.md`、`资产层_锁定与一致性.md` | 6.19.8 | MIT |
-| `SKILL.md` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.1 | MIT |
+| `SKILL.md` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.2 | MIT |
 
-上游许可：MIT License，Copyright (c) 2026 超级liqi提示词 contributors。
+上游许可：MIT License，Copyright (c) 2026 liqi-video-forge contributors。
 
 ## 三、同步
 

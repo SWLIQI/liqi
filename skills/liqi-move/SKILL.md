@@ -1,7 +1,7 @@
 ---
 name: liqi-move
 description: 运镜专精包（字段切片）。按场型取镜头骨架（景别机位 / 主运镜 / 时间轴 / 必锁项 / 已知失败），并检查一份镜头描述里的具名复合镜头、抽象词、超出词表的运镜——三类默认 ERROR、命中即 exit 1，并给逐条改法。适合写分镜、拆镜头、给视频模型写运镜句；只写静态画面或不需要镜头运动的活不要用。
-version: "0.2.0"
+version: "0.2.1"
 category: "AI 视频 / 分镜"
 platforms: ["WorkBuddy", "Claude Code", "Codex", "任意可执行 Node 的 Agent"]
 license: MIT

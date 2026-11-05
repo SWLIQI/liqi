@@ -1,7 +1,7 @@
 ---
 name: liqi-lens
 description: 镜头表与光专精包。把一场戏拆成可执行镜头表（景别/角度/视角/光位/光比/轴线/时长），输出可直接投喂的镜头卡，并机检三任务、轴线与可算的分镜配额（Q2 常规机位需人工）。适合写分镜、拆镜头、给视频模型写镜头；只做单张静态图、角色一致性或风格选择的活不要用。
-version: "0.2.0"
+version: "0.2.1"
 category: "AI 视频 / 分镜"
 platforms: ["WorkBuddy", "Claude Code", "Codex", "任意可执行 Node 的 Agent"]
 license: MIT

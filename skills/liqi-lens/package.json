@@ -1,6 +1,6 @@
 {
   "name": "liqi-lens",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "镜头表与光专精包：镜头卡生成与轴线/配额校验",

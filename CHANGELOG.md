@@ -2,6 +2,25 @@
 
 本文件的版本号的写法：主版本 = 结构级变更，次版本 = 规则增删，修订号 = 修正与措辞调整。
 
+## 6.19.9 — 2026-11-05（品牌名停用与仓库导航：规则零改动）
+
+### 改了什么
+
+- **停用旧中文品牌名**（用户指令）：`SKILL.md` 正文 H1、`references/liqi全景梳理.md` 标题与目录树根、
+  `THIRD-PARTY-NOTICES.md` 自称、`scripts/generate_emotion_curve.py` 文档串统一为 `liqi-video-forge`；
+  `LICENSE` 版权署名改 `Copyright (c) 2026 liqi-video-forge contributors`（五个专精包的 LICENSE 与
+  `THIRD-PARTY-NOTICES.md` 同改，因此它们发 patch 版：cast / style 0.2.2，move / lens / script 0.2.1）。
+- **历史字面保留**：CHANGELOG 与 `scripts/check_copies.py` 注释里提到旧名的 7 处不动——它们记录的是
+  「改名发生过」这件事本身（旧代码字面量 `MAIN_DIR_NAME`、旧安装路径 `~/.workbuddy/skills/…`、
+  `name:` 改名行、两份历史报告文件名）。抹掉会让变更日志不再是事实记录。
+- **README 双语加「仓库地图 / Repository map」**：主包在根目录、五个专精包在 `skills/`、当前版本与 tag；
+  两版目录结构补 `skills/`；快速开始不再让读者去找一个不存在的 `liqi-video-forge/` 子目录。
+
+### 没改什么
+
+规则、门禁、词表、`references/` 一律未动。五包 `SYNCED.json` 锁定的 65 个来源文件复算 **65/65 哈希全匹配**，
+`coreVersion` 仍标 6.19.8（专精包抽取自那次发布）。
+
 ## 6.19.8 — 2026-11-05（【主体与关系】纠偏：不是删节，是止住双事实源）
 
 ### 问题

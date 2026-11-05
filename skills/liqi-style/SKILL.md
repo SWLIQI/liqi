@@ -1,7 +1,7 @@
 ---
 name: liqi-style
 description: 风格专精包。从 50 种已落值的风格里按题材/维度/稳定性挑出合适的，并输出可直接拼进提示词的参数块（色值、运镜池、崩点与反制、九段锚、多面压句）。适合"要选风格、要风格稳定、要在多个模型间保持同一种视觉"的项目；只写一句通用提示词、不在乎风格一致性的活不要用。
-version: "0.2.1"
+version: "0.2.2"
 category: "图像与视频生成"
 platforms: ["WorkBuddy", "Claude Code", "Codex", "任意可执行 Node 的 Agent"]
 license: MIT

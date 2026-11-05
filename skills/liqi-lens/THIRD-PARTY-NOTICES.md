@@ -15,9 +15,9 @@
 | `references/03-light-and-axis.md` | `references/视听层_镜头文法与光色.md`、`references/轴线与反打规则.md` | 6.19.8 | MIT |
 | `references/04-quota.md` | `references/分镜配额与机检规范.md` | 6.19.8 | MIT |
 | `references/05-performance-optional.md` | `references/情绪表演层.md` | 6.19.8 | MIT |
-| `lens-vocab.json` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.0 | MIT |
+| `lens-vocab.json` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.1 | MIT |
 
-上游许可：MIT License，Copyright (c) 2026 超级liqi提示词 contributors。
+上游许可：MIT License，Copyright (c) 2026 liqi-video-forge contributors。
 
 ## 三、同步
 

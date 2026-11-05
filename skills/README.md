@@ -4,11 +4,11 @@
 
 | 包 | 版本 | 定位 | 入口 | 自测 |
 |---|---|---|---|---|
-| liqi-cast | 0.2.1 | 角色一致性：4 View 资产板、五官 10 + 服装 6、版本互锁 | [SKILL.md](liqi-cast/SKILL.md) | `node skills/liqi-cast/scripts/selftest.mjs` |
-| liqi-style | 0.2.1 | 50 种已落值风格：挑选、色值/运镜/崩点/九段锚/多面压句 | [SKILL.md](liqi-style/SKILL.md) | `node skills/liqi-style/scripts/selftest.mjs` |
-| liqi-move | 0.2.0 | 8×3 场型运镜骨架；具名复合镜头/抽象词/超纲运镜三类拦截 | [SKILL.md](liqi-move/SKILL.md) | `node skills/liqi-move/scripts/selftest.mjs` |
-| liqi-lens | 0.2.0 | 镜头表与光：景别/角度/视角/光位/轴线/时长 + 配额 | [SKILL.md](liqi-lens/SKILL.md) | `node skills/liqi-lens/scripts/selftest.mjs` |
-| liqi-script | 0.2.0 | 剧本门控：五阶门控、台词七维、语速排期、VO/OS | [SKILL.md](liqi-script/SKILL.md) | `node skills/liqi-script/scripts/selftest.mjs` |
+| liqi-cast | 0.2.2 | 角色一致性：4 View 资产板、五官 10 + 服装 6、版本互锁 | [SKILL.md](liqi-cast/SKILL.md) | `node skills/liqi-cast/scripts/selftest.mjs` |
+| liqi-style | 0.2.2 | 50 种已落值风格：挑选、色值/运镜/崩点/九段锚/多面压句 | [SKILL.md](liqi-style/SKILL.md) | `node skills/liqi-style/scripts/selftest.mjs` |
+| liqi-move | 0.2.1 | 8×3 场型运镜骨架；具名复合镜头/抽象词/超纲运镜三类拦截 | [SKILL.md](liqi-move/SKILL.md) | `node skills/liqi-move/scripts/selftest.mjs` |
+| liqi-lens | 0.2.1 | 镜头表与光：景别/角度/视角/光位/轴线/时长 + 配额 | [SKILL.md](liqi-lens/SKILL.md) | `node skills/liqi-lens/scripts/selftest.mjs` |
+| liqi-script | 0.2.1 | 剧本门控：五阶门控、台词七维、语速排期、VO/OS | [SKILL.md](liqi-script/SKILL.md) | `node skills/liqi-script/scripts/selftest.mjs` |
 
 ## 用法
 
@@ -22,4 +22,4 @@ GitHub 这里是源码目录，便于浏览与提交 issue。
 
 ## 许可
 
-MIT。各包内的 `THIRD-PARTY-NOTICES.md` 记录来源与上游版本；主包资产与专精包规则均来自 `liqi-video-forge v6.19.8`。
+MIT。各包内的 `THIRD-PARTY-NOTICES.md` 记录来源与上游版本；主包资产与专精包规则均来自 `liqi-video-forge v6.19.8`（各包 `SYNCED.json` 的 `coreVersion` 即此版本；主包 v6.19.9 只动文档与许可署名层，被哈希锁定的 65 个来源文件字节未变）。

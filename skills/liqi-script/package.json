@@ -1,6 +1,6 @@
 {
   "name": "liqi-script",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "剧本门控与台词专精包：五阶门控、七维诊断、语速排期与 VO/OS 检查",

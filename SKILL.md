@@ -3,10 +3,10 @@ name: liqi-video-forge
 description: 把故事、剧本或已有分镜锻造成可直接投喂 AI 视频模型的终稿级逐镜提示词包（含资产层、剧本层、表演层）。支持 Seedance 2.0 / 2.5 / MiniMax H3（含 H3 Max），六条风格轨道、50 个风格锚、4 View 角色资产板。当用户要生成视频提示词、分镜 / 逐镜 / 整合镜拆分、角色一致性方案 / 资产设定图、台词诊断、语速排期、过审预检，或提到 Seedance / MiniMax H3 时使用（English triggers: video prompt, shot list, storyboard, Seedance, MiniMax H3, character consistency, FACS）。交付前必须跑机械校验：Seedance 面跑 scripts/check_prompt.mjs，H3 面跑 scripts/check_prompt_h3.mjs；有剧本或资产库另跑 audit_project.py，投国内平台另跑 audit_risk.py。术语对照见 references/术语对照表_glossary.md，英文说明见 README.en.md。
 agent_created: true
 license: MIT
-version: "6.19.8"
+version: "6.19.9"
 ---
 
-# 超级 liqi提示词
+# liqi-video-forge
 
 ## Overview
 

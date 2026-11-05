@@ -15,9 +15,9 @@
 | `references/03-speech-rate.md` | 同上（第四节语速校准） | 6.19.8 | MIT |
 | `references/04-voiceover.md` | `references/方言与旁白规程.md`、`叙事层_剧本门控与台词.md` | 6.19.8 | MIT |
 | `references/05-deai-and-hooks.md` | `references/去AI味对照清单.md`、`references/尾钩与筹码账.md`、`叙事层_剧本门控与台词.md` | 6.19.8 | MIT |
-| `script-vocab.json` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.0 | MIT |
+| `script-vocab.json` / `scripts/*` / `examples/*` | 本仓库作者撰写 | 0.2.1 | MIT |
 
-上游许可：MIT License，Copyright (c) 2026 超级liqi提示词 contributors。
+上游许可：MIT License，Copyright (c) 2026 liqi-video-forge contributors。
 
 ## 三、同步
 
