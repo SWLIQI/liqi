@@ -1,0 +1,10 @@
+{
+ "coreVersion": "6.19.8",
+ "sources": {
+  "references/视听层_镜头文法与光色.md": "a720adecdf8fb6f1f19ed8904b0ca14430233a02456ee44315a01195ab193124",
+  "references/光学与空间语言块.md": "8ac6cc9a0a5cf423bc75f21f3451acbed54eb50e1c1339cd4fac2fbe7d60184f",
+  "references/轴线与反打规则.md": "27332be636722cb9f28339d60646d2fa02dc51dc1a3b061cdcf3516d5124d732",
+  "references/分镜配额与机检规范.md": "203db62ef974c96da59fe2377887540db252abb82393d204feaf39a54ba85613",
+  "references/情绪表演层.md": "f312f57f932b84729e48aab4068904e4ef5688e62cdfe71f226853bec802d42b"
+ }
+}

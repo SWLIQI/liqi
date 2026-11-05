@@ -1,0 +1,9 @@
+锚：broken-anchor
+索引：(无)
+IP：无
+字节：150
+结果：4 ERROR
+  · 缺「色值表」小节
+  · 缺「运镜池」小节
+  · 缺「崩点清单」小节
+  · style-index.json 里没有该锚（跑 build_index.mjs 重建）

@@ -1,0 +1,17 @@
+{
+  "name": "liqi-lens",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "镜头表与光专精包：镜头卡生成与轴线/配额校验",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "node scripts/selftest.mjs && node scripts/check_golden.mjs",
+    "golden": "node scripts/check_golden.mjs",
+    "check": "node scripts/check_lens.mjs",
+    "list": "node scripts/shot_list.mjs",
+    "sync": "node scripts/check_sync.mjs"
+  }
+}

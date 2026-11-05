@@ -1,0 +1,4 @@
+文件：examples/shot-good.md
+库内允许：后拉、固定、微推、横移、缓推、缓降、跟拍
+命中运镜词：移
+结果：0 ERROR / 0 WARN

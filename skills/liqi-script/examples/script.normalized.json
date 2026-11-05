@@ -1,0 +1,206 @@
+{
+  "title": "雨夜巷口",
+  "episode": "EP01",
+  "gates": {
+    "1": "ok",
+    "2": "ok",
+    "3": "ok",
+    "4": "ok",
+    "5": "ok"
+  },
+  "stats": {
+    "scenes": 2,
+    "lines": 8,
+    "chars": 62,
+    "speechSeconds": 20.071428571428573,
+    "lineSeconds": 24.07142857142857,
+    "budget": 42,
+    "plotPoints": 5,
+    "voLines": 1,
+    "voChars": 13,
+    "longLines": 0,
+    "fastLines": 0,
+    "avgRate": 3.088967971530249
+  },
+  "scenes": [
+    {
+      "id": "S01",
+      "interior_exterior": "外景",
+      "location": "巷口",
+      "time": "夜",
+      "characters": [
+        "沈知微",
+        "黑影"
+      ],
+      "goal": "穿过巷口回家",
+      "obstacle": "黑影堵住去路",
+      "escalation": "她绕行，黑影先一步挡住",
+      "turn": "黑影叫出她的名字",
+      "result": "她停步回头",
+      "duration": 24,
+      "action_time": 2,
+      "plot_points": [
+        "黑影叫出她的名字（信息翻转 · 沈知微立场动摇）",
+        "她认出黑影的伞是师父的旧物（信息翻转 · 关系线开启）"
+      ],
+      "description": "雨丝斜落，积水映着路灯，巷口没有别人",
+      "lines": [
+        {
+          "id": "L01",
+          "speaker": "黑影",
+          "type": "对白",
+          "text": "你终于来了。",
+          "chars": 5,
+          "rate": 3.5,
+          "seconds": 1.8285714285714287,
+          "functions": [
+            "冲突推进力",
+            "信息效率"
+          ],
+          "subtext": "我等你很久",
+          "action": "从雨里走出",
+          "pauseAfter": 0
+        },
+        {
+          "id": "L02",
+          "speaker": "沈知微",
+          "type": "对白",
+          "text": "你是谁？",
+          "chars": 3,
+          "rate": 3.5,
+          "seconds": 1.2571428571428571,
+          "functions": [
+            "冲突推进力"
+          ],
+          "subtext": "她其实认出了那把伞",
+          "action": "握紧伞柄",
+          "pauseAfter": 0
+        },
+        {
+          "id": "L03",
+          "speaker": "黑影",
+          "type": "对白",
+          "text": "伞还是那把伞，人已经不是了。",
+          "chars": 12,
+          "rate": 2.8,
+          "seconds": 4.885714285714286,
+          "functions": [
+            "潜台词层级",
+            "角色辨识度"
+          ],
+          "subtext": "他指的是她离开师门",
+          "action": "抬手让开半步",
+          "pauseAfter": 0
+        },
+        {
+          "id": "L04",
+          "speaker": "沈知微",
+          "type": "对白",
+          "text": "让开。",
+          "chars": 2,
+          "rate": 3.5,
+          "seconds": 0.9714285714285714,
+          "functions": [
+            "冲突推进力",
+            "节奏与音乐性"
+          ],
+          "subtext": "她不想在这里动手",
+          "action": "向前一步",
+          "pauseAfter": 0
+        },
+        {
+          "id": "L05",
+          "speaker": "沈知微",
+          "type": "VO",
+          "text": "师父说过，伞骨断了，就回不去了。",
+          "chars": 13,
+          "rate": 2.8,
+          "seconds": 5.442857142857143,
+          "functions": [
+            "信息效率",
+            "金句潜力"
+          ],
+          "subtext": "她想起师父的规矩",
+          "action": "",
+          "pauseAfter": 0
+        }
+      ],
+      "line_seconds": 14.385714285714286,
+      "total_seconds": 16.385714285714286
+    },
+    {
+      "id": "S02",
+      "interior_exterior": "外景",
+      "location": "巷尾",
+      "time": "夜",
+      "characters": [
+        "沈知微",
+        "黑影"
+      ],
+      "goal": "离开巷口",
+      "obstacle": "黑影说出师父的死因",
+      "escalation": "她拔伞",
+      "turn": "黑影不躲，反而递出半截伞骨",
+      "result": "她收手，接过伞骨",
+      "duration": 18,
+      "action_time": 1,
+      "plot_points": [
+        "黑影递出断伞骨（关系翻转 · 两人暂时结盟）",
+        "她发现伞骨上刻着师父的名字（信息翻转 · 真相线开启）",
+        "她决定跟黑影走（意图变化 · 下一集钩）"
+      ],
+      "description": "雨势渐小，巷尾车灯扫过积水",
+      "lines": [
+        {
+          "id": "L06",
+          "speaker": "黑影",
+          "type": "对白",
+          "text": "他死前，把这半截伞骨交给我。",
+          "chars": 12,
+          "rate": 3.5,
+          "seconds": 4.0285714285714285,
+          "functions": [
+            "信息效率",
+            "冲突推进力"
+          ],
+          "subtext": "他在试探她是否还认师门",
+          "action": "从怀里取出半截伞骨",
+          "pauseAfter": 0
+        },
+        {
+          "id": "L07",
+          "speaker": "沈知微",
+          "type": "对白",
+          "text": "你凭什么让我信？",
+          "chars": 7,
+          "rate": 3.5,
+          "seconds": 2.4,
+          "functions": [
+            "冲突推进力"
+          ],
+          "subtext": "她已经信了一半",
+          "action": "没有接",
+          "pauseAfter": 0
+        },
+        {
+          "id": "L08",
+          "speaker": "黑影",
+          "type": "对白",
+          "text": "凭你刚才没有动手。",
+          "chars": 8,
+          "rate": 2.8,
+          "seconds": 3.257142857142857,
+          "functions": [
+            "潜台词层级",
+            "金句潜力"
+          ],
+          "subtext": "他看穿了她的犹豫",
+          "action": "把伞骨放在积水里",
+          "pauseAfter": 0
+        }
+      ],
+      "line_seconds": 9.685714285714287,
+      "total_seconds": 10.685714285714287
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "title": "坏剧本",
+  "episode": "EP01",
+  "premise": {
+    "protagonist": "沈知微",
+    "desire": "回家",
+    "obstacle": "黑影"
+  },
+  "opening_hook": "随便",
+  "acts": [
+    { "name": "铺垫", "percent": 40 },
+    { "name": "冲突", "percent": 40 },
+    { "name": "转折", "percent": 20 }
+  ],
+  "characters": ["沈知微", "沈知微", "黑影"],
+  "scenes": [
+    {
+      "id": "S01",
+      "interior_exterior": "内外景",
+      "location": "巷口",
+      "time": "夜",
+      "characters": ["沈知微", "陌生人"],
+      "goal": "穿过巷口",
+      "escalation": "她绕行",
+      "turn": "黑影叫住她",
+      "result": "穿过巷口",
+      "duration": 10,
+      "action_time": 5,
+      "plot_points": [],
+      "description": "电影感的雨夜，空气凝固",
+      "lines": [
+        {
+          "id": "L01",
+          "speaker": "陌生人",
+          "text": "你终于来了，我等了你整整三年，今天你必须给我一个交代，否则别想走，现在。",
+          "type": "对白",
+          "rate": "fast",
+          "functions": ["潜台词层级"],
+          "action": "镜头推近，特写他的眼睛"
+        },
+        {
+          "id": "L02",
+          "speaker": "沈知微",
+          "text": "她想起三年前的那个雨夜",
+          "type": "VO",
+          "rate": "normal",
+          "functions": ["信息效率"],
+          "action": "内心独白",
+          "lipsync": true
+        }
+      ]
+    },
+    {
+      "id": "S01",
+      "interior_exterior": "外景",
+      "location": "巷尾",
+      "time": "夜",
+      "characters": ["沈知微"],
+      "goal": "离开",
+      "obstacle": "黑影",
+      "escalation": "她跑",
+      "turn": "车灯亮起",
+      "result": "她停下",
+      "duration": 20,
+      "action_time": 0,
+      "plot_points": ["车灯亮起（信息翻转）"],
+      "description": "雨停了",
+      "lines": [
+        {
+          "id": "L01",
+          "speaker": "旁白",
+          "text": "……",
+          "type": "对白",
+          "rate": 7,
+          "functions": ["情绪"],
+          "action": ""
+        }
+      ]
+    }
+  ],
+  "tail_hook": {
+    "type": "反转钩",
+    "content": "",
+    "recall": "下集"
+  },
+  "chips": [
+    { "type": "金钱", "content": "" }
+  ]
+}

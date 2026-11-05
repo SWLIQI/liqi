@@ -1,0 +1,57 @@
+[4 VIEW CHARACTER SHEET]
+CARD: professional 4-view character sheet, 16:9, bright gray studio background, fine blueprint guide grid, zero annotation lines, zero leader lines, zero arrows; card text only in these places: height value, palette color names, bottom-band English timbre label; no other renderable text, no garbled characters
+SUBJECT: 沈知微 · 22~24岁女性（行走江湖的制伞人）
+
+LAYOUT: main view area 88%, bottom detail band 12%, separated by one thin straight divider line; the band contains no face or body and does not count as a panel
+
+LEFT (25%): close-up head portrait, sharp facial detail, face shape: 冷艳瓜子脸，颧骨微高, brows: 平直剑眉，眉尾略淡, eyes: 狭长丹凤眼，眼窝深, pupils: 深褐琉璃瞳，高光锐利, nose: 高挺直鼻，鼻头微收, lips: 薄唇微抿，唇色偏暗红, jawline: 下颌线清晰，折角利落, ears: 贴脑耳，耳垂小巧, distinctive mark: 左眼角一颗浅褐色泪痣, skin and facial structure: 冷白偏青，皮肤细腻无明显瑕疵, neutral expression, mouth closed, eyes open, top of head fully inside frame with 5% headroom, bottom edge cuts two fingers below the collarbone, chin at 85-90% of the panel height, shoulders covered by the same outer garment as the right panels, collar visible, shoulders and neck not bare, no props, no view name text, no character name text, no panel number text, no caption, no annotation lines, no leader lines, no arrows, 22~24岁女性（行走江湖的制伞人）
+
+RIGHT (75%): three full-body views in one frame, three equal vertical thirds, order: front, 90-degree side profile, back, head fully inside frame in all three views; keep head shape, hairstyle, neck and shoulder line, but render a featureless face: no eyes, no nose, no mouth, smooth untextured facial plane, blank face, full body from top of head to shoes in all three views, no cropped head, no cropped feet, shoes and soles fully visible, feet aligned to one ground baseline, shoulder width, torso length, limb length and hem length identical across the three views, wardrobe: 重磅斜纹棉麻, 粗糙麻织肌理，洗旧泛白, 厚重硬挺，下摆自然垂坠, 袖口磨损起毛，衣角有泥水浸润, 哑光拉丝古铜扣, 双排工整明线，肩线加固一道
+
+HEIGHT LINE: vertical reference line at the far left of the three body panels, zero mark precisely aligned to the ground baseline, extending from the feet to the top of the head, short tick marks, value "168 cm" beside the line, clear gap between line and body, never overlapping or crossing the figure
+
+PALETTE: circular color swatches in a corner, each labeled with its Chinese color name and hex value: 青灰 #3A4E48（外衫）、墨绿 #556B66（长裙）、雾灰 #7D8C8A（提亮）
+
+BOTTOM: bottom band (12%): thin horizontal waveform strip on the left, abstract monochrome waveform, no axes, no ticks, no numbers, no legend, no text; on the right the English timbre label "low, restrained female voice", one line, fully legible, no distortion, no missing glyphs
+
+NEGATIVE (base): different face, drifting features, inconsistent age, plastic skin, props, annotation lines, leader lines, arrows, watermark, unintelligible scribbles, gibberish marks, clear facial features in the right-side views, second recognizable face, duplicate front view panel, extra fifth panel, five-panel layout, view name text, character name text, panel number text, border text, caption, subtitle, logo, signature, UI elements, head out of frame, cropped head, mosaic censoring bar, pixelated face
+
+NEGATIVE (per version — use only the line matching the version you render, never combine versions):
+  - 沈知微-常服: blood stains, bandages, torn hem
+  - 沈知微-战损: 干净衣角, 完好袖口, 整齐发髻
+
+VERSIONS:
+  - 沈知微-常服 [reuse]: 靛蓝布衫 + 深灰长裙，无外伤
+  - 沈知微-战损 [new_variant]: 同款布衫，右肩撕裂，左臂缠布条
+
+--- 文字锁 16 项 ---
+   1. bone    冷艳瓜子脸，颧骨微高
+   2. brow    平直剑眉，眉尾略淡
+   3. eye     狭长丹凤眼，眼窝深
+   4. pupil   深褐琉璃瞳，高光锐利
+   5. nose    高挺直鼻，鼻头微收
+   6. lip     薄唇微抿，唇色偏暗红
+   7. jaw     下颌线清晰，折角利落
+   8. ear     贴脑耳，耳垂小巧
+   9. mark    左眼角一颗浅褐色泪痣
+  10. skin    冷白偏青，皮肤细腻无明显瑕疵
+  11. fabric  重磅斜纹棉麻
+  12. texture 粗糙麻织肌理，洗旧泛白
+  13. drape   厚重硬挺，下摆自然垂坠
+  14. wear    袖口磨损起毛，衣角有泥水浸润
+  15. metal   哑光拉丝古铜扣
+  16. seam    双排工整明线，肩线加固一道
+      性别锚点: 22~24岁女性（行走江湖的制伞人）
+      身高线: 168 cm
+      色板: 青灰 #3A4E48（外衫）、墨绿 #556B66（长裙）、雾灰 #7D8C8A（提亮）
+
+--- 出图前九问 ---
+  1. [ ] 左 25% / 右 75% 三等分，顺序 正面→90°侧面→背面
+  2. [ ] 右区写了「头部完整入画 + 面部不刻画五官」+ featureless face，且没有误写「无头」
+  3. [ ] 16 项写满，性别锚点收尾
+  4. [ ] 表情中性
+  5. [ ] 零道具
+  6. [ ] 三个 HEX 带 #、带中文色名、来自注册表
+  7. [ ] 右区是「保头无脸」不是「无头」
+  8. [ ] 三格完整到鞋，不裁头不裁脚
+  9. [ ] 排版 88% + 12%、身高线数值、音色标签 ≤8 词、负向词无裸 text/letters/words、零引线

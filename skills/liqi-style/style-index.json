@@ -1,0 +1,891 @@
+[
+ {
+  "slug": "celshade-guoman-2d",
+  "name": "国漫赛璐璐2D",
+  "display": "国漫赛璐璐 2D",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6-6.5",
+  "stability": "稳",
+  "file": "anchors/国漫赛璐璐2D.md",
+  "marker_words": [
+   "clean cel-shading",
+   "国漫 2D 赛璐璐",
+   "边缘分明的两段式阴影",
+   "two-tone shading split by a hard edge"
+  ],
+  "ip_note": "投喂词内禁止点名任何具体作品名，只写风格特征（赛璐璐 / 美型 / 国漫 2D）"
+ },
+ {
+  "slug": "anime-2d",
+  "name": "日系动画2D",
+  "display": "日系动画 2D（anime 通用档）",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6.5-7",
+  "stability": "稳",
+  "file": "anchors/日系动画2D.md",
+  "marker_words": [
+   "Japanese 2D anime cel-shaded",
+   "thin clean lineart",
+   "base tone and shadow tone",
+   "no gradient",
+   "no camera orbit",
+   "日系 2D 动画赛璐璐"
+  ]
+ },
+ {
+  "slug": "webtoon-2d",
+  "name": "韩漫条漫2D",
+  "display": "韩漫条漫（竖屏专项）",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "7.5-8",
+  "stability": "中",
+  "file": "anchors/韩漫条漫2D.md",
+  "marker_words": [
+   "Korean webtoon illustration",
+   "clean digital lineart",
+   "soft-edged cel shading",
+   "eight-head adult proportions",
+   "竖屏分格构图",
+   "韩漫条漫"
+  ]
+ },
+ {
+  "slug": "documentary-live-action",
+  "name": "纪实实拍",
+  "display": "纪实 / 纪录片式实拍",
+  "track": "写实轨",
+  "dimension": "实拍",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/纪实实拍.md",
+  "marker_words": [
+   "footage shot by a real camera",
+   "available light only",
+   "natural handheld micro-shake",
+   "unposed subjects",
+   "no colour grading",
+   "纪实",
+   "真实摄影机"
+  ]
+ },
+ {
+  "slug": "npr-celshaded-3d",
+  "name": "三渲二NPR",
+  "display": "三渲二 NPR",
+  "track": "三渲二轨",
+  "dimension": "3D",
+  "heads": "6.5-7",
+  "stability": "稳",
+  "file": "anchors/三渲二NPR.md",
+  "marker_words": [
+   "cel-shaded 3D render",
+   "two flat tones",
+   "three-dimensional characters",
+   "三渲二",
+   "solid three-dimensional"
+  ]
+ },
+ {
+  "slug": "photoreal-pbr",
+  "name": "写实PBR",
+  "display": "写实 PBR",
+  "track": "写实轨",
+  "dimension": "3D",
+  "heads": "7-7.5",
+  "stability": "险",
+  "file": "anchors/写实PBR.md",
+  "marker_words": [
+   "photoreal live-action",
+   "with PBR materials and real cinematic lighting",
+   "毛孔",
+   "影视级写实 PBR"
+  ]
+ },
+ {
+  "slug": "ink-wash-2d",
+  "name": "水墨淡彩2D",
+  "display": "水墨淡彩东方手绘 2D",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "5.5-6.5",
+  "stability": "险",
+  "file": "anchors/水墨淡彩2D.md",
+  "marker_words": [
+   "xuan paper",
+   "ink-and-wash",
+   "one flat wash",
+   "dry-brush breaks",
+   "水墨",
+   "留白",
+   "干笔断锋",
+   "一次平涂完成"
+  ]
+ },
+ {
+  "slug": "gothic-puppet",
+  "name": "哥特定格木偶",
+  "display": "哥特定格木偶",
+  "track": "定格木偶轨",
+  "dimension": "3D",
+  "heads": "1:3.5-1:4.5",
+  "stability": "中",
+  "file": "anchors/哥特定格木偶.md",
+  "marker_words": [
+   "stop-motion puppet",
+   "matte clay skin",
+   "定格木偶",
+   "哑光黏土皮肤",
+   "尸感面孔"
+  ]
+ },
+ {
+  "slug": "stylized-pixar-3d",
+  "name": "风格化3D皮克斯",
+  "display": "风格化 3D（皮克斯式）",
+  "track": "三渲二轨",
+  "dimension": "3D",
+  "heads": "6-6.5",
+  "stability": "稳",
+  "file": "anchors/风格化3D皮克斯.md",
+  "marker_words": [
+   "stylized 3D animated feature look",
+   "soft subsurface skin",
+   "multi-tone soft shading",
+   "no outline",
+   "风格化 3D",
+   "三点式布光"
+  ],
+  "ip_note": "投喂词内禁止点名 Pixar、皮克斯或任何具体作品名，只写风格特征（圆润造型 / 次表面散射 / 电影级三点布光 / 高饱和暖调）；文档层可作溯源。"
+ },
+ {
+  "slug": "guofeng-cine-3d",
+  "name": "国风电影3D",
+  "display": "国风电影级 3D（唐代院线动画）",
+  "track": "写实轨",
+  "dimension": "3D",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/国风电影3D.md",
+  "marker_words": [
+   "Chinese 3D animated feature",
+   "Tang-dynasty",
+   "stylized realism",
+   "subsurface",
+   "atmospheric haze",
+   "国产院线 3D 动画",
+   "唐代",
+   "低饱和高级灰",
+   "大气雾效"
+  ],
+  "ip_note": "投喂词内禁止点名任何具体作品名（含《长安三万里》），只写风格特征（3D 动画电影 / 唐代 / 低饱和高级灰 / PBR）"
+ },
+ {
+  "slug": "urban-folk-filmstill",
+  "name": "市井写实志怪",
+  "display": "市井写实·中式都市志怪",
+  "track": "写实轨",
+  "dimension": "实拍",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/市井写实志怪.md",
+  "marker_words": [
+   "live-action film frame",
+   "old film-strip still",
+   "pores, fine lines",
+   "写实实拍",
+   "老胶片",
+   "都市冷灰"
+  ]
+ },
+ {
+  "slug": "papercut-2d",
+  "name": "剪纸2D",
+  "display": "剪纸",
+  "track": "平面工艺轨",
+  "dimension": "2D",
+  "heads": "4-4.5",
+  "stability": "中",
+  "file": "anchors/剪纸2D.md",
+  "marker_words": [
+   "papercut",
+   "single-layer flat",
+   "negative-space cutout",
+   "剪纸",
+   "负形镂空",
+   "红纸"
+  ]
+ },
+ {
+  "slug": "shadow-puppet-2d",
+  "name": "皮影2D",
+  "display": "皮影",
+  "track": "平面工艺轨",
+  "dimension": "2D",
+  "heads": "4-4.5",
+  "stability": "中",
+  "file": "anchors/皮影2D.md",
+  "marker_words": [
+   "shadow puppet",
+   "translucent shadow puppet",
+   "jointed",
+   "皮影",
+   "牛皮",
+   "背光",
+   "幕布"
+  ]
+ },
+ {
+  "slug": "guochao-2d",
+  "name": "国潮新中式2D",
+  "display": "国潮新中式",
+  "track": "平面工艺轨",
+  "dimension": "2D",
+  "heads": "6-6.5",
+  "stability": "稳",
+  "file": "anchors/国潮新中式2D.md",
+  "marker_words": [
+   "flat illustration",
+   "guochao",
+   "ornament band",
+   "国潮",
+   "新中式",
+   "云纹",
+   "金线勾边"
+  ]
+ },
+ {
+  "slug": "nianhua-2d",
+  "name": "民俗年画2D",
+  "display": "民俗年画",
+  "track": "平面工艺轨",
+  "dimension": "2D",
+  "heads": "5-5.5",
+  "stability": "稳",
+  "file": "anchors/民俗年画2D.md",
+  "marker_words": [
+   "New Year print",
+   "木版套色",
+   "no light and no shadow",
+   "年画",
+   "无光无影"
+  ]
+ },
+ {
+  "slug": "gothic-2d",
+  "name": "暗黑哥特2D",
+  "display": "暗黑哥特 2D",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6-6.5",
+  "stability": "中",
+  "file": "anchors/暗黑哥特2D.md",
+  "marker_words": [
+   "平面 2D 动画",
+   "维多利亚暗黑童话",
+   "硬边剪影",
+   "月雾灰蓝",
+   "墨黑紫",
+   "暗绯红",
+   "flat 2D animated frame",
+   "hard-edged shadow"
+  ]
+ },
+ {
+  "slug": "thickpaint-2d",
+  "name": "厚涂二次元2D",
+  "display": "厚涂二次元",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6.5-7.5",
+  "stability": "中",
+  "file": "anchors/厚涂二次元2D.md",
+  "marker_words": [
+   "painterly digital painting",
+   "soft blended shading",
+   "brushwork visible in the shadows",
+   "厚涂二次元",
+   "impasto"
+  ]
+ },
+ {
+  "slug": "claymation-3d",
+  "name": "黏土定格3D",
+  "display": "黏土定格",
+  "track": "定格木偶轨",
+  "dimension": "3D",
+  "heads": "1:3-1:4",
+  "stability": "稳",
+  "file": "anchors/黏土定格3D.md",
+  "marker_words": [
+   "claymation stop-motion",
+   "hand-modelled clay puppets",
+   "fingerprint dents",
+   "黏土定格"
+  ]
+ },
+ {
+  "slug": "comic-popart-2d",
+  "name": "美漫波普2D",
+  "display": "美漫波普",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "7-8",
+  "stability": "稳",
+  "file": "anchors/美漫波普2D.md",
+  "marker_words": [
+   "halftone",
+   "bold ink outlines",
+   "美漫波普",
+   "网点"
+  ]
+ },
+ {
+  "slug": "ghibli-2d",
+  "name": "吉卜力系2D",
+  "display": "吉卜力系",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6.5-7",
+  "stability": "稳",
+  "file": "anchors/吉卜力系2D.md",
+  "marker_words": [
+   "hand-painted watercolour",
+   "吉卜力系",
+   "只用自然光",
+   "layered greens",
+   "手绘水彩背景"
+  ],
+  "ip_note": "投喂词内禁止点名吉卜力、Studio Ghibli、宫崎骏或任何具体作品名，只写风格特征（西式透明水彩 / 圆润造型 / 柔和自然光 / 田园背景）；文档层可作溯源。"
+ },
+ {
+  "slug": "lowpoly-iso-3d",
+  "name": "LowPoly等距3D",
+  "display": "Low-poly / 等距 3D",
+  "track": "三渲二轨",
+  "dimension": "3D",
+  "heads": "5-6",
+  "stability": "稳",
+  "file": "anchors/LowPoly等距3D.md",
+  "marker_words": [
+   "low-poly",
+   "低多边形",
+   "faceted",
+   "硬边折面"
+  ],
+  "ip_note": "投喂词内禁止点名任何游戏或作品名，只写风格特征（低多边形 / 面块 / 等距）"
+ },
+ {
+  "slug": "dark-anime-2d",
+  "name": "暗黑二次元2D",
+  "display": "暗黑二次元",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6-7",
+  "stability": "中",
+  "file": "anchors/暗黑二次元2D.md",
+  "marker_words": [
+   "暗黑二次元",
+   "燐青",
+   "cold blue-green undertones"
+  ],
+  "ip_note": "投喂词内禁止点名任何作品名，只写风格特征（暗黑二次元 / 浓阴影 / 冷调）；恐怖题材遵守过审红线（血只走事后状态与光影）"
+ },
+ {
+  "slug": "dunhuang-gongbi-2d",
+  "name": "敦煌工笔重彩2D",
+  "display": "敦煌 / 工笔重彩",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "6-6.5",
+  "stability": "中",
+  "file": "anchors/敦煌工笔重彩2D.md",
+  "marker_words": [
+   "工笔重彩",
+   "iron-wire",
+   "沥粉",
+   "石青"
+  ],
+  "ip_note": "不点名具体洞窟编号与当代修复机构、摄影师；纹样写到公有形制名（联珠纹、卷草纹）为止"
+ },
+ {
+  "slug": "chibi-qban-2d",
+  "name": "Q版超变形2D",
+  "display": "Q 版 / 超变形",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "2-3",
+  "stability": "稳",
+  "file": "anchors/Q版超变形2D.md",
+  "marker_words": [
+   "super-deformed",
+   "大头小身",
+   "二到三头身"
+  ],
+  "ip_note": "投喂词内禁止点名任何 IP 或表情包系列名，只写风格特征（Q 版 / 超变形 / 大头小身）"
+ },
+ {
+  "slug": "shinkai-2d",
+  "name": "新海诚系2D",
+  "display": "新海诚 / 京都动画系",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6.5-7",
+  "stability": "稳",
+  "file": "anchors/新海诚系2D.md",
+  "marker_words": [
+   "magic-hour",
+   "积雨云",
+   "光色背景绘"
+  ],
+  "ip_note": "导演与工作室名只在文档层；正文只写光色背景绘特征，机检 W-DIRECTOR-NAME-IN-BODY 守"
+ },
+ {
+  "slug": "gouache-2d",
+  "name": "绘本水粉2D",
+  "display": "绘本水粉",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "4-5",
+  "stability": "稳",
+  "file": "anchors/绘本水粉2D.md",
+  "marker_words": [
+   "gouache",
+   "chalky",
+   "绘本水粉"
+  ],
+  "ip_note": "投喂词内禁止点名任何绘本作品或插画家名，只写风格特征（水粉 / 粉质笔触 / 纸面肌理）"
+ },
+ {
+  "slug": "xianxia-idol-live",
+  "name": "古装仙侠偶剧",
+  "display": "古装仙侠·偶剧实拍",
+  "track": "写实轨",
+  "dimension": "实拍",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/古装仙侠偶剧.md",
+  "marker_words": [
+   "古装仙侠偶像剧的实拍",
+   "drama-grade retouching",
+   "仙侠偶剧",
+   "剧级精修",
+   "月白淡青",
+   "发光法器"
+  ]
+ },
+ {
+  "slug": "sweet-romance-live",
+  "name": "都市甜宠奶油粉",
+  "display": "都市甜宠·奶油粉调",
+  "track": "写实轨",
+  "dimension": "实拍",
+  "heads": "7-7.5",
+  "stability": "稳",
+  "file": "anchors/都市甜宠奶油粉.md",
+  "marker_words": [
+   "sweet-romance drama",
+   "high-key soft lighting",
+   "都市甜宠偶像剧的实拍",
+   "奶油粉",
+   "浅景深",
+   "前景虚化"
+  ]
+ },
+ {
+  "slug": "hk-retro-filmstill",
+  "name": "复古港风",
+  "display": "复古港风·九十年代霓虹",
+  "track": "写实轨",
+  "dimension": "实拍",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/复古港风.md",
+  "marker_words": [
+   "1990s Hong Kong cinema",
+   "anamorphic widescreen",
+   "九十年代香港电影",
+   "胶片颗粒",
+   "油绿",
+   "霓虹招牌丛林只作失焦色块"
+  ]
+ },
+ {
+  "slug": "urban-suspense-live",
+  "name": "都市悬疑冷青",
+  "display": "都市悬疑·冷青暗调",
+  "track": "写实轨",
+  "dimension": "实拍",
+  "heads": "7-7.5",
+  "stability": "稳",
+  "file": "anchors/都市悬疑冷青.md",
+  "marker_words": [
+   "urban suspense drama",
+   "低照度数码电影感",
+   "都市悬疑剧的实拍",
+   "冷青",
+   "负空间",
+   "荧光灯"
+  ]
+ },
+ {
+  "slug": "shonen-hotblood-2d",
+  "name": "热血少年漫",
+  "display": "热血少年漫 2D",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6.5-7",
+  "stability": "中",
+  "file": "anchors/热血少年漫.md",
+  "marker_words": [
+   "shonen action anime",
+   "speed lines",
+   "热血少年漫",
+   "硬边两段式",
+   "爆发帧",
+   "广角冲击"
+  ]
+ },
+ {
+  "slug": "republic-calendar-poster",
+  "name": "民国月份牌",
+  "display": "民国月份牌画报",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "7-7.5",
+  "stability": "稳",
+  "file": "anchors/民国月份牌.md",
+  "marker_words": [
+   "民国月份牌广告画",
+   "charcoal shading",
+   "月份牌",
+   "擦笔水彩",
+   "泛黄纸面",
+   "旗袍人物"
+  ]
+ },
+ {
+  "slug": "song-aesthetic-2d",
+  "name": "宋式美学",
+  "display": "宋式美学·院体绢本",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/宋式美学.md",
+  "marker_words": [
+   "Song-dynasty court painting",
+   "silk weave",
+   "宋代院体绢本",
+   "游丝描",
+   "大片留白",
+   "汝窑天青"
+  ]
+ },
+ {
+  "slug": "qinghua-porcelain-2d",
+  "name": "青花瓷韵",
+  "display": "青花瓷韵·釉下钴蓝",
+  "track": "平面工艺轨",
+  "dimension": "2D",
+  "heads": "7-7.5",
+  "stability": "稳",
+  "file": "anchors/青花瓷韵.md",
+  "marker_words": [
+   "blue-and-white porcelain",
+   "釉下钴蓝",
+   "青花",
+   "分水五档",
+   "白釉",
+   "缠枝纹"
+  ]
+ },
+ {
+  "slug": "jinbi-landscape-2d",
+  "name": "金碧山水",
+  "display": "金碧山水·唐式青绿",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "6.5-7",
+  "stability": "中",
+  "file": "anchors/金碧山水.md",
+  "marker_words": [
+   "blue-green landscape",
+   "gold contour",
+   "金碧山水",
+   "泥金勾廓",
+   "千里江山"
+  ]
+ },
+ {
+  "slug": "han-relief-rubbing",
+  "name": "汉画像石",
+  "display": "汉画像石·拓片剪影",
+  "track": "平面工艺轨",
+  "dimension": "2D",
+  "heads": "5.5-6.5",
+  "stability": "稳",
+  "file": "anchors/汉画像石.md",
+  "marker_words": [
+   "汉画像石拓片",
+   "ink silhouette",
+   "汉画像石",
+   "拓片",
+   "带状横卷",
+   "羽人与四神"
+  ]
+ },
+ {
+  "slug": "bronze-motif-2d",
+  "name": "青铜铭纹",
+  "display": "青铜铭纹·吉金纹样",
+  "track": "平面工艺轨",
+  "dimension": "2D",
+  "heads": "5.5-6.5",
+  "stability": "稳",
+  "file": "anchors/青铜铭纹.md",
+  "marker_words": [
+   "商周青铜器纹样",
+   "taotie mask",
+   "青铜纹样",
+   "云雷纹",
+   "错金",
+   "金文"
+  ]
+ },
+ {
+  "slug": "opera-stage-live",
+  "name": "戏曲舞台",
+  "display": "戏曲舞台·浓彩程式",
+  "track": "写实轨",
+  "dimension": "实拍",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/戏曲舞台.md",
+  "marker_words": [
+   "Chinese opera stage",
+   "greasepaint formulas",
+   "戏曲舞台",
+   "检场空台",
+   "一桌二椅",
+   "水袖"
+  ]
+ },
+ {
+  "slug": "miao-batik-indigo",
+  "name": "苗银蜡染",
+  "display": "苗银蜡染·靛蓝冰纹",
+  "track": "平面工艺轨",
+  "dimension": "2D",
+  "heads": "7-7.5",
+  "stability": "稳",
+  "file": "anchors/苗银蜡染.md",
+  "marker_words": [
+   "indigo batik",
+   "wax-resist",
+   "苗银蜡染",
+   "冰裂纹",
+   "靛蓝",
+   "银冠"
+  ]
+ },
+ {
+  "slug": "thangka-mineral-gold",
+  "name": "唐卡重彩",
+  "display": "唐卡重彩·矿金满底",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "6.5-7",
+  "stability": "中",
+  "file": "anchors/唐卡重彩.md",
+  "marker_words": [
+   "矿彩金线风格",
+   "gold linework",
+   "矿彩金线",
+   "满底",
+   "对称分带",
+   "细密如织锦"
+  ]
+ },
+ {
+  "slug": "us-comic-ink-2d",
+  "name": "美式漫画硬线",
+  "display": "美式漫画·硬线印刷",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/美式漫画硬线.md",
+  "marker_words": [
+   "superhero comic-book panel",
+   "cross-hatching",
+   "美漫硬线",
+   "钢笔墨线",
+   "四色印刷",
+   "排线阴影"
+  ]
+ },
+ {
+  "slug": "cyberpunk-anime-2d",
+  "name": "赛博朋克动漫",
+  "display": "赛博朋克动漫·霓虹义体",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "6.5-7",
+  "stability": "中",
+  "file": "anchors/赛博朋克动漫.md",
+  "marker_words": [
+   "cyberpunk anime",
+   "neon ambient light",
+   "赛博朋克动漫",
+   "义体",
+   "霓虹雨夜",
+   "HUD 细线"
+  ]
+ },
+ {
+  "slug": "synthwave-retro-2d",
+  "name": "合成器波",
+  "display": "合成器波·八十年代图形",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "剪影档（不量头身）",
+  "stability": "稳",
+  "file": "anchors/合成器波.md",
+  "marker_words": [
+   "synthwave",
+   "网格地平线",
+   "合成器波",
+   "落日条纹",
+   "CRT 扫描线",
+   "铬银"
+  ]
+ },
+ {
+  "slug": "noir-ink-2d",
+  "name": "黑色电影插画",
+  "display": "黑色电影插画·黑白硬光",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "7-7.5",
+  "stability": "稳",
+  "file": "anchors/黑色电影插画.md",
+  "marker_words": [
+   "黑色电影风格",
+   "百叶窗光条",
+   "黑色电影插画",
+   "纯黑白",
+   "硬边光形",
+   "干笔肌理"
+  ]
+ },
+ {
+  "slug": "classical-oil-2d",
+  "name": "古典油画",
+  "display": "古典油画·明暗法笔触",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/古典油画.md",
+  "marker_words": [
+   "old-master oil painting",
+   "chiaroscuro",
+   "古典油画",
+   "透明罩染",
+   "厚涂笔触",
+   "明暗法"
+  ]
+ },
+ {
+  "slug": "flat-minimal-2d",
+  "name": "极简几何扁平",
+  "display": "极简几何扁平",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "几何档（2.5-4）",
+  "stability": "稳",
+  "file": "anchors/极简几何扁平.md",
+  "marker_words": [
+   "flat minimal design",
+   "geometric colour shapes",
+   "极简几何扁平",
+   "大色块",
+   "大量负空间",
+   "矢量级的干净边缘"
+  ]
+ },
+ {
+  "slug": "watercolor-translucent-2d",
+  "name": "透明水彩",
+  "display": "透明水彩·湿画留白",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "6.5-7",
+  "stability": "稳",
+  "file": "anchors/透明水彩.md",
+  "marker_words": [
+   "transparent watercolour",
+   "wet-on-wet blooms",
+   "透明水彩",
+   "水痕晕染",
+   "纸白透出",
+   "颗粒沉淀"
+  ]
+ },
+ {
+  "slug": "fantasy-epic-2d",
+  "name": "西幻魔幻史诗",
+  "display": "西幻魔幻史诗",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "7-7.5",
+  "stability": "中",
+  "file": "anchors/西幻魔幻史诗.md",
+  "marker_words": [
+   "epic western fantasy",
+   "volumetric god-rays",
+   "西方奇幻史诗插画",
+   "体积神光",
+   "巨龙或城堡",
+   "暖金对深蓝紫"
+  ]
+ },
+ {
+  "slug": "pixel-2d",
+  "name": "像素复古游戏",
+  "display": "像素艺术·复古游戏",
+  "track": "卡通轨",
+  "dimension": "2D",
+  "heads": "sprite 档（16/32/64px）",
+  "stability": "险（动态）",
+  "file": "anchors/像素复古游戏.md",
+  "marker_words": [
+   "十六位机像素艺术",
+   "dithering",
+   "像素艺术",
+   "复古游戏",
+   "有限调色板",
+   "步进帧动画"
+  ]
+ },
+ {
+  "slug": "chalk-pastel-2d",
+  "name": "粉笔粉彩",
+  "display": "粉笔粉彩·黑板肌理",
+  "track": "手绘轨",
+  "dimension": "2D",
+  "heads": "6-6.5",
+  "stability": "稳",
+  "file": "anchors/粉笔粉彩.md",
+  "marker_words": [
+   "粉笔黑板画",
+   "dusty chalk lines",
+   "擦痕残粉",
+   "粉彩色块",
+   "粉尘光柱"
+  ]
+ }
+]

@@ -1,0 +1,9 @@
+{
+ "coreVersion": "6.19.8",
+ "sources": {
+  "references/叙事层_剧本门控与台词.md": "8cdeb2280f1748101db4bb2d6c2ba4d7176b85addca9a81a449067cc6e78f0bc",
+  "references/方言与旁白规程.md": "bcf0f0066bae16f51dd5e148cfd628302449c4f8476ed6be7c86b44ad67489e2",
+  "references/去AI味对照清单.md": "62db427248d5a4b6fa310a8cf61ebe955cc6303532cf135330df445e56a1caaa",
+  "references/尾钩与筹码账.md": "7647598924f81512e1810568c993b7320b11cab72dbd9d00984c45dd26e941c1"
+ }
+}

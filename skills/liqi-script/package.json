@@ -1,0 +1,17 @@
+{
+  "name": "liqi-script",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "剧本门控与台词专精包：五阶门控、七维诊断、语速排期与 VO/OS 检查",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "node scripts/selftest.mjs && node scripts/check_golden.mjs",
+    "golden": "node scripts/check_golden.mjs",
+    "check": "node scripts/check_script.mjs",
+    "card": "node scripts/script_card.mjs",
+    "sync": "node scripts/check_sync.mjs"
+  }
+}

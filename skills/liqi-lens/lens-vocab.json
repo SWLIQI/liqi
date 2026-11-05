@@ -1,0 +1,128 @@
+{
+  "coreVersion": "6.19.8",
+  "sourceHashes": {
+    "视听层_镜头文法与光色.md": "a720adecdf8fb6f1f19ed8904b0ca14430233a02456ee44315a01195ab193124",
+    "光学与空间语言块.md": "8ac6cc9a0a5cf423bc75f21f3451acbed54eb50e1c1339cd4fac2fbe7d60184f",
+    "轴线与反打规则.md": "27332be636722cb9f28339d60646d2fa02dc51dc1a3b061cdcf3516d5124d732",
+    "分镜配额与机检规范.md": "203db62ef974c96da59fe2377887540db252abb82393d204feaf39a54ba85613",
+    "情绪表演层.md": "f312f57f932b84729e48aab4068904e4ef5688e62cdfe71f226853bec802d42b"
+  },
+  "shotSizes": [
+    {
+      "level": 1,
+      "name": "大远景",
+      "en": "EWS",
+      "framing": "环境主体，人物仅为点景",
+      "visual": "主体仅为比例参照，环境占满画面，可辨认的是体积与位置，不是细节"
+    },
+    {
+      "level": 2,
+      "name": "远景",
+      "en": "LS",
+      "framing": "人物全身 + 大量环境",
+      "visual": "主体全身可见但小，姿态与动势可辨认，五官不可辨"
+    },
+    {
+      "level": 3,
+      "name": "全景",
+      "en": "FS",
+      "framing": "人物全身 + 周边环境",
+      "visual": "主体全身入画，头顶与脚下留有余量，环境交代所处空间"
+    },
+    {
+      "level": 4,
+      "name": "中全景",
+      "en": "MFS",
+      "framing": "膝盖以上",
+      "visual": "取景到膝盖，人物全身入画但下缘切在膝上，环境仍在交代所处空间"
+    },
+    {
+      "level": 5,
+      "name": "中景",
+      "en": "MS",
+      "framing": "腰以上",
+      "visual": "取景到腰腹，背景保留形状与色块关系，细节纹理让位给主体"
+    },
+    {
+      "level": 6,
+      "name": "中近景",
+      "en": "MCU",
+      "framing": "胸口以上",
+      "visual": "取景到胸口，面部占画面六分之一以上，背景化开但能读出明暗结构"
+    },
+    {
+      "level": 7,
+      "name": "近景",
+      "en": "BCU",
+      "framing": "肩以上",
+      "visual": "取景到肩部，面部占画面四分之一以上，背景化开但能读出明暗结构"
+    },
+    {
+      "level": 8,
+      "name": "特写",
+      "en": "CU",
+      "framing": "头部/局部",
+      "visual": "主体占画面六成以上，背景只剩色块与光斑，不参与叙事"
+    },
+    {
+      "level": 9,
+      "name": "大特写",
+      "en": "ECU",
+      "framing": "极微距（双眼、瞳孔、物件细节）",
+      "visual": "只有局部占满画面，其余全部融化，可辨的只有材质与微动"
+    }
+  ],
+  "angles": ["平视", "俯拍", "仰拍", "大俯角", "大仰角", "侧 45°", "侧面", "过肩", "荷兰角", "主观视角"],
+  "fov": [
+    { "deg": 135, "perspective": "广角", "content": "环境动作 · 极端沉浸（仅整拍都是环境动作时）" },
+    { "deg": 107, "perspective": "广角", "content": "环境动作 · 大尺度地理" },
+    { "deg": 84, "perspective": "广角", "content": "面部肖像 · 带环境的亲密特写 / 环境动作 · 宽广" },
+    { "deg": 47, "perspective": "标准", "content": "环境动作 · 纪录片式" },
+    { "deg": 29, "perspective": "长焦", "content": "面部肖像 · 中景肖像 / 细节微距 · 标准" },
+    { "deg": 18, "perspective": "长焦", "content": "面部肖像 · 紧凑情感特写 / 细节微距 / 远距观察" },
+    { "deg": 8, "perspective": "长焦", "content": "面部肖像 · 远距隐藏观察 / 远距观察 · 体育野生动物" }
+  ],
+  "perspectives": ["广角", "标准", "长焦"],
+  "moves": ["固定", "横移", "缓推", "后拉", "跟拍", "缓降", "微推"],
+  "bannedNamedMoves": ["滑轨变焦", "甩镜", "摇臂升起", "360 环绕", "希区柯克变焦"],
+  "lightDirections": ["顺光", "侧光", "侧逆光", "逆光", "顶光", "底光"],
+  "tasks": ["改变人物情绪", "实质推进动作", "施加戏剧压力"],
+  "compositions": ["开场 ECU 两极对冲", "中心对称天地立极", "剪影轮廓光", "极端体量对比"],
+  "axisSides": ["左", "右", "轴上"],
+  "transitions": ["中性镜", "运动镜", "插入特写", "重新建轴"],
+  "heavyTechniques": ["滑动变焦", "环绕", "Snorricam", "鱼眼", "升降", "摇臂", "POV"],
+  "bannedGenericWords": [
+    "电影感", "高级感", "大片感", "氛围感", "压迫感", "震撼", "炫酷", "丝滑",
+    "很美", "很帅", "有质感",
+    "cinematic", "beautiful", "high quality", "stunning", "epic"
+  ],
+  "guardSentences": {
+    "广角": "本镜任何部分都不变成长焦肖像，环境在主体周围保持可见，机位保持物理贴近",
+    "标准": "无极端广角畸变，无长焦压缩，画面保持自然中性",
+    "长焦": "本镜任何部分都不变为广角覆盖，背景全程保持压缩与融化，更宽的取景靠机位拉远实现而不是换透视"
+  },
+  "quota": {
+    "minShotsForRatio": 3,
+    "minShotsForFov": 4,
+    "minShotsForMove": 8,
+    "closeUpShare": [0.25, 0.4],
+    "side45Share": [0.3, 0.4],
+    "sideShareMax": 0.15,
+    "bigLowMax": 3,
+    "bigHighMax": 3,
+    "dutchMax": 1,
+    "fovKindsMin": 4,
+    "moveKindsMin": 4,
+    "sameMoveRunMax": 2,
+    "heavyMax": {
+      "滑动变焦": 1,
+      "环绕": 3,
+      "Snorricam": 1,
+      "鱼眼": 2,
+      "升降": 2,
+      "摇臂": 2,
+      "POV": 3
+    },
+    "jumpWarnDelta": 3
+  }
+}

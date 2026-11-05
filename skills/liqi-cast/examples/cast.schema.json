@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "liqi-cast 角色设定",
+  "description": "4 View 资产板的输入。运行期校验以 scripts/lib/validate.mjs 为准；本文件是字段与类型的显式声明。",
+  "type": "object",
+  "required": ["name", "gender", "age_range", "height_cm", "face", "wardrobe", "palette"],
+  "properties": {
+    "name": { "type": "string", "minLength": 1, "description": "角色名" },
+    "gender": { "enum": ["男", "女", "male", "female"], "description": "性别锚点必写" },
+    "age_range": {
+      "type": "string",
+      "pattern": "^\\d+\\s*[~-]\\s*\\d+$",
+      "description": "年龄区间，如 22~24"
+    },
+    "identity": { "type": "string", "description": "身份代称，会进性别锚点括号" },
+    "height_cm": {
+      "type": "integer",
+      "minimum": 50,
+      "maximum": 250,
+      "description": "身高线数值，单位 cm"
+    },
+    "face": {
+      "type": "object",
+      "required": ["bone", "brow", "eye", "pupil", "nose", "lip", "jaw", "ear", "skin"],
+      "properties": {
+        "bone": { "type": "string", "minLength": 1, "description": "1 脸型骨相" },
+        "brow": { "type": "string", "minLength": 1, "description": "2 眉形细节" },
+        "eye": { "type": "string", "minLength": 1, "description": "3 眼型与眼窝" },
+        "pupil": { "type": "string", "minLength": 1, "description": "4 瞳色与反光" },
+        "nose": { "type": "string", "minLength": 1, "description": "5 鼻梁山根" },
+        "lip": { "type": "string", "minLength": 1, "description": "6 唇形与唇色" },
+        "jaw": { "type": "string", "minLength": 1, "description": "7 下颌线条与折角" },
+        "ear": { "type": "string", "minLength": 1, "description": "8 耳廓耳型" },
+        "mark": { "type": "string", "description": "9 标志性特征；没有就写「无」" },
+        "skin": { "type": "string", "minLength": 1, "description": "10 面部肌肉与肤色" }
+      }
+    },
+    "face_en": { "type": "object", "description": "可选：对应 face 的英文覆盖" },
+    "wardrobe": {
+      "type": "object",
+      "required": ["fabric", "texture", "drape", "wear", "metal", "seam"],
+      "properties": {
+        "fabric": { "type": "string", "minLength": 1, "description": "11 面料类别" },
+        "texture": { "type": "string", "minLength": 1, "description": "12 编织与表面纹理" },
+        "drape": { "type": "string", "minLength": 1, "description": "13 垂坠受力与硬挺度" },
+        "wear": { "type": "string", "minLength": 1, "description": "14 战损污损与做旧" },
+        "metal": { "type": "string", "minLength": 1, "description": "15 金属与扣具光泽" },
+        "seam": { "type": "string", "minLength": 1, "description": "16 缝纫与剪裁工艺" }
+      }
+    },
+    "wardrobe_en": { "type": "object", "description": "可选：对应 wardrobe 的英文覆盖" },
+    "palette": {
+      "type": "array",
+      "minItems": 3,
+      "description": "至少三色；推荐对象写法，字符串写法可用但卡面只有 HEX",
+      "items": {
+        "oneOf": [
+          { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+          {
+            "type": "object",
+            "required": ["name", "hex"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1, "description": "中文色名，会印在卡面" },
+              "hex": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+              "part": { "type": "string", "description": "用色部位，如 外衫" }
+            }
+          }
+        ]
+      }
+    },
+    "audio_label": {
+      "type": "string",
+      "minLength": 1,
+      "description": "图底英文音色速览标签，≤8 词；不启用音色就省略"
+    },
+    "versions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "verdict", "interlock"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "description": "角色名-状态名，不许同名两版" },
+          "verdict": {
+            "enum": ["reuse", "new_variant", "new_asset", "unresolved"],
+            "description": "身份判定四选一"
+          },
+          "diff": { "type": "string", "description": "本版与基准版的差异" },
+          "interlock": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 },
+            "description": "本版不该出现的特征，进 NEGATIVE (per version)"
+          },
+          "interlock_en": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "可选：互锁词英文覆盖，生成器优先使用"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "note": "禁止清单策展文件。source=MiniMaxH3适配.md 的词在 build_index 时逐条回查主包原文；source=local 是本包扩展。",
+  "named_moves": [
+    { "term": "滑轨变焦", "source": "MiniMaxH3适配.md" },
+    { "term": "甩镜", "source": "MiniMaxH3适配.md" },
+    { "term": "摇臂升起", "source": "MiniMaxH3适配.md" },
+    { "term": "360 环绕", "source": "MiniMaxH3适配.md" },
+    { "term": "希区柯克变焦", "source": "local" }
+  ],
+  "generic_words": [
+    { "term": "cinematic", "source": "MiniMaxH3适配.md" },
+    { "term": "beautiful", "source": "MiniMaxH3适配.md" },
+    { "term": "high quality", "source": "MiniMaxH3适配.md" },
+    { "term": "stunning", "source": "local" },
+    { "term": "epic", "source": "local" }
+  ]
+}

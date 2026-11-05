@@ -1,0 +1,53 @@
+{
+  "coreVersion": "6.19.8",
+  "sourceHashes": {
+    "叙事层_剧本门控与台词.md": "8cdeb2280f1748101db4bb2d6c2ba4d7176b85addca9a81a449067cc6e78f0bc",
+    "方言与旁白规程.md": "bcf0f0066bae16f51dd5e148cfd628302449c4f8476ed6be7c86b44ad67489e2",
+    "去AI味对照清单.md": "62db427248d5a4b6fa310a8cf61ebe955cc6303532cf135330df445e56a1caaa",
+    "尾钩与筹码账.md": "7647598924f81512e1810568c993b7320b11cab72dbd9d00984c45dd26e941c1"
+  },
+  "gates": [
+    { "id": 1, "name": "Premise", "cn": "核心前提" },
+    { "id": 2, "name": "Structure", "cn": "结构" },
+    { "id": 3, "name": "Beat Sheet", "cn": "场景因果节拍" },
+    { "id": 4, "name": "Entity Bounds", "cn": "实体边界" },
+    { "id": 5, "name": "Script Page", "cn": "脚本页" }
+  ],
+  "openingHooks": ["极端悬念", "认知反差", "情绪爆发", "视觉奇观"],
+  "tailHooks": ["信息钩", "危机钩", "选择钩", "态度钩"],
+  "chipTypes": ["信息", "关系", "资源", "力量"],
+  "functions": ["角色辨识度", "潜台词层级", "冲突推进力", "类型语感", "信息效率", "节奏与音乐性", "金句潜力"],
+  "voiceTypes": ["对白", "VO", "OS"],
+  "beats": ["goal", "obstacle", "escalation", "turn", "result"],
+  "rates": {
+    "slow": 2.8,
+    "normal": 3.5,
+    "fast": 5.0,
+    "comfort": [2.6, 3.6],
+    "planningCap": 3.2,
+    "hardMax": 6.5
+  },
+  "lineWarnChars": 24,
+  "lineErrorChars": 30,
+  "pauses": { "comma": 0.2, "end": 0.4 },
+  "gate2Ratio": [30, 50, 20],
+  "premiseMaxChars": 30,
+  "plotPointsMin": 5,
+  "plotPer15s": 1,
+  "voShareMax": 0.3,
+  "voCharsPerMinMax": 80,
+  "cameraWords": [
+    "镜头", "机位", "景别", "特写", "近景", "中景", "全景", "远景",
+    "推镜", "拉镜", "摇镜", "移镜", "跟拍", "升降", "俯拍", "仰拍",
+    "光位", "光比", "构图", "焦段", "轴线", "分镜"
+  ],
+  "unfilmableWords": [
+    "内心", "心里", "想起", "回忆起", "意识到", "感到", "仿佛", "似乎", "好像",
+    "命运", "时间静止", "空气凝固", "五味杂陈", "百感交集", "思绪万千", "心如刀割", "灵魂", "绝望"
+  ],
+  "slopWords": [
+    "电影感", "高级感", "氛围感", "大片感", "质感拉满", "细节丰富",
+    "惊心动魄", "引人深思", "深刻揭露", "耐人寻味", "完美呈现",
+    "精妙绝伦", "栩栩如生", "顶级", "一流", "卓越", "绝佳", "震撼"
+  ]
+}

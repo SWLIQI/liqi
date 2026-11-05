@@ -1,0 +1,17 @@
+{
+  "name": "liqi-style",
+  "version": "0.2.1",
+  "private": true,
+  "type": "module",
+  "description": "风格专精包：50 种风格的挑选与参数块输出",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "node scripts/selftest.mjs",
+    "pick": "node scripts/pick_style.mjs",
+    "get": "node scripts/get_style.mjs",
+    "check": "node scripts/check_style.mjs",
+    "build": "node scripts/build_index.mjs"
+  }
+}

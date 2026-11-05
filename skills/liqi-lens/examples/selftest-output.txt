@@ -1,0 +1,59 @@
+PASS  景别 9 档且编号 1–9
+PASS  景别英文缩写唯一
+PASS  Q9 门槛不超过 7 词表上限
+PASS  焦段 7 档
+PASS  运镜 7 词
+PASS  词表枚举完整
+PASS  来源哈希与 SYNCED 一致
+PASS  合格样例 exit=0
+PASS  合格样例 0 ERROR / 0 WARN
+PASS  合格样例统计 6 镜 / 2 段
+PASS  短包 Q9 明示未查
+PASS  Q2 明示需人工
+PASS  shot_list exit=0
+PASS  卡片含景别/光/防漂移
+PASS  卡片含轴线
+PASS  --md 输出表头与 6 行
+PASS  --json 可解析且派生字段正确
+PASS  不合格样例 exit=1
+PASS  坏样例抓到：缺三任务
+PASS  坏样例抓到：抽象词
+PASS  坏样例抓到：非法景别
+PASS  坏样例抓到：非法焦段
+PASS  坏样例抓到：缺物理光源
+PASS  坏样例抓到：高级感
+PASS  坏样例抓到：时长越界
+PASS  坏样例抓到：裸跨轴
+PASS  坏样例抓到：连续同运镜
+PASS  坏样例抓到：荷兰角超配
+PASS  坏样例抓到：重技法超限
+PASS  坏样例不输出镜头卡
+PASS  黄金 check-pass 一致
+PASS  黄金 check-fail 一致
+PASS  黄金 shot-cards 一致
+PASS  黄金 shot-table 一致
+PASS  黄金 normalized 一致
+PASS  变异：no-task.json
+PASS  变异：bad-size.json
+PASS  变异：bad-fov.json
+PASS  变异：no-light.json
+PASS  变异：abstract.json
+PASS  变异：dutch.json
+PASS  变异：heavy.json
+PASS  变异：abstract-axis.json
+PASS  变异：no-axis.json
+PASS  变异：naked-cross.json
+PASS  变异：same-move.json
+PASS  变异：bad-duration.json
+PASS  缺光比只 WARN 不拦
+PASS  长包 8 镜 7 词 Q9 不再误报
+PASS  轴上作为中性态不误判跨轴
+PASS  包外 cwd 相对路径可用
+PASS  shot_list 无参数给用法
+PASS  --md/--json 互斥
+PASS  镜头表损坏给中文 ERROR
+PASS  SYNCED 损坏给中文 ERROR
+PASS  check_sync 缺主包 = 跳过(2)
+PASS  check_sync 未知参数报错
+
+---- 57/57 通过 ----

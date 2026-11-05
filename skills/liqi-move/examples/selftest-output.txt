@@ -1,0 +1,31 @@
+PASS  骨架 24 条
+PASS  场型 8 个
+PASS  每条 9 字段齐全
+PASS  每场 3 条
+PASS  timeline 无【时间轴】前缀
+PASS  词表 7 个且无标点污染
+PASS  骨架 move 全部落在 7 词表内
+PASS  bans 元数据完整
+PASS  sourceHash 与 SYNCED 一致
+PASS  pick 命中场型 3 条
+PASS  pick 输出无冗余时间轴前缀
+PASS  pick 输出时间轴与必锁
+PASS  pick 无匹配给可用场型
+PASS  pick 无参数给用法
+PASS  合格镜头描述通过
+PASS  不合格样例 exit 非零
+PASS  具名复合镜头被判 ERROR
+PASS  抽象词被判 ERROR
+PASS  超纲运镜被判 ERROR
+PASS  仅抽象词也 exit 非零
+PASS  仅超纲运镜也 exit 非零
+PASS  仅具名复合镜头也 exit 非零
+PASS  check 无参数给用法
+PASS  check 文件不存在给提示
+PASS  包外 cwd 相对路径可用
+PASS  索引损坏给中文 ERROR
+PASS  SYNCED 损坏给中文 ERROR
+PASS  build_index 缺主包给中文错误
+PASS  check_sync 缺主包 = 跳过(2)
+
+---- 29/29 通过 ----

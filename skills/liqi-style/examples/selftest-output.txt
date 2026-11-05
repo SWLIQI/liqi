@@ -1,0 +1,36 @@
+PASS  索引 50 条
+PASS  索引字段类型
+PASS  稳定性值域合法
+PASS  锚文件都存在
+PASS  索引与注册表字段 0 差异
+PASS  IP 补丁覆盖 ghibli/pixar
+PASS  50 锚五节齐全（九段/色值/运镜/崩点/多面压句）
+PASS  check_style 全量 50/50 通过
+PASS  check_style 缺节被拦
+PASS  check_style 非法 HEX 被拦
+PASS  check_style 非锚文件被拦
+PASS  get 取到 写实PBR
+PASS  get 含色值/运镜/崩点/九段
+PASS  get 默认输出多面压句全文
+PASS  get --brief 省略多面压句
+PASS  get --full 输出全文
+PASS  get 未知风格退出非零
+PASS  get 无参数提示用法
+PASS  get --brief/--full 互斥
+PASS  pick 用「古风」能出结果
+PASS  pick 支持实拍维度
+PASS  pick 险档覆盖 3 条（含险（动态））
+PASS  pick 仅过滤无关键词可用
+PASS  pick 无匹配给替代建议
+PASS  pick 非法 limit 报错
+PASS  pick limit 0 报错
+PASS  pick 非法维度报错
+PASS  pick 非法稳定性报错
+PASS  pick 非法轨道报错
+PASS  pick 参数缺值报错
+PASS  pick 未知参数报错
+PASS  索引损坏给中文 ERROR
+PASS  build_index --dry-run 不写文件
+PASS  check_sync 缺主包 = 跳过(2)
+
+---- 34/34 通过 ----

@@ -1,0 +1,39 @@
+{
+ "coreVersion": "6.19.8",
+ "source": "references/镜头骨架库.md",
+ "sourceHash": "89c8cc0d83128968dce20c2d63539c361b129fc30a6b97587e5f2aea4f2628c7",
+ "sceneCount": 8,
+ "skeletonCount": 24,
+ "vocabulary": [
+  "后拉",
+  "固定",
+  "微推",
+  "横移",
+  "缓推",
+  "缓降",
+  "跟拍"
+ ],
+ "bannedNamedMoves": [
+  "滑轨变焦",
+  "甩镜",
+  "摇臂升起",
+  "360 环绕",
+  "希区柯克变焦"
+ ],
+ "bannedGenericWords": [
+  "cinematic",
+  "beautiful",
+  "high quality",
+  "stunning",
+  "epic"
+ ],
+ "bans": {
+  "file": "references/MiniMaxH3适配.md",
+  "namedFromSource": 4,
+  "namedLocal": 1,
+  "genericFromSource": 3,
+  "genericLocal": 2,
+  "verified": true,
+  "note": "来源词在 build_index 时逐条回查主包原文；local 为本包扩展。"
+ }
+}

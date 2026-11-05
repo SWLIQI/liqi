@@ -1,0 +1,13 @@
+{
+  "name": "缺字段的样例",
+  "gender": "",
+  "age_range": "二十出头",
+  "height_cm": "很高",
+  "face": { "bone": "瓜子脸" },
+  "wardrobe": { "fabric": "棉" },
+  "palette": ["3A4E48", "#556B66"],
+  "versions": [
+    { "name": "常态", "verdict": "reuse" },
+    { "name": "常态", "verdict": "bogus" }
+  ]
+}

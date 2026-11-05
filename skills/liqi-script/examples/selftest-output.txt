@@ -1,0 +1,86 @@
+PASS  五阶门控
+PASS  钩子/筹码/功能枚举完整
+PASS  语速与阈值
+PASS  来源哈希与 SYNCED 一致
+PASS  合格样例 exit=0
+PASS  合格样例 0 ERROR / 0 WARN
+PASS  合格样例五门全绿
+PASS  合格样例统计 2 场 / 8 句 / 62 字
+PASS  script_card exit=0
+PASS  卡片含 Gate 3 / 台词表 / 合计
+PASS  卡片标出 VO 不锁口型
+PASS  --md 输出场表与台词表
+PASS  --json 可解析且派生字段正确
+PASS  不合格样例 exit=1
+PASS  坏样例抓到：缺 premise.cost
+PASS  坏样例抓到：开场钩子非法
+PASS  坏样例抓到：角色重名
+PASS  坏样例抓到：尾钩类型非法
+PASS  坏样例抓到：尾钩内容为空
+PASS  坏样例抓到：筹码类型非法
+PASS  坏样例抓到：内外景非法
+PASS  坏样例抓到：角色不在 characters
+PASS  坏样例抓到：缺 obstacle
+PASS  坏样例抓到：台词 speaker 未知
+PASS  坏样例抓到：潜台词缺 subtext
+PASS  坏样例抓到：VO 锁口型
+PASS  坏样例抓到：场景超预算
+PASS  坏样例抓到：场景 id 重复
+PASS  坏样例抓到：台词 id 重复
+PASS  坏样例抓到：旁白用于对白
+PASS  坏样例抓到：物理硬闸
+PASS  坏样例抓到：functions 非法
+PASS  坏样例抓到：超长句
+PASS  坏样例抓到：三幕比例偏差
+PASS  坏样例抓到：goal=result
+PASS  坏样例抓到：无情节点
+PASS  坏样例抓到：不可拍词
+PASS  坏样例抓到：slop 词
+PASS  坏样例抓到：镜头语言
+PASS  坏样例抓到：VO 行占比
+PASS  坏样例抓到：情节点 <5
+PASS  坏样例抓到：排期偏紧
+PASS  坏样例抓到：余量过大
+PASS  坏样例抓到：回收缺集号
+PASS  坏样例不输出剧本卡
+PASS  变异：no-cost.json
+PASS  变异：bad-hook.json
+PASS  变异（只 WARN）：no-acts.json
+PASS  变异（只 WARN）：ratio.json
+PASS  变异：no-obstacle.json
+PASS  变异：bad-speaker.json
+PASS  变异：long-line.json
+PASS  变异（只 WARN）：camera.json
+PASS  变异（只 WARN）：unfilmable.json
+PASS  变异（只 WARN）：slop.json
+PASS  变异：vo-lipsync.json
+PASS  变异：rate7.json
+PASS  变异：over-budget.json
+PASS  变异：bad-function.json
+PASS  变异：no-subtext.json
+PASS  变异：bad-tail.json
+PASS  变异：bad-chip.json
+PASS  变异：dup-scene.json
+PASS  变异：dup-line.json
+PASS  变异：narration.json
+PASS  变异（只 WARN）：no-plot.json
+PASS  变异（只 WARN）：fast-all.json
+PASS  变异（只 WARN）：long-premise.json
+PASS  数字字符串 rate 可用
+PASS  变异（只 WARN）：premise-unfilmable.json
+PASS  变异（只 WARN）：beat-camera.json
+PASS  变异（只 WARN）：plot-slop.json
+PASS  黄金 check-pass 一致
+PASS  黄金 check-fail 一致
+PASS  黄金 script-cards 一致
+PASS  黄金 script-table 一致
+PASS  黄金 normalized 一致
+PASS  包外 cwd 相对路径可用
+PASS  script_card 无参数给用法
+PASS  --md/--json 互斥
+PASS  剧本损坏给中文 ERROR
+PASS  SYNCED 损坏给中文 ERROR
+PASS  check_sync 缺主包 = 跳过(2)
+PASS  check_sync 未知参数报错
+
+---- 84/84 通过 ----

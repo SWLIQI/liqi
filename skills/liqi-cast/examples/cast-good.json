@@ -1,0 +1,48 @@
+{
+  "name": "沈知微",
+  "gender": "女",
+  "age_range": "22~24",
+  "identity": "行走江湖的制伞人",
+  "height_cm": 168,
+  "face": {
+    "bone": "冷艳瓜子脸，颧骨微高",
+    "brow": "平直剑眉，眉尾略淡",
+    "eye": "狭长丹凤眼，眼窝深",
+    "pupil": "深褐琉璃瞳，高光锐利",
+    "nose": "高挺直鼻，鼻头微收",
+    "lip": "薄唇微抿，唇色偏暗红",
+    "jaw": "下颌线清晰，折角利落",
+    "ear": "贴脑耳，耳垂小巧",
+    "mark": "左眼角一颗浅褐色泪痣",
+    "skin": "冷白偏青，皮肤细腻无明显瑕疵"
+  },
+  "wardrobe": {
+    "fabric": "重磅斜纹棉麻",
+    "texture": "粗糙麻织肌理，洗旧泛白",
+    "drape": "厚重硬挺，下摆自然垂坠",
+    "wear": "袖口磨损起毛，衣角有泥水浸润",
+    "metal": "哑光拉丝古铜扣",
+    "seam": "双排工整明线，肩线加固一道"
+  },
+  "palette": [
+    { "name": "青灰", "hex": "#3A4E48", "part": "外衫" },
+    { "name": "墨绿", "hex": "#556B66", "part": "长裙" },
+    { "name": "雾灰", "hex": "#7D8C8A", "part": "提亮" }
+  ],
+  "audio_label": "low, restrained female voice",
+  "versions": [
+    {
+      "name": "沈知微-常服",
+      "verdict": "reuse",
+      "diff": "靛蓝布衫 + 深灰长裙，无外伤",
+      "interlock": ["血渍", "绷带", "破损衣角"],
+      "interlock_en": ["blood stains", "bandages", "torn hem"]
+    },
+    {
+      "name": "沈知微-战损",
+      "verdict": "new_variant",
+      "diff": "同款布衫，右肩撕裂，左臂缠布条",
+      "interlock": ["干净衣角", "完好袖口", "整齐发髻"]
+    }
+  ]
+}

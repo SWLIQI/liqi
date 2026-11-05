@@ -1,0 +1,15 @@
+{
+  "name": "liqi-cast",
+  "version": "0.2.1",
+  "private": true,
+  "type": "module",
+  "description": "角色一致性专精包：4 View 资产板提示词生成与校验",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "node scripts/selftest.mjs",
+    "check": "node scripts/check_cast.mjs",
+    "sheet": "node scripts/cast_sheet.mjs"
+  }
+}

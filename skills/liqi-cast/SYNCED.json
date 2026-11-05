@@ -1,0 +1,8 @@
+{
+  "coreVersion": "6.19.8",
+  "sources": {
+    "references/资产层_锁定与一致性.md": "78f11cbd5f7e43d0bf57efff70ef3659427785ccd9fbce3b684ba414847d6877",
+    "references/4View资产板_模板.md": "09a93837d1264b2744ee4c6b9884e5db84fee9aeccd8ff9bce695c8ba3202d40",
+    "references/版本拆分与互锁清单.md": "1e9d1d054452b49f701250cfe3c0b198304066ec9aa6cffc100591151d75708b"
+  }
+}

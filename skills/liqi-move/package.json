@@ -1,0 +1,16 @@
+{
+  "name": "liqi-move",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "运镜专精包：场型骨架与运镜用词检查",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "node scripts/selftest.mjs",
+    "pick": "node scripts/pick_move.mjs",
+    "check": "node scripts/check_move.mjs",
+    "build": "node scripts/build_index.mjs"
+  }
+}

@@ -1,0 +1,30 @@
+PASS  合格样例 exit=0
+PASS  输出含 4 VIEW 标题
+PASS  右区写明保头无脸
+PASS  含排版 88%/12%
+PASS  左区上下双锁
+PASS  性别锚点收尾 LEFT
+PASS  含身高线数值
+PASS  含色板中文色名
+PASS  互锁词在负向段
+PASS  interlock_en 生效
+PASS  --check 打印九问
+PASS  16 项编号 11–16
+PASS  不合格样例 cast_sheet 退出非零
+PASS  cast_sheet 报出 ERROR
+PASS  不合格样例 check_cast 退出非零
+PASS  check_cast 抓到色值格式
+PASS  check_cast 抓到版本重名
+PASS  check_cast 抓到身高
+PASS  五官缺项编号 10 正确
+PASS  类型异常退出非零
+PASS  类型异常不抛栈
+PASS  类型异常给中文 ERROR
+PASS  根节点 null 有中文提示
+PASS  mark 未声明给 WARN 且 0 ERROR
+PASS  缺互锁词报 ERROR
+PASS  两版互锁词雷同报 ERROR
+PASS  无参数时提示用法
+PASS  check_sync 未找到主包 = 跳过(2)
+
+---- 28/28 通过 ----
