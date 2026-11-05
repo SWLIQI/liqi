@@ -1,10 +1,42 @@
-# SuperLiqi Prompt Forge
+# liqi-video-forge
 
 [中文版 README](README.md) · **English**
 
 Turn a story, a screenplay or a rough storyboard into **production-ready prompts you can paste
 straight into an AI video model** — and build the asset, screenplay and acting layers upstream
 instead of patching them afterwards.
+
+Current version **v6.19.8** (tag `v6.19.8`); the five standalone skill packs under `skills/`
+are versioned 0.2.x — see the repository map below.
+
+> **Names**: the GitHub repository is `liqi`, the skill `name` is `liqi-video-forge`, and they are
+> the same thing — **the main pack is the repository root itself, not a subdirectory.** The old
+> Chinese brand name is retired; where `references/` or `CHANGELOG.md` still mention it, read it as
+> `liqi-video-forge`.
+
+---
+
+## Repository map
+
+| What you want | Where | Version |
+|---|---|---|
+| **Main pack** (full Step -1 ~ Step 6 pipeline) | repository root, entry [`SKILL.md`](SKILL.md) | v6.19.8 |
+| Character consistency self-check (4-View sheet, face / wardrobe / interlock) | [`skills/liqi-cast/`](skills/liqi-cast/SKILL.md) | 0.2.1 |
+| 50 pre-filled style anchors (hex / camera / break modes) | [`skills/liqi-style/`](skills/liqi-style/SKILL.md) | 0.2.1 |
+| 8×3 scene-type camera skeletons (three hard blocks) | [`skills/liqi-move/`](skills/liqi-move/SKILL.md) | 0.2.0 |
+| Shot list and light (size / FOV / light position / axis / quotas) | [`skills/liqi-lens/`](skills/liqi-lens/SKILL.md) | 0.2.0 |
+| Screenplay gates and dialogue (five gates / seven dimensions / speech-rate scheduling) | [`skills/liqi-script/`](skills/liqi-script/SKILL.md) | 0.2.0 |
+| Index of the five packs | [`skills/README.md`](skills/README.md) | — |
+| Release history | [`CHANGELOG.md`](CHANGELOG.md) | — |
+
+The packs are self-check tools extracted from the main pack's narrative / asset / audiovisual
+layers. Each carries its own `SKILL.md`, `references`, `scripts` and tests, and works without the
+main pack. Their `SYNCED.json` records hashes of main-pack files, so provenance is verifiable
+inside this repository:
+
+```bash
+node skills/liqi-cast/scripts/check_sync.mjs .     # the main pack sits at the repo root
+```
 
 ---
 
@@ -67,7 +99,10 @@ surface. The authoritative comparison is the **"Delivery Surface Parameter Table
 
 ## Quick start
 
-1. Copy the whole `liqi-video-forge` directory into your skills directory (the directory name must match the `name` in frontmatter; renamed from a Chinese name in v5.47.0).
+1. **The main pack is the repository root.** Put the root directory into your skills directory and
+   rename it to match the frontmatter `name` — `liqi-video-forge` (kebab-case since v5.47.0). If you
+   only want one layer's self-check, take a single `skills/liqi-<pack>/` directory instead; the main
+   pack is not required.
 2. Copy the registry seed: `references/style-registry.seed.json` → project-level `style-registry.json`.
 3. Give it a story or screenplay and state the locks.
 4. Follow Step -1 → Step 6. Use the Load Map in `SKILL.md` to see which reference file to load
@@ -150,8 +185,14 @@ references/              115 files (113 md at top level + style-registry.seed.js
 scripts/                 51 checkers and tools (14 Node + 36 Python + 1 shell)
 examples/                golden sample (a complete package + beat list)
 docs/                    sample-emotion-curve.png
+skills/                  5 standalone packs: liqi-cast 0.2.1 / liqi-style 0.2.1 / liqi-move 0.2.0 / liqi-lens 0.2.0 / liqi-script 0.2.0
+                         └ index and usage in skills/README.md; each pack ships its own selftest and check_sync
 LICENSE / THIRD-PARTY-NOTICES.md / README.md / README.en.md / CHANGELOG.md / requirements.txt / .gitignore
 ```
+
+There is no `liqi-video-forge/` wrapper directory above the tree above — **the root of this
+repository is the main pack.** Looking for the main pack means `SKILL.md`; looking for a layer
+pack means `skills/`.
 
 The repository carries Markdown sources only. Convert to docx / PDF on demand when you need to
 hand something to a non-technical collaborator.

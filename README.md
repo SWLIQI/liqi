@@ -1,4 +1,4 @@
-# 超级liqi提示词
+# liqi-video-forge
 
 **[English README](README.en.md)** · 中文版
 
@@ -8,6 +8,31 @@
 A prompt-forging skill that turns a story / screenplay / rough storyboard into  
 production-ready prompts for AI video models, with asset, screenplay and acting  
 layers built in upstream.
+
+当前版本 **v6.19.8**（tag `v6.19.8`）；五个专精包 0.2.x 见下面的仓库地图。
+
+> **名字**：GitHub 仓库叫 `liqi`，skill 的 `name` 是 `liqi-video-forge`，讲的是同一个东西——**主包就是仓库根目录，不在任何子目录里**。旧中文品牌名已停用；`references/` 与 `CHANGELOG.md` 里仍会出现历史称呼，按 `liqi-video-forge` 理解即可。
+
+---
+
+## 仓库地图
+
+| 你要什么 | 位置 | 版本 |
+|---|---|---|
+| **主包**（Step -1 ~ Step 6 全流程） | 仓库根目录，入口 [`SKILL.md`](SKILL.md) | v6.19.8 |
+| 角色一致性自检（4 View 资产板、五官/服装/互锁） | [`skills/liqi-cast/`](skills/liqi-cast/SKILL.md) | 0.2.1 |
+| 50 种已落值风格锚自检（色值/运镜/崩点/多面压句） | [`skills/liqi-style/`](skills/liqi-style/SKILL.md) | 0.2.1 |
+| 8×3 场型运镜骨架（三类强拦截） | [`skills/liqi-move/`](skills/liqi-move/SKILL.md) | 0.2.0 |
+| 镜头表与光（景别/焦段/光位/轴线/配额） | [`skills/liqi-lens/`](skills/liqi-lens/SKILL.md) | 0.2.0 |
+| 剧本门控与台词（五阶门控/七维/语速排期/VO-OS） | [`skills/liqi-script/`](skills/liqi-script/SKILL.md) | 0.2.0 |
+| 五个包的索引与用法 | [`skills/README.md`](skills/README.md) | — |
+| 版本变更历史 | [`CHANGELOG.md`](CHANGELOG.md) | — |
+
+专精包是从主包的叙事 / 资产 / 视听层抽出的**独立自检工具**：各自带 `SKILL.md`、`references`、`scripts` 与自测，可单独取用，不必加载主包。它们与主包同仓，来源哈希可在仓内直接核验：
+
+```bash
+node skills/liqi-cast/scripts/check_sync.mjs .     # 主包在仓库根，参数写 . 即可
+```
 
 ---
 
@@ -64,7 +89,7 @@ layers built in upstream.
 
 ## 快速开始
 
-1. 把 `liqi-video-forge` 整个目录放进你的 skills 目录（**目录名必须与 frontmatter 的 `name` 一致**，v5.47.0 起由中文名改 kebab-case；中文品牌仍是正文标题「超级 liqi提示词」）。
+1. **主包 = 仓库根目录**：把根目录放进你的 skills 目录，目录名改成与 frontmatter 的 `name` 一致——`liqi-video-forge`（v5.47.0 起用 kebab-case）。只要某一层的自检能力时，改取 `skills/liqi-<包名>/` 单个目录，主包不必装。
 2. 复制注册表种子：`references/style-registry.seed.json` → 项目级 `style-registry.json`。
 3. 给一段故事或剧本，说清前置锁（第零道锁 + 三锁）。
 4. 按 Step -1 → 6 走；每一步该加载哪份 reference，查 `SKILL.md` 的 Load Map。
@@ -165,8 +190,12 @@ references/              115 份文件（顶层 113 md + style-registry.seed.jso
 scripts/                 51 个机械校验与工具脚本（14 个 Node + 36 个 Python + 1 个 shell 编排）
 examples/                四套样例：黄金样例_E01S02（两镜格式基准）/ 黄金样例_A2_夜巡 / 实战_梦中人_场1（端到端主力）/ 实战_圆桌2x0_EP01（**2.0 面六段 15s 基准**，v6.9.1 收编——2.0 面此前零样例是模板漂移温床）
 docs/                    sample-emotion-curve.png（情绪曲线脚本的输出样例）
+skills/                  5 个专精包：liqi-cast 0.2.1 / liqi-style 0.2.1 / liqi-move 0.2.0 / liqi-lens 0.2.0 / liqi-script 0.2.0
+                         └ 索引与用法见 skills/README.md；每个包自带 selftest 与 check_sync
 LICENSE / THIRD-PARTY-NOTICES.md / README.md / README.en.md / CHANGELOG.md / requirements.txt / .gitignore
 ```
+
+**根目录就是主包 `liqi-video-forge` 本体**，上面没有再套一层同名目录——找主包看 `SKILL.md`，找专精包看 `skills/`。`skills/` 里的包不依赖主包即可运行，但它们的 `SYNCED.json` 记录的是主包文件哈希，所以在仓根能直接核验来源（`node skills/liqi-cast/scripts/check_sync.mjs .`）。
 
 仓库只收 Markdown 源。需要给非技术同事看的 docx / PDF 时，用任意 md 转 docx 工具现场生成即可。
 
